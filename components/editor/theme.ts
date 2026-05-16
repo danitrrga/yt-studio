@@ -23,6 +23,8 @@ export const studioTheme = EditorView.theme(
       color: FG,
       backgroundColor: 'transparent',
       height: '100%',
+      border: 'none',
+      outline: 'none',
     },
     '.cm-scroller': {
       fontFamily: INTER,
