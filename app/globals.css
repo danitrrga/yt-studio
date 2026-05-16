@@ -65,6 +65,34 @@
   --color-overdue: 0 100% 50%;
   --color-warn:    35 71% 58%;
 
+  /* ── Status solid colors — resolved hex for direct var() use ─── */
+  --status-idea-color:       #737373;
+  --status-research-color:   #7C7CFF;
+  --status-scripting-color:  #E0A24A;
+  --status-filming-color:    #FF8A3D;
+  --status-editing-color:    #B084F5;
+  --status-published-color:  #3FB984;
+  --status-error-color:      #FF0000;
+  --status-warn-color:       #E0A24A;
+  --status-info-color:       #7C7CFF;
+  --status-review-color:     #B084F5;  /* legacy → editing violet */
+  --color-overdue-color:     #FF0000;
+  --color-warn-color:        #E0A24A;
+
+  /* ── Status tints — 12% opacity for pill/card backgrounds ─── */
+  --status-idea-tint:       color-mix(in srgb, #737373 12%, transparent);
+  --status-research-tint:   color-mix(in srgb, #7C7CFF 12%, transparent);
+  --status-scripting-tint:  color-mix(in srgb, #E0A24A 12%, transparent);
+  --status-filming-tint:    color-mix(in srgb, #FF8A3D 12%, transparent);
+  --status-editing-tint:    color-mix(in srgb, #B084F5 12%, transparent);
+  --status-published-tint:  color-mix(in srgb, #3FB984 12%, transparent);
+  --status-error-tint:      color-mix(in srgb, #FF0000 12%, transparent);
+  --status-warn-tint:       color-mix(in srgb, #E0A24A 12%, transparent);
+  --status-info-tint:       color-mix(in srgb, #7C7CFF 12%, transparent);
+  --status-review-tint:     color-mix(in srgb, #B084F5 12%, transparent);  /* legacy → editing violet */
+  --color-overdue-tint:     color-mix(in srgb, #FF0000 12%, transparent);
+  --color-warn-tint:        color-mix(in srgb, #E0A24A 12%, transparent);
+
   /* ── Spacing (4px grid) ──────────────────────────────── */
   --space-0:  0;
   --space-1:  4px;
@@ -188,6 +216,10 @@ kbd, code, pre, .tabular, [data-mono] {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* CodeMirror — strip default border/outline that browser themes can re-inject */
+.cm-editor { border: none !important; outline: none !important; }
+.cm-editor.cm-focused { outline: none !important; }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
