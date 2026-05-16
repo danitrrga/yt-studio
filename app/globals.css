@@ -217,9 +217,11 @@ kbd, code, pre, .tabular, [data-mono] {
   }
 }
 
-/* CodeMirror — strip default border/outline that browser themes can re-inject */
-.cm-editor { border: none !important; outline: none !important; }
-.cm-editor.cm-focused { outline: none !important; }
+/* CodeMirror — strip default border/outline */
+.cm-editor,
+.cm-editor:focus,
+.cm-editor:focus-visible,
+.cm-editor.cm-focused { border: none !important; outline: none !important; }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
