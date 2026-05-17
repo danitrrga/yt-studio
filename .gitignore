@@ -45,3 +45,6 @@ next-env.d.ts
 .claude/
 .markdownlint.json
 DESIGN.md
+
+# design source files — exported PNGs live in public/assets/
+/public/design-system/
