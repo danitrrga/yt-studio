@@ -217,11 +217,11 @@ kbd, code, pre, .tabular, [data-mono] {
   }
 }
 
-/* CodeMirror — strip default border/outline */
+/* CodeMirror — strip border/outline/box-shadow (global *:focus-visible catches it) */
 .cm-editor,
 .cm-editor:focus,
 .cm-editor:focus-visible,
-.cm-editor.cm-focused { border: none !important; outline: none !important; }
+.cm-editor.cm-focused { border: none !important; outline: none !important; box-shadow: none !important; }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
