@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import type { Video, VideoStatus } from '@/lib/types';
-import { STATUS_COLOR_VAR } from '@/lib/status';
+import { STATUS_SOLID_VAR } from '@/lib/status';
 import { updateVideoField } from '@/hooks/use-videos';
 import { registerShortcut } from '@/lib/shortcuts';
 import { cn } from '@/lib/utils';
@@ -72,7 +72,7 @@ export function StatusAdvanceBanner({
   checklistIncomplete?: boolean;
 }) {
   const step = ADVANCE_MAP[video.frontmatter.status] ?? ADVANCE_MAP['idea'];
-  const colorVar = STATUS_COLOR_VAR[video.frontmatter.status] ?? STATUS_COLOR_VAR['idea'];
+  const solidVar = STATUS_SOLID_VAR[video.frontmatter.status] ?? STATUS_SOLID_VAR['idea'];
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const advance = useMemo(
@@ -130,21 +130,21 @@ export function StatusAdvanceBanner({
   return (
     <div
       className={cn(
-        'flex items-center justify-between gap-4 rounded-lg border bg-[var(--color-surface)] px-4 py-3',
+        'flex items-center justify-between gap-4 rounded-md border bg-[var(--bg-raised)] px-4 py-3',
         'border-l-[4px]'
       )}
-      style={{ borderLeftColor: `hsl(var(${colorVar}))` }}
+      style={{ borderLeftColor: `var(${solidVar})` }}
     >
       <div className="flex items-center gap-2.5 min-w-0">
         <Sparkles
           className="w-4 h-4 shrink-0"
-          style={{ color: `hsl(var(${colorVar}))` }}
+          style={{ color: `var(${solidVar})` }}
         />
         <div className="min-w-0">
-          <div className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)]">
+          <div className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)]">
             Next
           </div>
-          <div className="text-[13px] font-medium text-[var(--color-fg)] truncate">
+          <div className="text-[13px] font-medium text-[var(--fg)] truncate">
             {step.label}
           </div>
         </div>
@@ -154,7 +154,7 @@ export function StatusAdvanceBanner({
         onClick={advance}
         className={cn(
           'inline-flex items-center gap-1.5 px-3 h-8 rounded-md text-xs font-medium',
-          'bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] hover:bg-[var(--color-button-primary-hover)] transition-colors',
+          'bg-[var(--fg)] text-[var(--fg-inverse)] hover:bg-[var(--fg)] transition-colors',
           'outline-none'
         )}
       >

@@ -11,7 +11,7 @@ The Phase 12 brief at `~/.claude/plans/phase12-redesign-brief.md` is the **why**
 ## 0 · Principles
 
 1. **Surgical, not decorative.** Every color, border, and glyph must earn its place. The default is no chrome.
-2. **Two fonts, two jobs.** Inter for readable UI (prose, labels, body). JetBrains Mono for dense data (code, numbers, shortcuts, CLI, logs). Never flip them.
+2. **Two fonts, two jobs.** Inter for readable UI (prose, labels, body). JetBrains Mono for code, numbers, shortcuts, CLI, logs. Never flip them.
 3. **Red is a scalpel.** Use `#FF0000` for the brand mark, destructive actions, hard failures, and the recording state. Never for hover, never for decoration, never for "primary CTA."
 4. **Hairlines, not boxes.** Hierarchy comes from 1px rules and tone shifts, not borders + shadows + radii stacked together.
 5. **Information density is a feature.** Tables show many rows. Sidebars show many items. Padding is restrained.

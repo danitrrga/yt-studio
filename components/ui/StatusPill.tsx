@@ -1,7 +1,7 @@
 'use client';
 
 import type { VideoStatus } from '@/lib/types';
-import { STATUS_COLOR_VAR, STATUS_LABELS } from '@/lib/status';
+import { STATUS_SOLID_VAR, STATUS_TINT_VAR, STATUS_LABELS } from '@/lib/status';
 import { cn } from '@/lib/utils';
 
 export function StatusPill({
@@ -13,7 +13,8 @@ export function StatusPill({
   size?: 'sm' | 'md';
   className?: string;
 }) {
-  const colorVar = STATUS_COLOR_VAR[status];
+  const solidVar = STATUS_SOLID_VAR[status];
+  const tintVar  = STATUS_TINT_VAR[status];
   const isSm = size === 'sm';
   return (
     <span
@@ -23,9 +24,9 @@ export function StatusPill({
         className
       )}
       style={{
-        backgroundColor: `hsl(var(${colorVar}) / 0.12)`,
-        color: `hsl(var(${colorVar}))`,
-        borderColor: `hsl(var(${colorVar}) / 0.3)`,
+        backgroundColor: `var(${tintVar})`,
+        color: `var(${solidVar})`,
+        borderColor: `color-mix(in srgb, var(${solidVar}) 30%, transparent)`,
       }}
     >
       <span
@@ -33,7 +34,7 @@ export function StatusPill({
         style={{
           width: isSm ? 4 : 6,
           height: isSm ? 4 : 6,
-          backgroundColor: `hsl(var(${colorVar}))`,
+          backgroundColor: `var(${solidVar})`,
         }}
       />
       {STATUS_LABELS[status]}

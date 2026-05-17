@@ -79,12 +79,12 @@ export function IdeaEditor({
   const rows = Math.max(2, draft.split('\n').length + 1);
 
   return (
-    <div className="rounded-lg border bg-[var(--color-surface)] overflow-hidden">
-      <div className="flex items-center gap-2 px-4 h-10 border-b font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)]">
+    <div className="rounded-md border bg-[var(--bg-raised)] overflow-hidden">
+      <div className="flex items-center gap-2 px-4 h-10 border-b font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)]">
         <Lightbulb className="w-3 h-3" />
         <span>Idea</span>
         {busy && (
-          <span className="ml-auto text-[10px] text-[var(--color-fg-muted)]">Saving…</span>
+          <span className="ml-auto text-[10px] text-[var(--fg-dim)]">Saving…</span>
         )}
       </div>
       <div className="p-4">
@@ -97,7 +97,7 @@ export function IdeaEditor({
           placeholder="One or two sentences that capture the core message."
           className={cn(
             'w-full bg-transparent outline-none text-[15px] leading-relaxed resize-none',
-            'text-[var(--color-fg)] placeholder:text-[var(--color-fg-muted)]'
+            'text-[var(--fg)] placeholder:text-[var(--fg-dim)]'
           )}
         />
       </div>

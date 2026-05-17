@@ -38,8 +38,8 @@ import { createDaySnapModifier } from '@/lib/timeline-snap';
 import { useActiveView, viewStore } from '@/hooks/use-view-store';
 import { selection, useSelectionIds } from '@/hooks/use-selection';
 import { updateVideoField } from '@/hooks/use-videos';
-import { STATUS_COLOR_VAR, STATUS_LABELS } from '@/lib/status';
-import { KIND_COLOR, KIND_LABEL } from '@/lib/calendar-events';
+import { STATUS_SOLID_VAR, STATUS_LABELS } from '@/lib/status';
+import { KIND_HEX, KIND_LABEL } from '@/lib/calendar-events';
 import { StatusPill } from '@/components/ui/StatusPill';
 import { cn } from '@/lib/utils';
 
@@ -312,7 +312,7 @@ export function TimelineView({
         setDragDeltaDays(0);
       }}
     >
-      <div className="rounded-lg border bg-[var(--color-surface)] overflow-hidden">
+      <div className="rounded-md border bg-[var(--bg-raised)] overflow-hidden">
         <Toolbar
           zoom={zoom}
           onZoom={(z) => viewStore.setTimelineZoom(z)}
@@ -334,10 +334,10 @@ export function TimelineView({
 
         <div className="flex">
           {/* Sticky title column */}
-          <div className="shrink-0 border-r bg-[var(--color-surface)]" style={{ width: TITLE_COL_PX }}>
+          <div className="shrink-0 border-r bg-[var(--bg-raised)]" style={{ width: TITLE_COL_PX }}>
             <div className="border-b" style={{ height: HEADER_H }} />
             {layouts.length === 0 && (
-              <div className="px-4 py-12 text-center text-xs text-[var(--color-fg-muted)]">
+              <div className="px-4 py-12 text-center text-xs text-[var(--fg-dim)]">
                 No videos with dates.
               </div>
             )}
@@ -410,7 +410,7 @@ function Toolbar({
               'px-2.5 h-7 transition-colors',
               z === zoom
                 ? 'bg-[var(--fg)] text-[var(--fg-inverse)]'
-                : 'text-[var(--color-fg-muted)] hover:bg-[var(--color-surface-hover)]'
+                : 'text-[var(--fg-dim)] hover:bg-[var(--bg-hover)]'
             )}
           >
             {ZOOM_LABEL[z]}
@@ -418,16 +418,16 @@ function Toolbar({
         ))}
       </div>
       <div className="flex items-center gap-1">
-        <button onClick={onPrev} className="p-1.5 rounded hover:bg-[var(--color-surface-hover)]">
+        <button onClick={onPrev} className="p-1.5 rounded hover:bg-[var(--bg-hover)]">
           <ChevronLeft className="w-4 h-4" />
         </button>
         <button
           onClick={onToday}
-          className="px-2 h-7 text-xs text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)] rounded hover:bg-[var(--color-surface-hover)]"
+          className="px-2 h-7 text-xs text-[var(--fg-muted)] hover:text-[var(--fg)] rounded hover:bg-[var(--bg-hover)]"
         >
           Today
         </button>
-        <button onClick={onNext} className="p-1.5 rounded hover:bg-[var(--color-surface-hover)]">
+        <button onClick={onNext} className="p-1.5 rounded hover:bg-[var(--bg-hover)]">
           <ChevronRight className="w-4 h-4" />
         </button>
       </div>
@@ -437,13 +437,13 @@ function Toolbar({
 
 function Header({ axis, today }: { axis: TimeAxis; today: Date }) {
   return (
-    <div className="sticky top-0 z-10 bg-[var(--color-surface-elevated)] border-b" style={{ height: HEADER_H }}>
+    <div className="sticky top-0 z-10 bg-[var(--bg-raised)] border-b" style={{ height: HEADER_H }}>
       {/* Month band */}
-      <div className="relative h-8 border-b border-[var(--color-border-subtle)]">
+      <div className="relative h-8 border-b border-[var(--line-faint)]">
         {axis.monthBands.map((b, i) => (
           <div
             key={i}
-            className="absolute top-0 bottom-0 flex items-center px-2 font-mono text-[12px] font-medium uppercase tracking-wider text-[var(--color-fg-secondary)] border-r border-[var(--color-border-subtle)]"
+            className="absolute top-0 bottom-0 flex items-center px-2 font-mono text-[12px] font-medium uppercase tracking-wider text-[var(--fg-muted)] border-r border-[var(--line-faint)]"
             style={{ left: b.x, width: b.width }}
           >
             {b.label}
@@ -458,8 +458,8 @@ function Header({ axis, today }: { axis: TimeAxis; today: Date }) {
             className={cn(
               'absolute top-0 bottom-0 flex items-center justify-center tabular-nums -translate-x-1/2',
               t.major
-                ? 'text-[13px] font-semibold text-[var(--color-fg-secondary)]'
-                : 'text-[12px] text-[var(--color-fg-muted)]'
+                ? 'text-[13px] font-medium text-[var(--fg-muted)]'
+                : 'text-[12px] text-[var(--fg-dim)]'
             )}
             style={{
               left: t.x,
@@ -483,7 +483,7 @@ function TodayPill({ axis, today }: { axis: TimeAxis; today: Date }) {
       className="absolute top-0 -translate-x-1/2 z-20"
       style={{ left: x, height: HEADER_H }}
     >
-      <span className="inline-flex items-center justify-center min-w-[28px] h-5 px-2 rounded-full bg-[var(--fg)] text-[var(--fg-inverse)] text-[10px] font-semibold tabular-nums shadow">
+      <span className="inline-flex items-center justify-center min-w-[28px] h-5 px-2 rounded-full bg-[var(--fg)] text-[var(--fg-inverse)] text-[10px] font-medium tabular-nums">
         {format(today, 'd')}
       </span>
     </div>
@@ -521,7 +521,7 @@ function Body({
           c.isWeekend && (
             <div
               key={`w${i}`}
-              className="absolute top-0 bottom-0 bg-[var(--color-surface-elevated)]/30 pointer-events-none"
+              className="absolute top-0 bottom-0 bg-[var(--bg-raised)]/30 pointer-events-none"
               style={{ left: c.x, width: c.width }}
             />
           )
@@ -534,8 +534,8 @@ function Body({
           className={cn(
             'absolute top-0 bottom-0 pointer-events-none',
             c.isMonday
-              ? 'border-l border-[var(--color-border-subtle)]'
-              : 'border-l border-[var(--color-border-subtle)]/40'
+              ? 'border-l border-[var(--line-faint)]'
+              : 'border-l border-[var(--line-faint)]/40'
           )}
           style={{ left: c.x }}
         />
@@ -549,8 +549,8 @@ function Body({
             className={cn(
               'absolute top-0 bottom-0 pointer-events-none',
               t.major
-                ? 'border-l border-[var(--color-border-subtle)]'
-                : 'border-l border-[var(--color-border-subtle)]/40'
+                ? 'border-l border-[var(--line-faint)]'
+                : 'border-l border-[var(--line-faint)]/40'
             )}
             style={{ left: t.x }}
           />
@@ -601,7 +601,7 @@ function Row({
 }) {
   return (
     <div
-      className="relative border-b border-[var(--color-border-subtle)] hover:bg-[var(--color-surface-hover)]/30"
+      className="relative border-b border-[var(--line-faint)] hover:bg-[var(--bg-hover)]/30"
       style={{ height: rowH }}
     >
       <Bar
@@ -630,11 +630,11 @@ function RowTitle({
   return (
     <button
       onClick={onClick}
-      className="w-full text-left px-3 border-b border-[var(--color-border-subtle)] hover:bg-[var(--color-surface-hover)] transition-colors flex items-center gap-2 truncate"
+      className="w-full text-left px-3 border-b border-[var(--line-faint)] hover:bg-[var(--bg-hover)] transition-colors flex items-center gap-2 truncate"
       style={{ height: rowH }}
     >
       <StatusPill status={video.frontmatter.status} size="sm" />
-      <span className="text-[13px] text-[var(--color-fg)] truncate">
+      <span className="text-[13px] text-[var(--fg)] truncate">
         {video.frontmatter.title || video.slug}
       </span>
     </button>
@@ -660,7 +660,7 @@ function Bar({
   today: Date;
   onCardClick: (slug: string) => void;
 }) {
-  const colorVar = STATUS_COLOR_VAR[video.frontmatter.status];
+  const solidVar = STATUS_SOLID_VAR[video.frontmatter.status];
   const todayIso = format(today, 'yyyy-MM-dd');
   const overdue =
     bar.endDate < todayIso && video.frontmatter.status !== 'published';
@@ -676,7 +676,7 @@ function Bar({
         bar={bar}
         top={top}
         height={BAR_H}
-        colorVar={colorVar}
+        solidVar={solidVar}
         overdue={overdue}
         isBeingDragged={isBeingDragged && activeDragMode === 'span'}
         orderedSlugs={orderedSlugs}
@@ -730,7 +730,7 @@ function BarBody({
   bar,
   top,
   height,
-  colorVar,
+  solidVar,
   overdue,
   isBeingDragged,
   orderedSlugs,
@@ -740,7 +740,7 @@ function BarBody({
   bar: BarLayout;
   top: number;
   height: number;
-  colorVar: string;
+  solidVar: string;
   overdue: boolean;
   isBeingDragged: boolean;
   orderedSlugs: string[];
@@ -777,9 +777,9 @@ function BarBody({
       : transform
       ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
       : undefined,
-    backgroundColor: `hsl(var(${colorVar}) / 0.14)`,
-    borderColor: `hsl(var(${colorVar}) / 0.38)`,
-    color: `hsl(var(${colorVar}))`,
+    backgroundColor: `color-mix(in srgb, var(${solidVar}) 14%, transparent)`,
+    borderColor: `color-mix(in srgb, var(${solidVar}) 38%, transparent)`,
+    color: `var(${solidVar})`,
     visibility: isBeingDragged ? 'hidden' : undefined,
   };
 
@@ -795,7 +795,7 @@ function BarBody({
         'flex items-center px-1.5 gap-1',
         'hover:brightness-125 transition-[filter]',
         isSelected && 'bg-[var(--bg-selected)]',
-        overdue && 'ring-1 ring-[hsl(var(--color-overdue))]'
+        overdue && 'ring-1 ring-[var(--red)]'
       )}
       title={`${video.frontmatter.title} · ${STATUS_LABELS[video.frontmatter.status]} · ${bar.startDate}${bar.kind === 'span' ? ` → ${bar.endDate}` : ''}`}
     >
@@ -816,7 +816,7 @@ function BarBody({
             marginTop: -6,
             marginLeft: -6,
             borderRadius: '50%',
-            backgroundColor: `hsl(${KIND_COLOR[bar.markers[0]?.kind ?? 'target']})`,
+            backgroundColor: KIND_HEX[bar.markers[0]?.kind ?? 'target'],
           }}
         />
       )}
@@ -844,7 +844,7 @@ function MarkerHandle({
   const { attributes, listeners, setNodeRef } = useDraggable({
     id: `${slug}::${marker.kind}`,
   });
-  const color = KIND_COLOR[marker.kind];
+  const color = KIND_HEX[marker.kind];
   const HANDLE = 12;
   const isPlaceholder = !!marker.placeholder;
 
@@ -880,9 +880,9 @@ function MarkerHandle({
       }
       style={{
         ...style,
-        backgroundColor: isPlaceholder ? 'transparent' : `hsl(${color})`,
+        backgroundColor: isPlaceholder ? 'transparent' : color,
         border: isPlaceholder
-          ? `1px dashed hsl(${color})`
+          ? `1px dashed ${color}`
           : `1px solid rgba(0, 0, 0, 0.55)`,
         opacity: isPlaceholder ? 0.6 : 1,
       }}
@@ -896,19 +896,19 @@ function MarkerHandle({
 }
 
 function NoDateChipGhost({ video }: { video: VideoSummary }) {
-  const colorVar = STATUS_COLOR_VAR[video.frontmatter.status];
+  const solidVar = STATUS_SOLID_VAR[video.frontmatter.status];
   return (
     <div
       className="inline-flex items-center gap-1.5 px-2 h-[22px] rounded border text-[11px]"
       style={{
-        backgroundColor: `hsl(var(${colorVar}) / 0.28)`,
-        borderColor: `hsl(var(${colorVar}) / 0.6)`,
-        color: `hsl(var(${colorVar}))`,
+        backgroundColor: `color-mix(in srgb, var(${solidVar}) 28%, transparent)`,
+        borderColor: `color-mix(in srgb, var(${solidVar}) 60%, transparent)`,
+        color: `var(${solidVar})`,
       }}
     >
       <span
         className="w-1.5 h-1.5 rounded-full shrink-0"
-        style={{ backgroundColor: `hsl(var(${colorVar}))` }}
+        style={{ backgroundColor: `var(${solidVar})` }}
       />
       <span className="truncate max-w-[180px]">
         {video.frontmatter.title || video.slug}
@@ -930,7 +930,7 @@ function BarGhost({
   previewDays: number;
   mode: 'span' | DateKind;
 }) {
-  const colorVar = STATUS_COLOR_VAR[video.frontmatter.status];
+  const solidVar = STATUS_SOLID_VAR[video.frontmatter.status];
   const showPill = previewDays !== 0;
   const sign = previewDays > 0 ? '+' : '';
 
@@ -939,19 +939,19 @@ function BarGhost({
     // Single-marker drag — render just the dot ghost + pill
     const original = bar.markers.find((m) => m.kind === mode)?.date ?? bar.startDate;
     const newDate = format(addDays(parseISO(original), previewDays), 'MMM d');
-    const color = KIND_COLOR[mode];
+    const color = KIND_HEX[mode];
     return (
       <div className="relative">
         {showPill && (
           <div
-            className="absolute left-1/2 -translate-x-1/2 -top-7 inline-flex items-center gap-1.5 h-5 px-2 rounded-full border bg-[var(--color-surface-elevated)] text-[10px] tabular-nums whitespace-nowrap z-10"
-            style={{ borderColor: `hsl(${color} / 0.5)` }}
+            className="absolute left-1/2 -translate-x-1/2 -top-7 inline-flex items-center gap-1.5 h-5 px-2 rounded-full border bg-[var(--bg-raised)] text-[10px] tabular-nums whitespace-nowrap z-10"
+            style={{ borderColor: `color-mix(in srgb, ${color} 50%, transparent)` }}
           >
-            <span className="font-mono text-[var(--color-fg-muted)] uppercase tracking-wider text-[9px]">
+            <span className="font-mono text-[var(--fg-dim)] uppercase tracking-wider text-[9px]">
               {KIND_LABEL[mode]}
             </span>
             <span>{newDate}</span>
-            <span className="font-semibold" style={{ color: `hsl(${color})` }}>
+            <span className="font-medium" style={{ color }}>
               {sign}{previewDays}d
             </span>
           </div>
@@ -962,7 +962,7 @@ function BarGhost({
             width: 14,
             height: 14,
             borderRadius: '50%',
-            backgroundColor: `hsl(${color})`,
+            backgroundColor: color,
           }}
         />
       </div>
@@ -976,17 +976,17 @@ function BarGhost({
     <div className="relative" style={{ width: bar.width }}>
       {showPill && (
         <div
-          className="absolute left-1/2 -translate-x-1/2 -top-7 inline-flex items-center gap-1.5 h-5 px-2 rounded-full border bg-[var(--color-surface-elevated)] text-[10px] tabular-nums whitespace-nowrap z-10"
-          style={{ borderColor: `hsl(var(${colorVar}) / 0.4)`, color: 'var(--color-fg)' }}
+          className="absolute left-1/2 -translate-x-1/2 -top-7 inline-flex items-center gap-1.5 h-5 px-2 rounded-full border bg-[var(--bg-raised)] text-[10px] tabular-nums whitespace-nowrap z-10"
+          style={{ borderColor: `color-mix(in srgb, var(${solidVar}) 40%, transparent)`, color: 'var(--fg)' }}
         >
           <span>{newStart}</span>
           {bar.kind === 'span' && (
             <>
-              <span className="text-[var(--color-fg-muted)]">→</span>
+              <span className="text-[var(--fg-dim)]">→</span>
               <span>{newEnd}</span>
             </>
           )}
-          <span className="text-[var(--fg)] font-semibold">{sign}{previewDays}d</span>
+          <span className="text-[var(--fg)] font-medium">{sign}{previewDays}d</span>
         </div>
       )}
       <div
@@ -994,9 +994,9 @@ function BarGhost({
         style={{
           width: bar.width,
           height: 22,
-          backgroundColor: `hsl(var(${colorVar}) / 0.28)`,
-          borderColor: `hsl(var(${colorVar}) / 0.6)`,
-          color: `hsl(var(${colorVar}))`,
+          backgroundColor: `color-mix(in srgb, var(${solidVar}) 28%, transparent)`,
+          borderColor: `color-mix(in srgb, var(${solidVar}) 60%, transparent)`,
+          color: `var(${solidVar})`,
         }}
       >
         {bar.kind === 'span' && (
@@ -1031,23 +1031,23 @@ function NoDateZone({
     <div
       ref={setNodeRef}
       className={cn(
-        'border-b bg-[var(--color-surface-elevated)]/30 transition-colors',
-        isOver && 'bg-[hsl(var(--color-overdue)/0.06)] ring-1 ring-[hsl(var(--color-overdue)/0.4)] ring-inset'
+        'border-b bg-[var(--bg-raised)]/30 transition-colors',
+        isOver && 'bg-[color-mix(in_srgb,var(--red)_6%,transparent)] ring-1 ring-[color-mix(in_srgb,var(--red)_40%,transparent)] ring-inset'
       )}
     >
       <button
         onClick={onToggle}
-        className="w-full flex items-center gap-2 px-3 py-2.5 text-left font-mono text-[12px] font-medium uppercase tracking-wider text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+        className="w-full flex items-center gap-2 px-3 py-2.5 text-left font-mono text-[12px] font-medium uppercase tracking-wider text-[var(--fg-dim)] hover:text-[var(--fg)]"
       >
         <span className="inline-block w-3 transition-transform" style={{ transform: expanded ? 'rotate(90deg)' : 'rotate(0)' }}>▸</span>
-        No date <span className="text-[var(--color-fg-muted)] normal-case font-normal">({videos.length})</span>
+        No date <span className="text-[var(--fg-dim)] normal-case font-normal">({videos.length})</span>
         {expanded && !isDraggingDated && (
-          <span className="ml-2 normal-case font-normal text-[var(--color-fg-muted)] tracking-normal text-[10px]">
+          <span className="ml-2 normal-case font-normal text-[var(--fg-dim)] tracking-normal text-[10px]">
             drag onto timeline to set a plan date
           </span>
         )}
         {isDraggingDated && (
-          <span className="ml-2 normal-case font-normal text-[hsl(var(--color-overdue))] tracking-normal text-[10px]">
+          <span className="ml-2 normal-case font-normal text-[var(--fg-muted)] tracking-normal text-[10px]">
             drop here to unschedule
           </span>
         )}
@@ -1080,7 +1080,7 @@ function NoDateChip({
   const { attributes, listeners, setNodeRef } = useDraggable({
     id: `${video.slug}::nodate`,
   });
-  const colorVar = STATUS_COLOR_VAR[video.frontmatter.status];
+  const solidVar = STATUS_SOLID_VAR[video.frontmatter.status];
   return (
     <button
       ref={setNodeRef}
@@ -1095,16 +1095,16 @@ function NoDateChip({
         'hover:brightness-125'
       )}
       style={{
-        backgroundColor: `hsl(var(${colorVar}) / 0.18)`,
-        borderColor: `hsl(var(${colorVar}) / 0.45)`,
-        color: `hsl(var(${colorVar}))`,
+        backgroundColor: `color-mix(in srgb, var(${solidVar}) 18%, transparent)`,
+        borderColor: `color-mix(in srgb, var(${solidVar}) 45%, transparent)`,
+        color: `var(${solidVar})`,
         visibility: isBeingDragged ? 'hidden' : undefined,
       }}
       title={`${video.frontmatter.title || video.slug} — drag to schedule`}
     >
       <span
         className="w-1.5 h-1.5 rounded-full shrink-0"
-        style={{ backgroundColor: `hsl(var(${colorVar}))` }}
+        style={{ backgroundColor: `var(${solidVar})` }}
       />
       <span className="truncate max-w-[180px] tabular-nums">
         {video.frontmatter.title || video.slug}

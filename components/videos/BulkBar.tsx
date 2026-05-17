@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Target, Video as VideoIcon, CheckCircle2, ChevronDown, X, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { VideoStatus, VideoSummary } from '@/lib/types';
-import { STATUS_ORDER, STATUS_LABELS, STATUS_COLOR_VAR } from '@/lib/status';
+import { STATUS_ORDER, STATUS_LABELS, STATUS_SOLID_VAR } from '@/lib/status';
 import {
   updateVideoField,
   deleteVideoRequest,
@@ -123,23 +123,23 @@ export function BulkBar({
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 24, opacity: 0 }}
         transition={{ duration: 0.15 }}
-        className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 bg-[var(--color-surface-elevated)] border rounded-full pl-4 pr-2 h-11"
+        className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 bg-[var(--bg-raised)] border rounded-full pl-4 pr-2 h-11"
       >
-        <span className="text-xs font-medium text-[var(--color-fg)]">
+        <span className="text-xs font-medium text-[var(--fg)]">
           {size} selected
         </span>
-        <span className="w-px h-4 bg-[var(--color-border)]" />
+        <span className="w-px h-4 bg-[var(--line)]" />
 
         <StatusMenu onPick={bulkSetStatus} />
         <DateMenu label="Plan" icon={Target} onPick={(d) => bulkSetDate('target_date', d)} />
         <DateMenu label="Record" icon={VideoIcon} onPick={(d) => bulkSetDate('record_date', d)} />
         <DateMenu label="Published" icon={CheckCircle2} onPick={(d) => bulkSetDate('published_date', d)} />
 
-        <span className="w-px h-4 bg-[var(--color-border)]" />
+        <span className="w-px h-4 bg-[var(--line)]" />
 
         <button
           onClick={bulkDelete}
-          className="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-full text-xs text-[hsl(var(--color-overdue))] hover:bg-[hsl(var(--color-overdue)/0.1)]"
+          className="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-full text-xs text-[var(--fg-dim)] hover:bg-[var(--red-wash)]"
         >
           <Trash2 className="w-3 h-3" />
           Delete
@@ -147,7 +147,7 @@ export function BulkBar({
 
         <button
           onClick={() => selection.clear()}
-          className="inline-flex items-center justify-center w-7 h-7 rounded-full text-[var(--color-fg-muted)] hover:bg-[var(--color-surface-hover)]"
+          className="inline-flex items-center justify-center w-7 h-7 rounded-full text-[var(--fg-dim)] hover:bg-[var(--bg-hover)]"
           title="Clear selection (Esc)"
         >
           <X className="w-3.5 h-3.5" />
@@ -161,7 +161,7 @@ function StatusMenu({ onPick }: { onPick: (s: VideoStatus) => void }) {
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
-        <button className="inline-flex items-center gap-1 h-7 px-2.5 rounded-full text-xs text-[var(--color-fg-secondary)] hover:bg-[var(--color-surface-hover)]">
+        <button className="inline-flex items-center gap-1 h-7 px-2.5 rounded-full text-xs text-[var(--fg-muted)] hover:bg-[var(--bg-hover)]">
           Status
           <ChevronDown className="w-3 h-3" />
         </button>
@@ -170,19 +170,18 @@ function StatusMenu({ onPick }: { onPick: (s: VideoStatus) => void }) {
         <Popover.Content
           sideOffset={8}
           align="start"
-          className="z-[60] rounded-lg border bg-[var(--color-surface-elevated)] py-1 min-w-[160px]"
+          className="z-[60] rounded-md border bg-[var(--bg-raised)] py-1 min-w-[160px]"
         >
           {STATUS_ORDER.map((s) => {
-            const colorVar = STATUS_COLOR_VAR[s];
             return (
               <Popover.Close
                 key={s}
                 onClick={() => onPick(s)}
-                className="w-full text-left flex items-center gap-2 px-3 h-8 text-sm hover:bg-[var(--color-surface-hover)]"
+                className="w-full text-left flex items-center gap-2 px-3 h-8 text-sm hover:bg-[var(--bg-hover)]"
               >
                 <span
                   className="w-1.5 h-1.5 rounded-full"
-                  style={{ backgroundColor: `hsl(var(${colorVar}))` }}
+                  style={{ backgroundColor: `var(${STATUS_SOLID_VAR[s]})` }}
                 />
                 {STATUS_LABELS[s]}
               </Popover.Close>
@@ -209,7 +208,7 @@ function DateMenu({
       <Popover.Trigger asChild>
         <button className={cn(
           'inline-flex items-center gap-1.5 h-7 px-2.5 rounded-full text-xs',
-          'text-[var(--color-fg-secondary)] hover:bg-[var(--color-surface-hover)]'
+          'text-[var(--fg-muted)] hover:bg-[var(--bg-hover)]'
         )}>
           <Icon className="w-3 h-3" />
           {label}
@@ -219,9 +218,9 @@ function DateMenu({
         <Popover.Content
           sideOffset={8}
           align="start"
-          className="z-[60] rounded-lg border bg-[var(--color-surface-elevated)] p-3 w-[220px] space-y-3"
+          className="z-[60] rounded-md border bg-[var(--bg-raised)] p-3 w-[220px] space-y-3"
         >
-          <div className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--color-fg-muted)]">
+          <div className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--fg-dim)]">
             Set {label.toLowerCase()} for selected
           </div>
           <input
@@ -234,18 +233,18 @@ function DateMenu({
                 (e.target as HTMLInputElement).closest('[data-radix-popper-content-wrapper]')?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
               }
             }}
-            className="w-full h-9 px-2 rounded-md border bg-[var(--color-surface)] text-sm outline-none"
+            className="w-full h-9 px-2 rounded-md border bg-[var(--bg-raised)] text-sm outline-none"
           />
           <div className="flex items-center justify-between">
             <Popover.Close
               onClick={() => onPick(null)}
-              className="text-xs text-[var(--color-fg-muted)] hover:text-[hsl(var(--color-overdue))]"
+              className="text-xs text-[var(--fg-dim)] hover:text-[var(--fg)]"
             >
               Clear
             </Popover.Close>
             <Popover.Close
               onClick={() => onPick(draft || null)}
-              className="px-2.5 h-7 rounded text-xs font-medium bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] hover:bg-[var(--color-button-primary-hover)]"
+              className="px-2.5 h-7 rounded text-xs font-medium bg-[var(--fg)] text-[var(--fg-inverse)] hover:bg-[var(--fg)]"
             >
               Save
             </Popover.Close>

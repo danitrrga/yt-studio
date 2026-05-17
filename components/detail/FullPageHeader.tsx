@@ -60,12 +60,12 @@ export function FullPageHeader({
   };
 
   return (
-    <header className="h-14 shrink-0 border-b flex items-center justify-between px-4 bg-[var(--color-surface)]">
+    <header className="h-14 shrink-0 border-b flex items-center justify-between px-4 bg-[var(--bg-raised)]">
       <div className="flex items-center gap-2 min-w-0">
         <Tooltip content="Back to list (Esc)">
           <Link
             href="/videos"
-            className="p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)] shrink-0"
+            className="p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)] shrink-0"
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
@@ -73,12 +73,12 @@ export function FullPageHeader({
         <nav className="flex items-center gap-1.5 text-sm min-w-0">
           <Link
             href="/videos"
-            className="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] shrink-0"
+            className="text-[var(--fg-dim)] hover:text-[var(--fg)] shrink-0"
           >
             All videos
           </Link>
-          <span className="text-[var(--color-fg-muted)]">/</span>
-          <span className="text-[var(--color-fg)] truncate font-medium">
+          <span className="text-[var(--fg-dim)]">/</span>
+          <span className="text-[var(--fg)] truncate font-medium">
             {video.frontmatter.title || video.slug}
           </span>
         </nav>
@@ -89,24 +89,24 @@ export function FullPageHeader({
           <SaveIndicator state={saveState} />
         </div>
 
-        <div className="flex items-center gap-0.5 border rounded-md bg-[var(--color-surface)]">
+        <div className="flex items-center gap-0.5 border rounded-md bg-[var(--bg-raised)]">
           <Tooltip content="Previous (K)">
             <button
               disabled={!prevSlug}
               onClick={() => prevSlug && router.push(`/videos/${prevSlug}`)}
-              className="p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)] disabled:opacity-30"
+              className="p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)] disabled:opacity-30"
             >
               <ChevronUp className="w-3.5 h-3.5" />
             </button>
           </Tooltip>
-          <span className="text-[11px] text-[var(--color-fg-muted)] tabular-nums px-1">
+          <span className="text-[11px] text-[var(--fg-dim)] tabular-nums px-1">
             {index + 1}/{total}
           </span>
           <Tooltip content="Next (J)">
             <button
               disabled={!nextSlug}
               onClick={() => nextSlug && router.push(`/videos/${nextSlug}`)}
-              className="p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)] disabled:opacity-30"
+              className="p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)] disabled:opacity-30"
             >
               <ChevronDown className="w-3.5 h-3.5" />
             </button>
@@ -120,7 +120,7 @@ export function FullPageHeader({
               'p-1.5 rounded border transition-colors',
               writingMode
                 ? 'bg-[var(--fg)]/15 border-[var(--line-strong)]/40 text-[var(--fg)]'
-                : 'bg-[var(--color-surface)] border-transparent hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)]'
+                : 'bg-[var(--bg-raised)] border-transparent hover:bg-[var(--bg-hover)] text-[var(--fg-muted)]'
             )}
           >
             <Feather className="w-3.5 h-3.5" />
@@ -130,7 +130,7 @@ export function FullPageHeader({
         <Tooltip content={metadataCollapsed ? 'Show metadata (M)' : 'Hide metadata (M)'}>
           <button
             onClick={toggleMetadata}
-            className="p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)]"
+            className="p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)]"
           >
             <PanelRight className="w-3.5 h-3.5" />
           </button>
@@ -139,7 +139,7 @@ export function FullPageHeader({
         <Tooltip content={fullscreen ? 'Exit fullscreen (Shift+F)' : 'Fullscreen (Shift+F)'}>
           <button
             onClick={toggleFullscreen}
-            className="p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)]"
+            className="p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)]"
           >
             {fullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
           </button>
@@ -148,7 +148,7 @@ export function FullPageHeader({
         <Tooltip content="Open in Obsidian">
           <a
             href={video.obsidianUri}
-            className="p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)]"
+            className="p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)]"
           >
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
@@ -157,7 +157,7 @@ export function FullPageHeader({
         <Tooltip content="Delete video">
           <button
             onClick={() => setConfirmOpen(true)}
-            className="p-1.5 rounded hover:bg-[var(--color-danger-subtle)] text-[var(--color-fg-muted)] hover:text-[var(--color-danger)] transition-colors"
+            className="p-1.5 rounded hover:bg-[var(--red-wash)] text-[var(--fg-dim)] hover:text-[var(--fg)] transition-colors"
           >
             <Trash2 className="w-3.5 h-3.5" />
           </button>

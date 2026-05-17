@@ -218,8 +218,8 @@ function ScriptCard({
   sections: { text: string; words: number; seconds: number }[];
 }) {
   return (
-    <div className="rounded-lg border bg-[var(--color-surface)] overflow-hidden">
-      <div className="flex items-center gap-2 px-4 h-10 border-b font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)]">
+    <div className="rounded-md border bg-[var(--bg-raised)] overflow-hidden">
+      <div className="flex items-center gap-2 px-4 h-10 border-b font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)]">
         <FileText className="w-3.5 h-3.5" />
         <span>Script</span>
         <span className="ml-auto tabular-nums text-[10px]">
@@ -228,19 +228,19 @@ function ScriptCard({
       </div>
       <div className="p-5 space-y-4">
         {sections.length > 0 ? (
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-[var(--color-fg-muted)] tabular-nums">
+          <div className="flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-[var(--fg-dim)] tabular-nums">
             {sections.map((s, i) => (
               <span key={i}>
-                <span className="text-[var(--color-fg-secondary)]">{s.text}</span>
-                <span className="mx-1.5 text-[var(--color-border)]">·</span>
+                <span className="text-[var(--fg-muted)]">{s.text}</span>
+                <span className="mx-1.5 text-[var(--line)]">·</span>
                 {s.words}w
-                <span className="mx-1 text-[var(--color-border)]">·</span>
+                <span className="mx-1 text-[var(--line)]">·</span>
                 {fmtTime(s.seconds)}
               </span>
             ))}
           </div>
         ) : (
-          <p className="text-sm text-[var(--color-fg-muted)] italic">
+          <p className="text-sm text-[var(--fg-dim)] italic">
             No script sections yet — open the editor to start.
           </p>
         )}
@@ -249,7 +249,7 @@ function ScriptCard({
           href={`/videos/${slug}/script`}
           className={cn(
             'inline-flex items-center gap-2 px-3 h-8 rounded-md text-xs font-medium',
-            'bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] hover:bg-[var(--color-button-primary-hover)]',
+            'bg-[var(--fg)] text-[var(--fg-inverse)] hover:bg-[var(--fg)]',
             'transition-colors'
           )}
         >
@@ -263,12 +263,12 @@ function ScriptCard({
 
 function PostMortemLocked({ daysUntil }: { daysUntil: number | null }) {
   return (
-    <div className="rounded-lg border border-dashed bg-[var(--color-surface)]/40 overflow-hidden opacity-60">
-      <div className="flex items-center gap-2 px-4 h-10 border-b border-dashed font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)]">
+    <div className="rounded-md border border-dashed bg-[var(--bg-raised)]/40 overflow-hidden opacity-60">
+      <div className="flex items-center gap-2 px-4 h-10 border-b border-dashed font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)]">
         <NotebookPen className="w-3.5 h-3.5" />
         <span>Post-Mortem</span>
       </div>
-      <div className="p-6 text-center text-sm text-[var(--color-fg-muted)] inline-flex items-center justify-center gap-2 w-full">
+      <div className="p-6 text-center text-sm text-[var(--fg-dim)] inline-flex items-center justify-center gap-2 w-full">
         <Lock className="w-3.5 h-3.5" />
         {daysUntil === null
           ? 'Unlocks after the video is published.'
@@ -295,11 +295,11 @@ function SectionCard({
   const Icon = meta.icon;
 
   return (
-    <div className="rounded-lg border bg-[var(--color-surface)] overflow-hidden">
-      <div className="flex items-center gap-2 px-4 h-10 border-b font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)]">
+    <div className="rounded-md border bg-[var(--bg-raised)] overflow-hidden">
+      <div className="flex items-center gap-2 px-4 h-10 border-b font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)]">
         <Icon className="w-3.5 h-3.5" />
         <span>{meta.label}</span>
-        {busy && <span className="ml-auto text-[10px] text-[var(--color-fg-muted)]">Saving…</span>}
+        {busy && <span className="ml-auto text-[10px] text-[var(--fg-dim)]">Saving…</span>}
       </div>
       <div className="p-4">
         {kind === 'checklist' && (
@@ -345,7 +345,7 @@ function MarkdownTextArea({
       }}
       placeholder={placeholder}
       rows={Math.max(3, value.split('\n').length + 1)}
-      className="w-full bg-transparent outline-none text-sm font-mono resize-none text-[var(--color-fg)] placeholder:text-[var(--color-fg-muted)]"
+      className="w-full bg-transparent outline-none text-sm font-mono resize-none text-[var(--fg)] placeholder:text-[var(--fg-dim)]"
     />
   );
 }
@@ -459,7 +459,7 @@ function ChecklistEditor({
         {ghostItems.map((it, i) => (
           <div
             key={i}
-            className="flex items-center gap-2.5 group rounded px-1 -mx-1 py-0.5 hover:bg-[var(--color-surface-hover)] opacity-50 hover:opacity-100 transition-opacity cursor-pointer"
+            className="flex items-center gap-2.5 group rounded px-1 -mx-1 py-0.5 hover:bg-[var(--bg-hover)] opacity-50 hover:opacity-100 transition-opacity cursor-pointer"
             onClick={() => seedFromGhost(i)}
           >
             <Checkbox
@@ -468,7 +468,7 @@ function ChecklistEditor({
               onChange={() => seedFromGhost(i)}
               title="Start the list"
             />
-            <span className="flex-1 text-sm text-[var(--color-fg-muted)]">{it.text}</span>
+            <span className="flex-1 text-sm text-[var(--fg-dim)]">{it.text}</span>
           </div>
         ))}
         <div className="pt-1">
@@ -485,7 +485,7 @@ function ChecklistEditor({
           key={i}
           className={cn(
             'flex items-center gap-2.5 group rounded px-1 -mx-1 py-0.5',
-            'hover:bg-[var(--color-surface-hover)]'
+            'hover:bg-[var(--bg-hover)]'
           )}
         >
           <Checkbox
@@ -503,7 +503,7 @@ function ChecklistEditor({
             }}
             className={cn(
               'flex-1 bg-transparent outline-none text-sm',
-              it.checked && 'line-through text-[var(--color-fg-muted)]'
+              it.checked && 'line-through text-[var(--fg-dim)]'
             )}
           />
         </div>
@@ -586,10 +586,10 @@ function BulletListEditor({
             className="flex items-center gap-2.5 rounded px-1 -mx-1 py-0.5 opacity-50"
           >
             <span
-              className="w-1 h-1 rounded-full bg-[var(--color-fg-muted)] shrink-0 ml-1"
+              className="w-1 h-1 rounded-full bg-[var(--fg-dim)] shrink-0 ml-1"
               aria-hidden
             />
-            <span className="flex-1 text-sm text-[var(--color-fg-muted)]">{t}</span>
+            <span className="flex-1 text-sm text-[var(--fg-dim)]">{t}</span>
           </div>
         ))}
         <div className="pt-1">
@@ -604,10 +604,10 @@ function BulletListEditor({
       {draft.map((t, i) => (
         <div
           key={i}
-          className="flex items-center gap-2.5 group rounded px-1 -mx-1 py-0.5 hover:bg-[var(--color-surface-hover)]"
+          className="flex items-center gap-2.5 group rounded px-1 -mx-1 py-0.5 hover:bg-[var(--bg-hover)]"
         >
           <span
-            className="w-1 h-1 rounded-full bg-[var(--color-fg-muted)] shrink-0 ml-1"
+            className="w-1 h-1 rounded-full bg-[var(--fg-dim)] shrink-0 ml-1"
             aria-hidden
           />
           <input
@@ -622,7 +622,7 @@ function BulletListEditor({
           <button
             type="button"
             onClick={() => remove(i)}
-            className="opacity-0 group-hover:opacity-100 text-[var(--color-fg-muted)] hover:text-[hsl(var(--color-overdue))] transition-opacity text-xs"
+            className="opacity-0 group-hover:opacity-100 text-[var(--fg-dim)] hover:text-[var(--fg)] transition-opacity text-xs"
             aria-label="Remove item"
           >
             ×
@@ -656,7 +656,7 @@ function NewItemRow({
         if (value.trim()) onCommit();
       }}
       placeholder="Add item…"
-      className="w-full bg-transparent outline-none text-sm text-[var(--color-fg)] placeholder:text-[var(--color-fg-muted)]"
+      className="w-full bg-transparent outline-none text-sm text-[var(--fg)] placeholder:text-[var(--fg-dim)]"
     />
   );
 }

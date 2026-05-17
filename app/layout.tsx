@@ -21,7 +21,19 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: 'yt/studio',
-  description: 'Local production dashboard for YouTube videos',
+  description: 'Local production dashboard for YouTube videos — manage scripts, track pipeline stages, and ship faster.',
+  openGraph: {
+    title: 'yt/studio',
+    description: 'Local production dashboard for YouTube videos — manage scripts, track pipeline stages, and ship faster.',
+    images: [{ url: '/assets/og-social.png', width: 1280, height: 640 }],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'yt/studio',
+    description: 'Local production dashboard for YouTube videos — manage scripts, track pipeline stages, and ship faster.',
+    images: ['/assets/og-social.png'],
+  },
 };
 
 export default function RootLayout({
@@ -45,9 +57,9 @@ export default function RootLayout({
               position="bottom-right"
               toastOptions={{
                 style: {
-                  background: 'var(--color-surface-elevated)',
-                  border: '1px solid var(--color-border)',
-                  color: 'var(--color-fg)',
+                  background: 'var(--bg-raised)',
+                  border: '1px solid var(--line)',
+                  color: 'var(--fg)',
                 },
               }}
             />

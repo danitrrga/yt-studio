@@ -45,8 +45,8 @@ export function SortPill() {
           className={cn(
             'inline-flex items-center gap-1.5 h-7 px-2 rounded-md border text-xs',
             count > 0
-              ? 'bg-[var(--color-surface)] text-[var(--color-fg)] border-[var(--color-border)]'
-              : 'border-dashed border-[var(--color-border)] text-[var(--color-fg-secondary)] hover:bg-[var(--color-surface-hover)]'
+              ? 'bg-[var(--bg-raised)] text-[var(--fg)] border-[var(--line)]'
+              : 'border-dashed border-[var(--line)] text-[var(--fg-muted)] hover:bg-[var(--bg-hover)]'
           )}
         >
           <ArrowUpDown className="w-3 h-3" />
@@ -57,7 +57,7 @@ export function SortPill() {
         <Popover.Content
           sideOffset={6}
           align="end"
-          className="z-50 w-[320px] rounded-md border bg-[var(--color-surface-elevated)] overflow-hidden"
+          className="z-50 w-[320px] rounded-md border bg-[var(--bg-raised)] overflow-hidden"
         >
           <SortPanel rules={view.sort} />
         </Popover.Content>
@@ -81,12 +81,12 @@ function SortPanel({ rules }: { rules: SortRule[] }) {
 
   return (
     <div>
-      <div className="p-2 text-xs text-[var(--color-fg-muted)] border-b border-[var(--color-border-subtle)]">
+      <div className="p-2 text-xs text-[var(--fg-dim)] border-b border-[var(--line-faint)]">
         Sort rules · drag to reorder
       </div>
 
       {rules.length === 0 ? (
-        <div className="px-3 py-6 text-center text-xs text-[var(--color-fg-muted)]">No sort rules</div>
+        <div className="px-3 py-6 text-center text-xs text-[var(--fg-dim)]">No sort rules</div>
       ) : (
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={ids} strategy={verticalListSortingStrategy}>
@@ -97,7 +97,7 @@ function SortPanel({ rules }: { rules: SortRule[] }) {
         </DndContext>
       )}
 
-      <div className="p-1 border-t border-[var(--color-border-subtle)]">
+      <div className="p-1 border-t border-[var(--line-faint)]">
         <AddSortButton existing={rules.map((r) => r.field)} />
       </div>
     </div>
@@ -116,9 +116,9 @@ function SortRuleRow({ rule }: { rule: SortRule }) {
     <div
       ref={setNodeRef}
       style={style}
-      className="flex items-center gap-1 px-1 py-1 rounded hover:bg-[var(--color-surface-hover)]"
+      className="flex items-center gap-1 px-1 py-1 rounded hover:bg-[var(--bg-hover)]"
     >
-      <button {...attributes} {...listeners} className="p-0.5 cursor-grab active:cursor-grabbing text-[var(--color-fg-muted)]">
+      <button {...attributes} {...listeners} className="p-0.5 cursor-grab active:cursor-grabbing text-[var(--fg-dim)]">
         <GripVertical className="w-3 h-3" />
       </button>
       <span className="flex-1 text-sm">{meta.label}</span>
@@ -126,14 +126,14 @@ function SortRuleRow({ rule }: { rule: SortRule }) {
         onClick={() => viewStore.setSort(
           toggleDirection(rule)
         )}
-        className="p-1 rounded hover:bg-[var(--color-surface-hover)]"
+        className="p-1 rounded hover:bg-[var(--bg-hover)]"
         aria-label="Toggle direction"
       >
         {rule.direction === 'asc' ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />}
       </button>
       <button
         onClick={() => viewStore.removeSort(rule.id)}
-        className="p-1 rounded text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+        className="p-1 rounded text-[var(--fg-dim)] hover:text-[var(--fg)]"
         aria-label="Remove sort"
       >
         <X className="w-3 h-3" />
@@ -153,7 +153,7 @@ function AddSortButton({ existing }: { existing: FieldId[] }) {
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
-        <button className="w-full flex items-center gap-2 px-2 py-1.5 rounded text-sm text-[var(--color-fg-secondary)] hover:bg-[var(--color-surface-hover)]">
+        <button className="w-full flex items-center gap-2 px-2 py-1.5 rounded text-sm text-[var(--fg-muted)] hover:bg-[var(--bg-hover)]">
           <Plus className="w-3 h-3" />
           <span>Add sort</span>
         </button>
@@ -162,7 +162,7 @@ function AddSortButton({ existing }: { existing: FieldId[] }) {
         <Popover.Content
           sideOffset={6}
           align="start"
-          className="z-50 w-[220px] max-h-[320px] overflow-y-auto rounded-md border bg-[var(--color-surface-elevated)] p-1"
+          className="z-50 w-[220px] max-h-[320px] overflow-y-auto rounded-md border bg-[var(--bg-raised)] p-1"
         >
           {options.map((id) => (
             <button
@@ -171,13 +171,13 @@ function AddSortButton({ existing }: { existing: FieldId[] }) {
                 viewStore.addSort({ id: newId(), field: id, direction: 'asc' });
                 setOpen(false);
               }}
-              className="w-full text-left px-2 py-1.5 rounded text-sm hover:bg-[var(--color-surface-hover)]"
+              className="w-full text-left px-2 py-1.5 rounded text-sm hover:bg-[var(--bg-hover)]"
             >
               {FIELDS[id].label}
             </button>
           ))}
           {options.length === 0 && (
-            <div className="px-2 py-4 text-center text-xs text-[var(--color-fg-muted)]">All fields added</div>
+            <div className="px-2 py-4 text-center text-xs text-[var(--fg-dim)]">All fields added</div>
           )}
         </Popover.Content>
       </Popover.Portal>

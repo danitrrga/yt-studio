@@ -27,7 +27,7 @@ import { useVideos } from '@/hooks/use-videos';
 import { useHubClips } from '@/hooks/use-hub';
 import { thumbnailSrc } from '@/components/hub/hub-utils';
 import { useUI } from '@/components/UIProvider';
-import { STATUS_COLOR_VAR, IN_FLIGHT_STATUSES } from '@/lib/status';
+import { STATUS_SOLID_VAR, IN_FLIGHT_STATUSES } from '@/lib/status';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { EmptyState } from '@/components/EmptyState';
 import { Skeleton } from '@/components/ui/Skeleton';
@@ -173,11 +173,11 @@ export default function Home() {
       {/* Hero */}
       <div className="flex items-start justify-between gap-6 flex-wrap">
         <div>
-          <h1 className="text-[28px] font-semibold tracking-[-0.012em] leading-[1.2]">
+          <h1 className="text-[28px] font-bold tracking-[-0.012em] leading-[1.2]">
             Today, {format(today, 'EEEE MMM d')}
           </h1>
           {!isLoading && (
-            <p className="text-[13px] text-[var(--color-fg-muted)] mt-2">
+            <p className="text-[13px] text-[var(--fg-dim)] mt-2">
               {inFlight.length === 0 ? (
                 'Nothing in flight.'
               ) : (
@@ -186,7 +186,7 @@ export default function Home() {
                   {overdue.length > 0 && (
                     <>
                       {', '}
-                      <span className="text-[hsl(var(--color-overdue))] font-medium">
+                      <span className="text-[var(--fg-muted)] font-medium">
                         {overdue.length} overdue
                       </span>
                     </>
@@ -199,7 +199,7 @@ export default function Home() {
         </div>
         <button
           onClick={() => setQuickAddOpen(true)}
-          className="inline-flex items-center gap-1.5 px-3 h-8 rounded-md bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] text-[13px] font-medium hover:bg-[var(--color-button-primary-hover)]"
+          className="inline-flex items-center gap-1.5 px-3 h-8 rounded-md bg-[var(--fg)] text-[var(--fg-inverse)] text-[13px] font-medium hover:bg-[var(--fg)]"
         >
           <Plus className="w-4 h-4" />
           New video
@@ -210,7 +210,7 @@ export default function Home() {
       </div>
 
       {isLoading && (
-        <div className="rounded-xl border bg-[var(--color-surface)] p-6">
+        <div className="rounded-md border bg-[var(--bg-raised)] p-6">
           <Skeleton variant="row" count={3} />
         </div>
       )}
@@ -277,15 +277,15 @@ function NowWorkingCard({
 
   return (
     <section>
-      <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--color-fg-muted)] mb-3">
+      <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--fg-dim)] mb-3">
         Now working on
       </h2>
-      <div className="rounded-xl border bg-[var(--color-surface)] p-5 hover:bg-[var(--color-surface-hover)] transition-colors">
+      <div className="rounded-md border bg-[var(--bg-raised)] p-5 hover:bg-[var(--bg-hover)] transition-colors">
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div className="min-w-0 flex-1">
             <Link
               href={`/videos/${video.slug}`}
-              className="text-[20px] font-semibold tracking-[-0.01em] leading-[1.3] line-clamp-2 hover:underline"
+              className="text-[20px] font-bold tracking-[-0.01em] leading-[1.3] line-clamp-2 hover:underline"
             >
               {video.frontmatter.title || video.slug}
             </Link>
@@ -315,7 +315,7 @@ function NowWorkingCard({
           <div className="flex flex-col gap-2 shrink-0">
             <Link
               href={`/videos/${video.slug}/script`}
-              className="inline-flex items-center justify-center gap-1.5 px-3 h-8 rounded-md bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] text-[13px] font-medium hover:bg-[var(--color-button-primary-hover)]"
+              className="inline-flex items-center justify-center gap-1.5 px-3 h-8 rounded-md bg-[var(--fg)] text-[var(--fg-inverse)] text-[13px] font-medium hover:bg-[var(--fg)]"
             >
               <PenLine className="w-4 h-4" />
               Open script
@@ -343,14 +343,14 @@ function DateLine({
   return (
     <div
       className={`inline-flex items-center gap-1.5 ${
-        warn ? 'text-[hsl(var(--color-overdue))]' : 'text-[var(--color-fg-secondary)]'
+        warn ? 'text-[var(--fg-muted)]' : 'text-[var(--fg-muted)]'
       }`}
     >
       <Icon className="w-3.5 h-3.5" />
-      <span className="text-[var(--color-fg-muted)]">{label}</span>
-      <span className="font-medium text-[var(--color-fg)]">{value}</span>
+      <span className="text-[var(--fg-dim)]">{label}</span>
+      <span className="font-medium text-[var(--fg)]">{value}</span>
       {hint && (
-        <span className={warn ? '' : 'text-[var(--color-fg-muted)]'}>· {hint}</span>
+        <span className={warn ? '' : 'text-[var(--fg-dim)]'}>· {hint}</span>
       )}
     </div>
   );
@@ -370,29 +370,29 @@ function FocusColumn({
   empty: string;
 }) {
   return (
-    <section className="rounded-lg border bg-[var(--color-surface)] flex flex-col">
+    <section className="rounded-md border bg-[var(--bg-raised)] flex flex-col">
       <div className="flex items-center gap-2 px-4 h-10 border-b">
         <Icon className="w-3.5 h-3.5 text-[var(--fg-muted)]" />
-        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--color-fg-muted)]">
+        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--fg-dim)]">
           {title}
         </span>
-        <span className="ml-auto text-[11px] tabular-nums text-[var(--color-fg-muted)]">
+        <span className="ml-auto text-[11px] tabular-nums text-[var(--fg-dim)]">
           {videos.length}
         </span>
       </div>
       {videos.length === 0 ? (
-        <div className="px-4 py-6 text-xs text-[var(--color-fg-muted)] text-center">
+        <div className="px-4 py-6 text-xs text-[var(--fg-dim)] text-center">
           {empty}
         </div>
       ) : (
-        <div className="divide-y divide-[var(--color-border-subtle)]">
+        <div className="divide-y divide-[var(--line-faint)]">
           {videos.slice(0, 5).map((v) => (
             <FocusRow key={v.slug} video={v} dateField={dateField} />
           ))}
           {videos.length > 5 && (
             <Link
               href="/videos"
-              className="block px-4 py-2 text-xs text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] text-center"
+              className="block px-4 py-2 text-xs text-[var(--fg-dim)] hover:text-[var(--fg)] text-center"
             >
               +{videos.length - 5} more
             </Link>
@@ -407,7 +407,7 @@ function FocusRow({
   video,
   dateField,
   warn,
-  hoverClass = 'hover:bg-[var(--color-surface-hover)]',
+  hoverClass = 'hover:bg-[var(--bg-hover)]',
 }: {
   video: VideoSummary;
   dateField: 'target_date' | 'record_date';
@@ -423,14 +423,14 @@ function FocusRow({
     >
       <span
         className="w-1.5 h-1.5 rounded-full shrink-0"
-        style={{ background: `hsl(var(${STATUS_COLOR_VAR[video.frontmatter.status]}))` }}
+        style={{ background: `var(${STATUS_SOLID_VAR[video.frontmatter.status]})` }}
       />
       <div className="min-w-0 flex-1 text-[13px] font-medium line-clamp-1">
         {video.frontmatter.title || video.slug}
       </div>
       {dateValue && (
         <div className={`text-[12px] tabular-nums shrink-0 ${
-          warn ? 'text-[hsl(var(--color-overdue))]' : 'text-[var(--color-fg-muted)]'
+          warn ? 'text-[var(--fg-dim)]' : 'text-[var(--fg-dim)]'
         }`}>
           {fmtDate(dateValue)}
           {days !== null && (
@@ -441,7 +441,7 @@ function FocusRow({
           )}
         </div>
       )}
-      <ChevronRight className="w-3.5 h-3.5 text-[var(--color-fg-muted)] opacity-30 group-hover:opacity-100 transition-opacity duration-[120ms] shrink-0" />
+      <ChevronRight className="w-3.5 h-3.5 text-[var(--fg-dim)] opacity-30 group-hover:opacity-100 transition-opacity duration-[120ms] shrink-0" />
     </Link>
   );
 }
@@ -451,23 +451,23 @@ function OverdueStrip({ videos }: { videos: VideoSummary[] }) {
   const more = videos.length - top.length;
   return (
     <section>
-      <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--color-fg-muted)] mb-3 inline-flex items-center gap-1.5">
-        <AlertTriangle className="w-3 h-3 text-[hsl(var(--color-overdue))]" />
+      <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--fg-dim)] mb-3 inline-flex items-center gap-1.5">
+        <AlertTriangle className="w-3 h-3 text-[var(--fg-muted)]" />
         Overdue
-        <span className="tabular-nums text-[var(--color-fg-muted)]">· {videos.length}</span>
+        <span className="tabular-nums text-[var(--fg-dim)]">· {videos.length}</span>
       </h2>
-      <div className="rounded-xl border border-l-2 border-l-[hsl(var(--color-overdue))] bg-[hsl(var(--color-overdue)/0.04)] divide-y divide-[var(--color-border-subtle)] overflow-hidden">
+      <div className="rounded-md border border-[var(--line)] bg-[var(--red-wash)] divide-y divide-[var(--line-faint)] overflow-hidden">
         {top.map((v) => (
           <FocusRow
             key={v.slug}
             video={v}
             dateField="target_date"
             warn
-            hoverClass="hover:bg-[hsl(var(--color-overdue)/0.08)]"
+            hoverClass="hover:bg-[var(--bg-hover)]"
           />
         ))}
         {more > 0 && (
-          <div className="block px-5 py-2.5 text-[12px] text-[var(--color-fg-muted)] text-center">
+          <div className="block px-5 py-2.5 text-[12px] text-[var(--fg-dim)] text-center">
             +{more} more
           </div>
         )}
@@ -481,13 +481,13 @@ function RecentClipsSection({ clips }: { clips: HubClipSummary[] }) {
   return (
     <section>
       <div className="flex items-center justify-between mb-3">
-        <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--color-fg-muted)] inline-flex items-center gap-1.5">
+        <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--fg-dim)] inline-flex items-center gap-1.5">
           <Library className="w-3 h-3" />
           Inbox · {clips.length} new clip{clips.length === 1 ? '' : 's'}
         </h2>
         <Link
           href="/hub"
-          className="text-[11px] text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)] inline-flex items-center gap-1"
+          className="text-[11px] text-[var(--fg-muted)] hover:text-[var(--fg)] inline-flex items-center gap-1"
         >
           All clips <ArrowRight className="w-3 h-3" />
         </Link>
@@ -499,26 +499,26 @@ function RecentClipsSection({ clips }: { clips: HubClipSummary[] }) {
             <Link
               key={clip.slug}
               href={`/hub/${clip.slug}`}
-              className="group rounded-lg border bg-[var(--color-surface)] hover:bg-[var(--color-surface-hover)] transition-colors overflow-hidden flex"
+              className="group rounded-md border bg-[var(--bg-raised)] hover:bg-[var(--bg-hover)] transition-colors overflow-hidden flex"
             >
               {thumb ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={thumb}
                   alt=""
-                  className="w-24 aspect-video object-cover bg-[var(--color-surface-elevated)] shrink-0"
+                  className="w-24 aspect-video object-cover bg-[var(--bg-raised)] shrink-0"
                   loading="lazy"
                 />
               ) : (
-                <div className="w-24 aspect-video flex items-center justify-center bg-[var(--color-surface-elevated)] shrink-0">
-                  <Library className="w-4 h-4 text-[var(--color-fg-muted)]" />
+                <div className="w-24 aspect-video flex items-center justify-center bg-[var(--bg-raised)] shrink-0">
+                  <Library className="w-4 h-4 text-[var(--fg-dim)]" />
                 </div>
               )}
               <div className="p-2.5 flex-1 min-w-0 flex flex-col gap-1">
                 <div className="text-sm font-medium line-clamp-2 leading-snug">
                   {clip.frontmatter.title || clip.frontmatter.url}
                 </div>
-                <div className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-muted)] mt-auto">
+                <div className="font-mono text-[11px] uppercase tracking-wider text-[var(--fg-dim)] mt-auto">
                   {clip.frontmatter.source}
                 </div>
               </div>

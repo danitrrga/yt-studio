@@ -62,19 +62,19 @@ export function FilterPopover({
 
   return (
     <div className="min-w-[280px] max-w-[360px]">
-      <div className="flex items-center gap-2 px-2 py-1.5 border-b border-[var(--color-border-subtle)] text-xs text-[var(--color-fg-muted)]">
+      <div className="flex items-center gap-2 px-2 py-1.5 border-b border-[var(--line-faint)] text-xs text-[var(--fg-dim)]">
         <button
           onClick={() => setStage('property')}
-          className="p-0.5 hover:text-[var(--color-fg)]"
+          className="p-0.5 hover:text-[var(--fg)]"
           aria-label="Back"
         >
           <ArrowLeft className="w-3 h-3" />
         </button>
-        <span className="font-medium text-[var(--color-fg)]">{meta?.label}</span>
+        <span className="font-medium text-[var(--fg)]">{meta?.label}</span>
         <span>·</span>
         <button
           onClick={() => setStage('operator')}
-          className="hover:text-[var(--color-fg)]"
+          className="hover:text-[var(--fg)]"
         >
           {op ? OP_LABELS[op] : 'is'}
         </button>
@@ -112,7 +112,7 @@ function PropertyList({
 
   return (
     <div className="min-w-[240px]">
-      <div className="p-2 border-b border-[var(--color-border-subtle)]">
+      <div className="p-2 border-b border-[var(--line-faint)]">
         <input
           autoFocus
           type="text"
@@ -120,7 +120,7 @@ function PropertyList({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Escape') onCancel?.(); }}
-          className="w-full bg-transparent outline-none text-sm placeholder:text-[var(--color-fg-muted)]"
+          className="w-full bg-transparent outline-none text-sm placeholder:text-[var(--fg-dim)]"
         />
       </div>
       <div className="max-h-[320px] overflow-y-auto p-1">
@@ -128,14 +128,14 @@ function PropertyList({
           <button
             key={id}
             onClick={() => onPick(id)}
-            className="w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded text-sm text-left hover:bg-[var(--color-surface-hover)]"
+            className="w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded text-sm text-left hover:bg-[var(--bg-hover)]"
           >
             <span>{FIELDS[id].label}</span>
             <ChevronRight className="w-3 h-3 opacity-40" />
           </button>
         ))}
         {items.length === 0 && (
-          <div className="px-2 py-6 text-center text-xs text-[var(--color-fg-muted)]">No matches</div>
+          <div className="px-2 py-6 text-center text-xs text-[var(--fg-dim)]">No matches</div>
         )}
       </div>
     </div>
@@ -158,7 +158,7 @@ function OperatorList({
         <button
           key={op}
           onClick={() => onPick(op)}
-          className="w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded text-sm text-left hover:bg-[var(--color-surface-hover)]"
+          className="w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded text-sm text-left hover:bg-[var(--bg-hover)]"
         >
           <span>{OP_LABELS[op]}</span>
           {current === op && <Check className="w-3 h-3 text-[var(--fg)]" />}
@@ -210,7 +210,7 @@ function ValueInput({
           value={typeof value === 'string' ? value : ''}
           onChange={(e) => onChange(e.target.value)}
           placeholder="Value..."
-          className="w-full h-8 px-2 rounded bg-[var(--color-surface)] border text-sm outline-none"
+          className="w-full h-8 px-2 rounded bg-[var(--bg-raised)] border text-sm outline-none"
         />
       </div>
     );
@@ -228,7 +228,7 @@ function ValueInput({
             className="flex-1"
             ariaLabel="Lower bound"
           />
-          <span className="text-xs text-[var(--color-fg-muted)]">to</span>
+          <span className="text-xs text-[var(--fg-dim)]">to</span>
           <NumberInput
             value={hi}
             onChange={(n) => onChange([lo, n ?? 0] as [number, number])}
@@ -270,7 +270,7 @@ function ValueInput({
               key={k}
               onClick={() => onChange(k)}
               className={cn(
-                'w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded text-sm text-left hover:bg-[var(--color-surface-hover)]',
+                'w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded text-sm text-left hover:bg-[var(--bg-hover)]',
                 value === k && 'text-[var(--fg)]'
               )}
             >
@@ -288,7 +288,7 @@ function ValueInput({
           type="date"
           value={typeof value === 'string' ? value : ''}
           onChange={(e) => onChange(e.target.value || null)}
-          className="w-full h-8 px-2 rounded bg-[var(--color-surface)] border text-sm outline-none"
+          className="w-full h-8 px-2 rounded bg-[var(--bg-raised)] border text-sm outline-none"
         />
       </div>
     );
@@ -325,14 +325,14 @@ function MultiSelect({
 
   return (
     <div className="min-w-[240px]">
-      <div className="p-2 border-b border-[var(--color-border-subtle)]">
+      <div className="p-2 border-b border-[var(--line-faint)]">
         <input
           autoFocus
           type="text"
           placeholder="Search options..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full bg-transparent outline-none text-sm placeholder:text-[var(--color-fg-muted)]"
+          className="w-full bg-transparent outline-none text-sm placeholder:text-[var(--fg-dim)]"
         />
       </div>
       <div className="max-h-[280px] overflow-y-auto p-1">
@@ -343,8 +343,8 @@ function MultiSelect({
               key={opt}
               onClick={() => toggle(opt)}
               className={cn(
-                'w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded text-sm text-left hover:bg-[var(--color-surface-hover)]',
-                isSel && 'bg-[var(--color-surface-hover)]'
+                'w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded text-sm text-left hover:bg-[var(--bg-hover)]',
+                isSel && 'bg-[var(--bg-hover)]'
               )}
             >
               <span>{labelFor?.(opt) ?? opt}</span>
@@ -353,7 +353,7 @@ function MultiSelect({
           );
         })}
         {filtered.length === 0 && (
-          <div className="px-2 py-6 text-center text-xs text-[var(--color-fg-muted)]">No options</div>
+          <div className="px-2 py-6 text-center text-xs text-[var(--fg-dim)]">No options</div>
         )}
       </div>
     </div>

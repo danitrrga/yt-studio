@@ -30,7 +30,7 @@ export function Toolbar({
         type="button"
         onClick={() => downloadCsv(filtered)}
         title="Export filtered set as CSV"
-        className="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-md border text-[var(--color-fg-secondary)] hover:bg-[var(--color-surface-hover)]"
+        className="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-md border text-[var(--fg-muted)] hover:bg-[var(--bg-hover)]"
       >
         <Download className="w-3 h-3" />
         CSV
@@ -107,14 +107,14 @@ function GroupByMenu({ value, onChange }: { value: GroupBy; onChange: (g: GroupB
         <Popover.Content
           sideOffset={6}
           align="start"
-          className="z-[60] rounded-lg border bg-[var(--color-surface-elevated)] py-1 min-w-[160px]"
+          className="z-[60] rounded-md border bg-[var(--bg-raised)] py-1 min-w-[160px]"
         >
           {(Object.keys(GROUP_LABELS) as GroupBy[]).map((g) => (
             <Popover.Close
               key={g}
               onClick={() => onChange(g)}
               className={cn(
-                'w-full text-left px-3 h-8 text-sm hover:bg-[var(--color-surface-hover)]',
+                'w-full text-left px-3 h-8 text-sm hover:bg-[var(--bg-hover)]',
                 value === g && 'text-[var(--fg)] font-medium'
               )}
             >

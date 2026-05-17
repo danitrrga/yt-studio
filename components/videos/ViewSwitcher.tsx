@@ -25,7 +25,7 @@ export function ViewSwitcher({
   const { focus, toggleFocus } = useUI();
   return (
     <div className="flex items-center gap-2">
-      <div className="inline-flex items-center p-0.5 rounded-md border bg-[var(--color-surface)]">
+      <div className="inline-flex items-center p-0.5 rounded-md border bg-[var(--bg-raised)]">
         {VIEWS.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
@@ -33,8 +33,8 @@ export function ViewSwitcher({
             className={cn(
               'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-colors',
               value === id
-                ? 'bg-[var(--bg-hover)] text-[var(--fg)] border-b-2 border-[var(--red)]'
-                : 'text-[var(--fg-dim)] hover:text-[var(--fg)] border-b-2 border-transparent'
+                ? 'bg-[var(--fg)] text-[var(--fg-inverse)]'
+                : 'text-[var(--fg-dim)] hover:text-[var(--fg)] hover:bg-[var(--bg-hover)]'
             )}
           >
             <Icon className="w-3.5 h-3.5" />
@@ -49,7 +49,7 @@ export function ViewSwitcher({
             'inline-flex items-center justify-center w-8 h-8 rounded-md border transition-colors',
             focus
               ? 'bg-[var(--bg-selected)] border-[var(--line-strong)] text-[var(--fg)]'
-              : 'bg-[var(--color-surface)] text-[var(--fg-dim)] hover:text-[var(--fg)]'
+              : 'bg-[var(--bg-raised)] text-[var(--fg-dim)] hover:text-[var(--fg)]'
           )}
         >
           <Focus className="w-3.5 h-3.5" />

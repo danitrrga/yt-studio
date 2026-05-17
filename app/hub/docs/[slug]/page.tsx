@@ -95,15 +95,15 @@ export default function HubDocPage({
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="sticky top-0 z-20 h-12 px-5 flex items-center justify-between gap-3 border-b bg-[var(--color-bg)]">
+      <div className="sticky top-0 z-20 h-12 px-5 flex items-center justify-between gap-3 border-b bg-[var(--bg)]">
         <Link
           href="/hub"
-          className="inline-flex items-center gap-1.5 text-sm text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)]"
+          className="inline-flex items-center gap-1.5 text-sm text-[var(--fg-muted)] hover:text-[var(--fg)]"
         >
           <ArrowLeft className="w-4 h-4" />
           Hub
         </Link>
-        <div className="flex-1 text-sm font-semibold truncate text-center">
+        <div className="flex-1 text-sm font-medium truncate text-center">
           {title}
         </div>
         <div className="flex items-center gap-3">
@@ -112,7 +112,7 @@ export default function HubDocPage({
             <a
               href={data.obsidianUri}
               title="Open in Obsidian"
-              className="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+              className="text-[var(--fg-dim)] hover:text-[var(--fg)]"
             >
               <ExternalLink className="w-4 h-4" />
             </a>
@@ -123,7 +123,7 @@ export default function HubDocPage({
       <div className="flex-1 px-8 py-8">
         <div className="max-w-[760px] mx-auto">
           {isLoading ? (
-            <div className="text-sm text-[var(--color-fg-muted)]">Loading…</div>
+            <div className="text-sm text-[var(--fg-dim)]">Loading…</div>
           ) : (
             <EditorErrorBoundary
               fallback={(err, retry) => (
@@ -156,19 +156,19 @@ export default function HubDocPage({
 function SaveBadge({ state }: { state: SaveState }) {
   if (state === 'clean')
     return (
-      <span className="text-[11px] text-[hsl(var(--status-published))] inline-flex items-center gap-1">
+      <span className="text-[11px] text-[var(--status-published-color)] inline-flex items-center gap-1">
         <Check className="w-3 h-3" />
         Saved
       </span>
     );
   if (state === 'dirty')
-    return <span className="text-[11px] text-[var(--color-fg-muted)]">Editing…</span>;
+    return <span className="text-[11px] text-[var(--fg-dim)]">Editing…</span>;
   if (state === 'saving')
     return (
-      <span className="text-[11px] text-[var(--color-fg-muted)] inline-flex items-center gap-1">
+      <span className="text-[11px] text-[var(--fg-dim)] inline-flex items-center gap-1">
         <Loader2 className="w-3 h-3 animate-spin" />
         Saving
       </span>
     );
-  return <span className="text-[11px] text-[hsl(var(--color-overdue))]">Save failed</span>;
+  return <span className="text-[11px] text-[var(--red)]">Save failed</span>;
 }

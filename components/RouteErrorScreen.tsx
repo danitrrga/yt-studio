@@ -35,38 +35,38 @@ export function RouteErrorScreen({
 
   return (
     <div className="px-8 py-12 max-w-[760px] mx-auto">
-      <div className="rounded-xl border bg-[var(--color-surface)] p-8 space-y-5">
+      <div className="rounded-md border bg-[var(--bg-raised)] p-8 space-y-5">
         <div className="flex items-center gap-3">
-          <AlertTriangle className="w-7 h-7 text-[hsl(var(--color-overdue))]" />
+          <AlertTriangle className="w-7 h-7 text-[var(--red)]" />
           <div>
             <h1 className="text-xl font-bold">Something broke on {routeLabel}</h1>
-            <p className="text-sm text-[var(--color-fg-muted)] mt-0.5">
+            <p className="text-sm text-[var(--fg-dim)] mt-0.5">
               Logged to diagnostics. Try reloading or head home.
             </p>
           </div>
         </div>
-        <pre className="text-[11px] font-mono whitespace-pre-wrap break-all rounded-md bg-[var(--color-surface-elevated)] p-3 text-[hsl(var(--color-overdue))] max-h-48 overflow-y-auto">
+        <pre className="text-[11px] font-mono whitespace-pre-wrap break-all rounded-md bg-[var(--bg-raised)] p-3 text-[var(--red)] max-h-48 overflow-y-auto">
           {error.message}
           {error.digest && `\n\ndigest: ${error.digest}`}
         </pre>
         <div className="flex items-center gap-2 flex-wrap">
           <button
             onClick={reset}
-            className="inline-flex items-center gap-1.5 px-3 h-9 rounded-md bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] text-sm font-medium hover:bg-[var(--color-button-primary-hover)]"
+            className="inline-flex items-center gap-1.5 px-3 h-9 rounded-md bg-[var(--fg)] text-[var(--fg-inverse)] text-sm font-medium hover:bg-[var(--fg)]"
           >
             <RotateCcw className="w-4 h-4" />
             Try again
           </button>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 px-3 h-9 rounded-md border text-sm hover:bg-[var(--color-surface-hover)]"
+            className="inline-flex items-center gap-1.5 px-3 h-9 rounded-md border text-sm hover:bg-[var(--bg-hover)]"
           >
             <ArrowLeft className="w-4 h-4" />
             Home
           </Link>
           <Link
             href="/diagnostics"
-            className="inline-flex items-center gap-1.5 px-3 h-9 rounded-md border text-sm hover:bg-[var(--color-surface-hover)]"
+            className="inline-flex items-center gap-1.5 px-3 h-9 rounded-md border text-sm hover:bg-[var(--bg-hover)]"
           >
             <Activity className="w-4 h-4" />
             Diagnostics

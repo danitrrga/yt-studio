@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import * as Popover from '@radix-ui/react-popover';
 import { Plus, Search } from 'lucide-react';
 import { useVideos } from '@/hooks/use-videos';
-import { STATUS_COLOR_VAR, STATUS_LABELS } from '@/lib/status';
+import { STATUS_SOLID_VAR, STATUS_LABELS } from '@/lib/status';
 import { cn } from '@/lib/utils';
 
 export function LinkVideoPopover({
@@ -38,7 +38,7 @@ export function LinkVideoPopover({
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
-        <button className="inline-flex items-center gap-1.5 px-2.5 h-7 rounded-md border text-xs hover:bg-[var(--color-surface-hover)]">
+        <button className="inline-flex items-center gap-1.5 px-2.5 h-7 rounded-md border text-xs hover:bg-[var(--bg-hover)]">
           <Plus className="w-3.5 h-3.5" />
           Link a video
         </button>
@@ -47,21 +47,21 @@ export function LinkVideoPopover({
         <Popover.Content
           align="start"
           sideOffset={6}
-          className="z-50 w-80 rounded-lg border bg-[var(--color-surface-elevated)] overflow-hidden"
+          className="z-50 w-80 rounded-md border bg-[var(--bg-raised)] overflow-hidden"
         >
           <div className="flex items-center gap-2 px-2.5 h-9 border-b">
-            <Search className="w-3.5 h-3.5 text-[var(--color-fg-muted)]" />
+            <Search className="w-3.5 h-3.5 text-[var(--fg-dim)]" />
             <input
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search videos…"
-              className="flex-1 bg-transparent outline-none text-sm placeholder:text-[var(--color-fg-muted)]"
+              className="flex-1 bg-transparent outline-none text-sm placeholder:text-[var(--fg-dim)]"
             />
           </div>
           <div className="max-h-72 overflow-y-auto py-1">
             {filtered.length === 0 ? (
-              <div className="px-3 py-6 text-center text-xs text-[var(--color-fg-muted)]">
+              <div className="px-3 py-6 text-center text-xs text-[var(--fg-dim)]">
                 {videos?.length ? 'No videos match' : 'No videos yet'}
               </div>
             ) : (
@@ -73,12 +73,12 @@ export function LinkVideoPopover({
                     setOpen(false);
                     setQuery('');
                   }}
-                  className="w-full text-left flex items-center gap-2 px-3 py-1.5 hover:bg-[var(--color-surface-hover)]"
+                  className="w-full text-left flex items-center gap-2 px-3 py-1.5 hover:bg-[var(--bg-hover)]"
                 >
                   <span
                     className="w-1.5 h-1.5 rounded-full shrink-0"
                     style={{
-                      background: `hsl(var(${STATUS_COLOR_VAR[v.frontmatter.status]}))`,
+                      background: `var(${STATUS_SOLID_VAR[v.frontmatter.status]})`,
                     }}
                   />
                   <span className="text-sm flex-1 truncate">
@@ -86,7 +86,7 @@ export function LinkVideoPopover({
                   </span>
                   <span
                     className={cn(
-                      'font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--color-fg-muted)]'
+                      'font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--fg-dim)]'
                     )}
                   >
                     {STATUS_LABELS[v.frontmatter.status]}

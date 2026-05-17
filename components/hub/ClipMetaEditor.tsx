@@ -56,7 +56,7 @@ export function ClipTitleField({
         }
       }}
       placeholder="Untitled clip"
-      className="w-full bg-transparent outline-none text-[22px] font-semibold tracking-[-0.012em] leading-[1.25] focus:bg-[var(--color-surface-hover)] rounded px-1 -mx-1 transition-colors"
+      className="w-full bg-transparent outline-none text-[22px] font-bold tracking-[-0.012em] leading-[1.25] focus:bg-[var(--bg-hover)] rounded px-1 -mx-1 transition-colors"
     />
   );
 }
@@ -111,12 +111,12 @@ export function ClipTagsField({
       {tags.map((t) => (
         <span
           key={t}
-          className="group inline-flex items-center gap-1 text-[11px] pl-1.5 pr-1 py-0.5 rounded bg-[var(--color-surface-elevated)] text-[var(--color-fg-secondary)]"
+          className="group inline-flex items-center gap-1 text-[11px] pl-1.5 pr-1 py-0.5 rounded bg-[var(--bg-raised)] text-[var(--fg-muted)]"
         >
           #{t}
           <button
             onClick={() => removeTag(t)}
-            className="opacity-50 group-hover:opacity-100 hover:text-[hsl(var(--color-overdue))]"
+            className="opacity-50 group-hover:opacity-100 hover:text-[var(--fg)]"
             aria-label={`Remove tag ${t}`}
           >
             <X className="w-3 h-3" />
@@ -137,7 +137,7 @@ export function ClipTagsField({
         }}
         onBlur={addTag}
         placeholder="+ tag"
-        className="text-[11px] bg-transparent outline-none w-16 px-1 placeholder:text-[var(--color-fg-muted)]"
+        className="text-[11px] bg-transparent outline-none w-16 px-1 placeholder:text-[var(--fg-dim)]"
       />
     </div>
   );
@@ -186,7 +186,7 @@ export function ClipCategoryField({
         }
       }}
       placeholder="+ category"
-      className="text-xs bg-transparent outline-none px-1 -mx-1 rounded focus:bg-[var(--color-surface-hover)] w-32"
+      className="text-xs bg-transparent outline-none px-1 -mx-1 rounded focus:bg-[var(--bg-hover)] w-32"
     />
   );
 }
@@ -240,7 +240,7 @@ export function ClipCycleField({
       }}
       placeholder="—"
       type="number"
-      className="text-xs bg-transparent outline-none px-1 -mx-1 rounded focus:bg-[var(--color-surface-hover)] w-12 tabular-nums"
+      className="text-xs bg-transparent outline-none px-1 -mx-1 rounded focus:bg-[var(--bg-hover)] w-12 tabular-nums"
     />
   );
 }

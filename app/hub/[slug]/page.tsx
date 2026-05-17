@@ -35,7 +35,7 @@ import {
   ClipCategoryField,
   ClipCycleField,
 } from '@/components/hub/ClipMetaEditor';
-import { STATUS_COLOR_VAR } from '@/lib/status';
+import { STATUS_SOLID_VAR } from '@/lib/status';
 import { cn } from '@/lib/utils';
 import type { HubSource } from '@/lib/types';
 
@@ -234,14 +234,14 @@ export default function HubClipPage({
 
   if (isLoading) {
     return (
-      <div className="px-8 py-6 text-sm text-[var(--color-fg-muted)]">Loading…</div>
+      <div className="px-8 py-6 text-sm text-[var(--fg-dim)]">Loading…</div>
     );
   }
 
   if (!clip) {
     return (
       <div className="px-8 py-12 max-w-[760px] mx-auto text-center">
-        <p className="text-sm text-[var(--color-fg-muted)]">Clip not found.</p>
+        <p className="text-sm text-[var(--fg-dim)]">Clip not found.</p>
         <Link
           href="/hub"
           className="inline-flex items-center gap-1 text-sm mt-3 text-[var(--fg)] hover:underline"
@@ -270,10 +270,10 @@ export default function HubClipPage({
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="sticky top-0 z-20 h-12 px-5 flex items-center justify-between gap-3 border-b bg-[var(--color-bg)]">
+      <div className="sticky top-0 z-20 h-12 px-5 flex items-center justify-between gap-3 border-b bg-[var(--bg)]">
         <Link
           href="/hub"
-          className="inline-flex items-center gap-1.5 text-sm text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)]"
+          className="inline-flex items-center gap-1.5 text-sm text-[var(--fg-muted)] hover:text-[var(--fg)]"
         >
           <ArrowLeft className="w-4 h-4" />
           Hub
@@ -282,7 +282,7 @@ export default function HubClipPage({
           <SaveBadge state={save} />
           <button
             onClick={() => setStatus(isArchived ? 'read' : 'archived')}
-            className="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+            className="text-[var(--fg-dim)] hover:text-[var(--fg)]"
             title={isArchived ? 'Unarchive' : 'Archive'}
           >
             {isArchived ? (
@@ -295,14 +295,14 @@ export default function HubClipPage({
             href={clip.frontmatter.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+            className="text-[var(--fg-dim)] hover:text-[var(--fg)]"
             title="Open URL"
           >
             <ExternalLink className="w-4 h-4" />
           </a>
           <button
             onClick={onDelete}
-            className="text-[var(--color-fg-muted)] hover:text-[hsl(var(--color-overdue))]"
+            className="text-[var(--fg-dim)] hover:text-[var(--fg)]"
             title="Delete clip"
           >
             <Trash2 className="w-4 h-4" />
@@ -319,11 +319,11 @@ export default function HubClipPage({
               <img
                 src={thumbUrl}
                 alt=""
-                className="w-44 aspect-video rounded-lg border bg-[var(--color-surface-elevated)] object-cover shrink-0"
+                className="w-44 aspect-video rounded-md border bg-[var(--bg-raised)] object-cover shrink-0"
               />
             ) : (
-              <div className="w-44 aspect-video rounded-lg border bg-[var(--color-surface-elevated)] flex items-center justify-center shrink-0">
-                <Icon className="w-10 h-10 text-[var(--color-fg-muted)]" />
+              <div className="w-44 aspect-video rounded-md border bg-[var(--bg-raised)] flex items-center justify-center shrink-0">
+                <Icon className="w-10 h-10 text-[var(--fg-dim)]" />
               </div>
             )}
             <div className="flex-1 min-w-0 space-y-2">
@@ -332,7 +332,7 @@ export default function HubClipPage({
                 initial={clip.frontmatter.title || ''}
                 onPatched={() => mutate()}
               />
-              <div className="flex items-center gap-2 flex-wrap text-xs text-[var(--color-fg-muted)]">
+              <div className="flex items-center gap-2 flex-wrap text-xs text-[var(--fg-dim)]">
                 <Icon className="w-3.5 h-3.5" />
                 <span className="capitalize">{clip.frontmatter.source}</span>
                 <span>·</span>
@@ -340,7 +340,7 @@ export default function HubClipPage({
                   href={clip.frontmatter.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[var(--color-fg)] truncate"
+                  className="hover:text-[var(--fg)] truncate"
                 >
                   {hostFrom(clip.frontmatter.url)}
                 </a>
@@ -348,11 +348,11 @@ export default function HubClipPage({
                 <span>captured {fmtDate(clip.frontmatter.created_at)}</span>
               </div>
               {clip.frontmatter.description && (
-                <p className="text-sm text-[var(--color-fg-secondary)] leading-relaxed">
+                <p className="text-sm text-[var(--fg-muted)] leading-relaxed">
                   {clip.frontmatter.description}
                 </p>
               )}
-              <div className="flex items-center gap-3 flex-wrap text-xs text-[var(--color-fg-muted)]">
+              <div className="flex items-center gap-3 flex-wrap text-xs text-[var(--fg-dim)]">
                 <span className="inline-flex items-center gap-1">
                   Category:
                   <ClipCategoryField
@@ -379,7 +379,7 @@ export default function HubClipPage({
                 <button
                   onClick={onConvert}
                   disabled={converting}
-                  className="inline-flex items-center gap-1.5 px-3 h-8 rounded-md bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] text-sm font-medium hover:bg-[var(--color-button-primary-hover)] disabled:opacity-60"
+                  className="inline-flex items-center gap-1.5 px-3 h-8 rounded-md bg-[var(--fg)] text-[var(--fg-inverse)] text-sm font-medium hover:bg-[var(--fg)] disabled:opacity-60"
                 >
                   {converting ? (
                     <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -393,9 +393,9 @@ export default function HubClipPage({
           </section>
 
           {/* Linked videos */}
-          <section className="rounded-lg border bg-[var(--color-surface)] p-4 space-y-2">
+          <section className="rounded-md border bg-[var(--bg-raised)] p-4 space-y-2">
             <div className="flex items-center justify-between">
-              <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)]">
+              <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)]">
                 Linked videos ({linkedVideos.length})
               </h2>
               <LinkVideoPopover
@@ -404,7 +404,7 @@ export default function HubClipPage({
               />
             </div>
             {linkedVideos.length === 0 ? (
-              <p className="text-xs text-[var(--color-fg-muted)]">
+              <p className="text-xs text-[var(--fg-dim)]">
                 Not linked to any video yet.
               </p>
             ) : (
@@ -412,12 +412,12 @@ export default function HubClipPage({
                 {linkedVideos.map((v) => (
                   <li
                     key={v.slug}
-                    className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--color-surface-hover)]"
+                    className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--bg-hover)]"
                   >
                     <span
                       className="w-1.5 h-1.5 rounded-full shrink-0"
                       style={{
-                        background: `hsl(var(${STATUS_COLOR_VAR[v.frontmatter.status]}))`,
+                        background: `var(${STATUS_SOLID_VAR[v.frontmatter.status]})`,
                       }}
                     />
                     <Link
@@ -425,11 +425,11 @@ export default function HubClipPage({
                       className="flex-1 text-sm truncate hover:underline inline-flex items-center gap-1"
                     >
                       {v.frontmatter.title || v.slug}
-                      <ArrowUpRight className="w-3 h-3 text-[var(--color-fg-muted)]" />
+                      <ArrowUpRight className="w-3 h-3 text-[var(--fg-dim)]" />
                     </Link>
                     <button
                       onClick={() => onUnlink(v.slug)}
-                      className="text-[var(--color-fg-muted)] hover:text-[hsl(var(--color-overdue))]"
+                      className="text-[var(--fg-dim)] hover:text-[var(--fg)]"
                       title="Unlink"
                     >
                       <X className="w-3.5 h-3.5" />
@@ -442,7 +442,7 @@ export default function HubClipPage({
 
           {/* Notes */}
           <section className="space-y-2">
-            <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--color-fg-muted)]">
+            <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--fg-dim)]">
               Notes
             </h2>
             <EditorErrorBoundary
@@ -476,19 +476,19 @@ export default function HubClipPage({
 function SaveBadge({ state }: { state: SaveState }) {
   if (state === 'clean')
     return (
-      <span className="text-[11px] text-[hsl(var(--status-published))] inline-flex items-center gap-1">
+      <span className="text-[11px] text-[var(--status-published-color)] inline-flex items-center gap-1">
         <Check className="w-3 h-3" />
         Saved
       </span>
     );
   if (state === 'dirty')
-    return <span className="text-[11px] text-[var(--color-fg-muted)]">Editing…</span>;
+    return <span className="text-[11px] text-[var(--fg-dim)]">Editing…</span>;
   if (state === 'saving')
     return (
-      <span className="text-[11px] text-[var(--color-fg-muted)] inline-flex items-center gap-1">
+      <span className="text-[11px] text-[var(--fg-dim)] inline-flex items-center gap-1">
         <Loader2 className="w-3 h-3 animate-spin" />
         Saving
       </span>
     );
-  return <span className="text-[11px] text-[hsl(var(--color-overdue))]">Save failed</span>;
+  return <span className="text-[11px] text-[var(--red)]">Save failed</span>;
 }

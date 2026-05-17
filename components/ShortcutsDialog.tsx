@@ -33,27 +33,27 @@ export function ShortcutsDialog() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.15 }}
-                className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[480px] max-h-[80vh] overflow-y-auto rounded-xl border bg-[var(--color-surface-elevated)] p-6"
+                className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[480px] max-h-[80vh] overflow-y-auto rounded-md border bg-[var(--bg-raised)] p-6"
               >
-                <Dialog.Title className="font-mono text-sm font-medium uppercase tracking-wider text-[var(--color-fg-muted)] mb-4">
+                <Dialog.Title className="font-mono text-sm font-medium uppercase tracking-wider text-[var(--fg-dim)] mb-4">
                   Keyboard shortcuts
                 </Dialog.Title>
 
                 <div className="space-y-5">
                   {Object.entries(byGroup).map(([group, list]) => (
                     <div key={group}>
-                      <div className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)] mb-2">
+                      <div className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)] mb-2">
                         {group}
                       </div>
                       <div className="space-y-1.5">
                         {list.map((s) => (
                           <div key={s.id} className="flex items-center justify-between text-sm py-1">
-                            <span className="text-[var(--color-fg-secondary)]">{s.label}</span>
+                            <span className="text-[var(--fg-muted)]">{s.label}</span>
                             <div className="flex items-center gap-1">
                               {s.keys.map((k, i) => (
                                 <kbd
                                   key={i}
-                                  className="px-1.5 py-0.5 rounded border bg-[var(--color-surface)] text-xs font-mono text-[var(--color-fg)]"
+                                  className="px-1.5 py-0.5 rounded border bg-[var(--bg-raised)] text-xs font-mono text-[var(--fg)]"
                                 >
                                   {formatKey(k)}
                                 </kbd>
@@ -66,7 +66,7 @@ export function ShortcutsDialog() {
                   ))}
                 </div>
 
-                <p className="text-xs text-[var(--color-fg-muted)] mt-5 pt-4 border-t">
+                <p className="text-xs text-[var(--fg-dim)] mt-5 pt-4 border-t">
                   Shortcuts ignore input fields + editor.
                 </p>
               </motion.div>

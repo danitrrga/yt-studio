@@ -46,7 +46,7 @@ export function Checkbox({
         dim,
         isOn
           ? 'bg-[var(--fg)] border-[var(--fg)] text-[var(--fg-inverse)]'
-          : 'bg-[var(--color-surface)]/80 border-[var(--color-fg-muted)]/40 hover:border-[var(--color-fg-muted)] hover:bg-[var(--color-surface-hover)]',
+          : 'bg-[var(--bg-raised)]/80 border-[var(--fg-dim)]/40 hover:border-[var(--fg-dim)] hover:bg-[var(--bg-hover)]',
         className
       )}
     >

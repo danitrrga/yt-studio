@@ -86,7 +86,7 @@ export function BodyEditor({
 
   if (!initialized) {
     return (
-      <div className="text-sm text-[var(--color-fg-muted)] py-4">Loading...</div>
+      <div className="text-sm text-[var(--fg-dim)] py-4">Loading...</div>
     );
   }
 
@@ -94,7 +94,7 @@ export function BodyEditor({
     <div className="flex flex-col gap-2">
       {!fullHeight && (
         <div className="flex items-center justify-between">
-          <span className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--color-fg-muted)]">
+          <span className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--fg-dim)]">
             Script / Notes
           </span>
           <SaveIndicator state={status} />
@@ -134,13 +134,13 @@ export function BodyEditor({
       </div>
 
       {!hideFooter && !fullHeight && !writingMode && (
-        <p className="text-xs text-[var(--color-fg-muted)]">
+        <p className="text-xs text-[var(--fg-dim)]">
           Markdown shortcuts · Cmd+S force save · $x^2$ math · Obsidian-compatible
         </p>
       )}
 
       {errorMessage && status === 'error' && (
-        <div className="text-xs text-[hsl(var(--color-overdue))]">
+        <div className="text-xs text-[var(--red)]">
           Save failed: {errorMessage}
         </div>
       )}
@@ -152,25 +152,25 @@ export function SaveIndicator({ state }: { state: SaveState }) {
   if (state === 'clean')
     return null;
   if (state === 'dirty')
-    return <span className="text-[11px] text-[var(--color-fg-muted)]">Editing...</span>;
+    return <span className="text-[11px] text-[var(--fg-dim)]">Editing...</span>;
   if (state === 'saving')
     return (
-      <span className="text-[11px] text-[var(--color-fg-muted)] inline-flex items-center gap-1">
+      <span className="text-[11px] text-[var(--fg-dim)] inline-flex items-center gap-1">
         <Loader2 className="w-3 h-3 animate-spin" />
         Saving
       </span>
     );
   if (state === 'conflict')
     return (
-      <span className="text-[11px] text-[hsl(var(--status-review))] inline-flex items-center gap-1">
+      <span className="text-[11px] text-[var(--status-review-color)] inline-flex items-center gap-1">
         <AlertCircle className="w-3 h-3" />
         Conflict
       </span>
     );
   if (state === 'error')
-    return <span className="text-[11px] text-[hsl(var(--color-overdue))]">Save failed</span>;
+    return <span className="text-[11px] text-[var(--red)]">Save failed</span>;
   return (
-    <span className="text-[11px] text-[hsl(var(--status-published))] inline-flex items-center gap-1">
+    <span className="text-[11px] text-[var(--status-published-color)] inline-flex items-center gap-1">
       <Check className="w-3 h-3" />
       Saved
     </span>

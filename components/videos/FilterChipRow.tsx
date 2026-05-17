@@ -44,7 +44,7 @@ export function FilterChipRow({ videos }: { videos: VideoSummary[] }) {
         }}
       >
         <Popover.Trigger asChild>
-          <button className="inline-flex items-center gap-1 h-7 px-2 rounded-md border border-dashed border-[var(--color-border)] text-xs text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)] hover:bg-[var(--color-surface-hover)]">
+          <button className="inline-flex items-center gap-1 h-7 px-2 rounded-md border border-dashed border-[var(--line)] text-xs text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--bg-hover)]">
             <Plus className="w-3 h-3" />
             <span>Filter</span>
           </button>
@@ -53,7 +53,7 @@ export function FilterChipRow({ videos }: { videos: VideoSummary[] }) {
           <Popover.Content
             sideOffset={6}
             align="start"
-            className="z-50 w-[260px] rounded-md border bg-[var(--color-surface-elevated)] overflow-hidden"
+            className="z-50 w-[260px] rounded-md border bg-[var(--bg-raised)] overflow-hidden"
           >
             <FilterPopover
               videos={videos}
@@ -80,7 +80,7 @@ export function FilterChipRow({ videos }: { videos: VideoSummary[] }) {
       {conds.length > 0 && (
         <button
           onClick={() => viewStore.clearFilters()}
-          className="inline-flex items-center gap-1 h-7 px-2 rounded-md text-xs text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+          className="inline-flex items-center gap-1 h-7 px-2 rounded-md text-xs text-[var(--fg-dim)] hover:text-[var(--fg)]"
         >
           <X className="w-3 h-3" />
           <span>Clear</span>

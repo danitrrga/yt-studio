@@ -34,23 +34,23 @@ export function ExternalDiffModal({
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.15 }}
-                className="fixed left-1/2 top-[8vh] -translate-x-1/2 z-[71] w-[min(900px,94vw)] max-h-[84vh] flex flex-col rounded-xl border bg-[var(--color-surface-elevated)]"
+                className="fixed left-1/2 top-[8vh] -translate-x-1/2 z-[71] w-[min(900px,94vw)] max-h-[84vh] flex flex-col rounded-md border bg-[var(--bg-raised)]"
               >
                 <div className="flex items-center justify-between gap-3 px-5 h-12 border-b">
-                  <Dialog.Title className="text-sm font-semibold inline-flex items-center gap-2">
-                    <AlertTriangle className="w-4 h-4 text-[hsl(var(--color-overdue))]" />
+                  <Dialog.Title className="text-sm font-medium inline-flex items-center gap-2">
+                    <AlertTriangle className="w-4 h-4 text-[var(--fg-muted)]" />
                     External edits — conflicts kept your version
                   </Dialog.Title>
                   <button
                     onClick={onClose}
-                    className="p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)]"
+                    className="p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)]"
                     aria-label="Close"
                   >
                     <X className="w-4 h-4" />
                   </button>
                 </div>
 
-                <div className="px-5 py-3 text-xs text-[var(--color-fg-muted)] border-b">
+                <div className="px-5 py-3 text-xs text-[var(--fg-dim)] border-b">
                   {hunks.length} conflicting {hunks.length === 1 ? 'hunk' : 'hunks'}.
                   Your version is saved. Disk lines below are what was on disk —
                   copy any you want manually.
@@ -65,7 +65,7 @@ export function ExternalDiffModal({
                 <div className="flex items-center justify-end px-5 h-12 border-t">
                   <button
                     onClick={onClose}
-                    className="px-3 h-7 rounded text-xs font-medium bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] hover:bg-[var(--color-button-primary-hover)]"
+                    className="px-3 h-7 rounded text-xs font-medium bg-[var(--fg)] text-[var(--fg-inverse)] hover:bg-[var(--fg)]"
                   >
                     Got it
                   </button>
@@ -81,20 +81,20 @@ export function ExternalDiffModal({
 
 function HunkCard({ hunk, index }: { hunk: ConflictHunk; index: number }) {
   return (
-    <div className="rounded-lg border bg-[var(--color-surface)]">
-      <div className="px-3 h-8 border-b flex items-center font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--color-fg-muted)]">
+    <div className="rounded-md border bg-[var(--bg-raised)]">
+      <div className="px-3 h-8 border-b flex items-center font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--fg-dim)]">
         Hunk {index}
       </div>
-      <div className="grid grid-cols-2 divide-x divide-[var(--color-border-subtle)]">
+      <div className="grid grid-cols-2 divide-x divide-[var(--line-faint)]">
         <Pane label="Yours (kept)" lines={hunk.localLines} accent="kept" />
         <Pane label="Disk (rejected)" lines={hunk.serverLines} accent="rejected" />
       </div>
       {hunk.baseLines.length > 0 && (
         <details className="px-3 py-2 border-t">
-          <summary className="font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--color-fg-muted)] cursor-pointer hover:text-[var(--color-fg)]">
+          <summary className="font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--fg-dim)] cursor-pointer hover:text-[var(--fg)]">
             Common ancestor ({hunk.baseLines.length} lines)
           </summary>
-          <pre className="mt-2 text-[11px] font-mono whitespace-pre-wrap text-[var(--color-fg-muted)]">
+          <pre className="mt-2 text-[11px] font-mono whitespace-pre-wrap text-[var(--fg-dim)]">
             {hunk.baseLines.join('\n')}
           </pre>
         </details>
@@ -118,14 +118,14 @@ function Pane({
         className={cn(
           'font-mono text-[11px] font-medium uppercase tracking-wider mb-1.5',
           accent === 'kept'
-            ? 'text-[hsl(var(--status-published))]'
-            : 'text-[hsl(var(--color-overdue))]'
+            ? 'text-[var(--status-published-color)]'
+            : 'text-[var(--fg-muted)]'
         )}
       >
         {label}
       </div>
-      <pre className="text-[12px] font-mono whitespace-pre-wrap text-[var(--color-fg)] leading-relaxed">
-        {lines.length > 0 ? lines.join('\n') : <span className="text-[var(--color-fg-muted)] italic">(empty)</span>}
+      <pre className="text-[12px] font-mono whitespace-pre-wrap text-[var(--fg)] leading-relaxed">
+        {lines.length > 0 ? lines.join('\n') : <span className="text-[var(--fg-dim)] italic">(empty)</span>}
       </pre>
     </div>
   );

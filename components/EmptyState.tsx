@@ -24,21 +24,21 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        'flex flex-col items-center justify-center text-center py-16 px-6 rounded-lg border border-dashed',
+        'flex flex-col items-center justify-center text-center py-16 px-6 rounded-md border border-dashed',
         className
       )}
     >
       {Icon && (
-        <div className="w-11 h-11 rounded-full flex items-center justify-center bg-[var(--color-surface-elevated)] mb-4">
-          <Icon className="w-5 h-5 text-[var(--color-fg-muted)]" />
+        <div className="w-11 h-11 rounded-full flex items-center justify-center bg-[var(--bg-raised)] mb-4">
+          <Icon className="w-5 h-5 text-[var(--fg-dim)]" />
         </div>
       )}
-      <h3 className="text-base font-semibold text-[var(--color-fg)] mb-1">{title}</h3>
-      {body && <p className="text-sm text-[var(--color-fg-muted)] max-w-sm mb-4">{body}</p>}
+      <h3 className="text-base font-bold text-[var(--fg)] mb-1">{title}</h3>
+      {body && <p className="text-sm text-[var(--fg-dim)] max-w-sm mb-4">{body}</p>}
       {cta && (
         <button
           onClick={cta.onClick}
-          className="inline-flex items-center gap-2 px-3 h-8 rounded-md bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] text-sm font-medium hover:bg-[var(--color-button-primary-hover)]"
+          className="inline-flex items-center gap-2 px-3 h-8 rounded-md bg-[var(--fg)] text-[var(--fg-inverse)] text-sm font-medium hover:bg-[var(--fg)]"
         >
           {cta.label}
           {cta.shortcut && (

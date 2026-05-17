@@ -100,11 +100,11 @@ export default function DiagnosticsPage() {
     <div className="px-8 py-6 space-y-6 max-w-[1400px] mx-auto">
       <div className="flex items-end justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-[28px] font-semibold tracking-[-0.012em] leading-[1.2] inline-flex items-center gap-2">
-            <Activity className="w-5 h-5 text-[var(--color-fg-secondary)]" />
+          <h1 className="text-[28px] font-bold tracking-[-0.012em] leading-[1.2] inline-flex items-center gap-2">
+            <Activity className="w-5 h-5 text-[var(--fg-muted)]" />
             Diagnostics
           </h1>
-          <p className="text-[13px] text-[var(--color-fg-muted)] mt-1">
+          <p className="text-[13px] text-[var(--fg-dim)] mt-1">
             app health and recent events. {computedLabel}
           </p>
         </div>
@@ -117,8 +117,8 @@ export default function DiagnosticsPage() {
                 className={cn(
                   'px-3 h-8 transition-colors',
                   window === o.id
-                    ? 'bg-[var(--fg)] text-black'
-                    : 'bg-[var(--color-surface)] text-[var(--color-fg-secondary)] hover:bg-[var(--color-surface-hover)]'
+                    ? 'bg-[var(--fg)] text-[var(--fg-inverse)]'
+                    : 'bg-[var(--bg-raised)] text-[var(--fg-muted)] hover:bg-[var(--bg-hover)]'
                 )}
               >
                 {o.label}
@@ -128,7 +128,7 @@ export default function DiagnosticsPage() {
           <button
             onClick={refresh}
             title="Refresh"
-            className="inline-flex items-center justify-center w-8 h-8 rounded-md border bg-[var(--color-surface)] hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)]"
+            className="inline-flex items-center justify-center w-8 h-8 rounded-md border bg-[var(--bg-raised)] hover:bg-[var(--bg-hover)] text-[var(--fg-muted)]"
           >
             <RefreshCw className="w-3.5 h-3.5" />
           </button>
@@ -207,7 +207,7 @@ export default function DiagnosticsPage() {
             setScope(e.target.value);
             setActiveCounter(null);
           }}
-          className="h-8 px-2.5 rounded-md border bg-[var(--color-surface)] text-xs outline-none"
+          className="h-8 px-2.5 rounded-md border bg-[var(--bg-raised)] text-xs outline-none"
         >
           <option value="">All scopes</option>
           {SCOPE_OPTIONS.map((s) => (
@@ -222,7 +222,7 @@ export default function DiagnosticsPage() {
             setLevel(e.target.value);
             setActiveCounter(null);
           }}
-          className="h-8 px-2.5 rounded-md border bg-[var(--color-surface)] text-xs outline-none"
+          className="h-8 px-2.5 rounded-md border bg-[var(--bg-raised)] text-xs outline-none"
         >
           <option value="">All levels</option>
           {LEVEL_OPTIONS.map((l) => (
@@ -239,24 +239,24 @@ export default function DiagnosticsPage() {
             setSearch(e.target.value);
             setActiveCounter(null);
           }}
-          className="h-8 px-2.5 rounded-md border bg-[var(--color-surface)] text-xs outline-none flex-1 min-w-[200px]"
+          className="h-8 px-2.5 rounded-md border bg-[var(--bg-raised)] text-xs outline-none flex-1 min-w-[200px]"
         />
         {(scope || level || search) && (
           <button
             onClick={clearFilters}
-            className="text-xs text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+            className="text-xs text-[var(--fg-dim)] hover:text-[var(--fg)]"
           >
             Clear
           </button>
         )}
-        <span className="ml-auto text-xs text-[var(--color-fg-muted)] tabular-nums">
+        <span className="ml-auto text-xs text-[var(--fg-dim)] tabular-nums">
           {events?.length ?? 0} events
         </span>
       </div>
 
       <EventTable events={events} isLoading={eventsLoading} />
 
-      <div className="text-[11px] text-[var(--color-fg-muted)] pt-4 border-t">
+      <div className="text-[11px] text-[var(--fg-dim)] pt-4 border-t">
         NDJSON store at <code>vault/0 - System/diagnostics/events-{format(new Date(), 'yyyy-MM-dd')}.ndjson</code>
         {' · '}
         30-day retention

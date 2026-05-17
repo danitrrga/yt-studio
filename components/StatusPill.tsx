@@ -13,8 +13,8 @@ function toneFor(counters: { saveFails: number; conflicts: number; crashes: numb
 }
 
 const TONE_DOT: Record<Tone, string> = {
-  green: 'bg-[hsl(var(--status-published))]',
-  amber: 'bg-[var(--color-warning)]',
+  green: 'bg-[var(--status-published-color)]',
+  amber: 'bg-[var(--status-warn-color)]',
   red: 'bg-[var(--red-dim)]',
   idle: 'bg-[var(--fg-dim)]',
 };
@@ -67,7 +67,7 @@ export function StatusPill({ collapsed }: { collapsed: boolean }) {
         tone === 'red'
           ? 'text-[var(--red-dim)]'
           : tone === 'amber'
-            ? 'text-[var(--color-warning)]'
+            ? 'text-[var(--status-warn-color)]'
             : 'text-[var(--fg-muted)]'
       )}
     >

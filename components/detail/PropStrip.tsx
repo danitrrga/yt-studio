@@ -53,7 +53,7 @@ export function PropStrip({
   };
 
   return (
-    <div className="sticky top-0 z-10 bg-[var(--color-bg)] border-b border-[var(--color-border-subtle)] -mx-1 px-1 py-2">
+    <div className="sticky top-0 z-10 bg-[var(--bg)] border-b border-[var(--line-faint)] -mx-1 px-1 py-2">
       <div className="flex items-center gap-2 flex-wrap">
         <StatusPill status={video.frontmatter.status} />
 
@@ -109,7 +109,7 @@ export function PropStrip({
             {video.frontmatter.tags.map((t) => (
               <span
                 key={t}
-                className="text-[11px] text-[var(--color-fg-muted)] bg-[var(--color-surface)] rounded px-1.5 h-5 flex items-center border"
+                className="text-[11px] text-[var(--fg-dim)] bg-[var(--bg-raised)] rounded px-1.5 h-5 flex items-center border"
               >
                 #{t}
               </span>
@@ -124,7 +124,7 @@ export function PropStrip({
                 key={slug}
                 href={resolveLink(slug)}
                 title={`Linked: ${slug}`}
-                className="inline-flex items-center gap-1 text-[11px] text-[var(--color-fg-muted)] bg-[var(--color-surface)] rounded px-1.5 h-5 border hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-fg)] transition-colors"
+                className="inline-flex items-center gap-1 text-[11px] text-[var(--fg-dim)] bg-[var(--bg-raised)] rounded px-1.5 h-5 border hover:bg-[var(--bg-hover)] hover:text-[var(--fg)] transition-colors"
               >
                 <Link2 className="w-3 h-3" />
                 {slug}

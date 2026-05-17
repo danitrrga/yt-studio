@@ -84,23 +84,23 @@ export function VideoHero({
           if (e.key === 'Enter') (e.target as HTMLInputElement).blur();
         }}
         placeholder="Untitled video"
-        className="w-full bg-transparent outline-none font-semibold tracking-[-0.012em] text-[28px] leading-[1.2] focus:bg-[var(--color-surface-hover)] rounded px-1 -mx-1 py-1"
+        className="w-full bg-transparent outline-none font-bold tracking-[-0.012em] text-[28px] leading-[1.2] focus:bg-[var(--bg-hover)] rounded px-1 -mx-1 py-1"
       />
 
       <div className="flex items-center gap-2.5 flex-wrap text-[13px]">
         <StatusPill status={video.frontmatter.status} />
         {video.frontmatter.cycle != null && (
-          <span className="text-[12px] text-[var(--color-fg-muted)]">
+          <span className="text-[12px] text-[var(--fg-dim)]">
             Cycle {video.frontmatter.cycle}
           </span>
         )}
         {video.frontmatter.category && (
-          <span className="text-[12px] text-[var(--color-fg-muted)]">
+          <span className="text-[12px] text-[var(--fg-dim)]">
             · {video.frontmatter.category}
           </span>
         )}
         {video.frontmatter.audience && (
-          <span className="text-[12px] text-[var(--color-fg-muted)]">
+          <span className="text-[12px] text-[var(--fg-dim)]">
             · {video.frontmatter.audience}
           </span>
         )}
@@ -111,7 +111,7 @@ export function VideoHero({
           {video.frontmatter.tags.map((t) => (
             <span
               key={t}
-              className="text-[11px] text-[var(--color-fg-muted)] bg-[var(--color-surface)] rounded px-1.5 py-0.5 border"
+              className="text-[11px] text-[var(--fg-dim)] bg-[var(--bg-raised)] rounded px-1.5 py-0.5 border"
             >
               #{t}
             </span>

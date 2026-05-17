@@ -5,15 +5,15 @@ import { tags as t } from '@lezer/highlight';
 const INTER = `"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif`;
 const MONO = `"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace`;
 
-const FG = 'hsl(0 0% 98%)';
-const FG_SEC = 'hsl(240 5% 75%)';
-const FG_MUTED = 'hsl(240 4% 55%)';
-const BG = 'hsl(240 10% 4%)';
-const BG_WRITING = 'hsl(30 3% 6%)';
-const SURFACE = 'hsl(240 8% 7%)';
-const SURFACE_ELEV = 'hsl(240 7% 10%)';
-const BORDER = 'hsl(240 5% 16%)';
-const ACCENT = 'hsl(180 80% 50%)';
+const FG = '#fafafa';
+const FG_SEC = '#bbbbc0';
+const FG_MUTED = '#8a8a91';
+const BG = '#09090f';
+const BG_WRITING = '#0f0e0d';
+const SURFACE = '#101013';
+const SURFACE_ELEV = '#17171c';
+const BORDER = '#272729';
+const ACCENT = '#1ae6e6';
 
 export const studioTheme = EditorView.theme(
   {
@@ -43,28 +43,28 @@ export const studioTheme = EditorView.theme(
       borderLeftWidth: '1.5px',
     },
     '.cm-selectionBackground': {
-      backgroundColor: 'hsl(0 0% 100% / 0.09) !important',
+      backgroundColor: 'rgba(255,255,255,0.09) !important',
       borderRadius: '2px',
     },
     '&.cm-focused .cm-selectionBackground': {
-      backgroundColor: 'hsl(0 0% 100% / 0.13) !important',
+      backgroundColor: 'rgba(255,255,255,0.13) !important',
     },
     '::selection': {
-      backgroundColor: 'hsl(0 0% 100% / 0.13)',
+      backgroundColor: 'rgba(255,255,255,0.13)',
     },
     '.cm-activeLine': {
       backgroundColor: 'transparent',
     },
     '&.cm-focused .cm-activeLine': {
-      backgroundColor: 'hsl(0 0% 100% / 0.02)',
+      backgroundColor: 'rgba(255,255,255,0.02)',
     },
     '&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket': {
-      backgroundColor: 'hsl(0 0% 100% / 0.08)',
+      backgroundColor: 'rgba(255,255,255,0.08)',
       color: 'inherit',
       outline: 'none',
     },
     '.cm-selectionMatch': {
-      backgroundColor: 'hsl(0 0% 100% / 0.05)',
+      backgroundColor: 'rgba(255,255,255,0.05)',
     },
     '.cm-gutters': { display: 'none' },
 
@@ -154,7 +154,7 @@ export const studioTheme = EditorView.theme(
       borderBottom: 'none',
     },
     '.cm-md-table tbody tr:hover': {
-      background: 'hsl(0 0% 100% / 0.02)',
+      background: 'rgba(255,255,255,0.02)',
     },
     '.cm-md-table code': {
       fontFamily: MONO,

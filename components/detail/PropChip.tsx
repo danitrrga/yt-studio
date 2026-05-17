@@ -73,8 +73,8 @@ export function PropChip({
           className={cn(
             'inline-flex items-center gap-1 rounded-md px-2 h-6 text-xs transition-colors border',
             isSet
-              ? 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-fg-secondary)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-fg)]'
-              : 'border-dashed border-[var(--color-border)] text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] hover:bg-[var(--color-surface-hover)]',
+              ? 'border-[var(--line)] bg-[var(--bg-raised)] text-[var(--fg-muted)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg)]'
+              : 'border-dashed border-[var(--line)] text-[var(--fg-dim)] hover:text-[var(--fg)] hover:bg-[var(--bg-hover)]',
             className
           )}
           title={
@@ -90,9 +90,9 @@ export function PropChip({
         <Popover.Content
           sideOffset={6}
           align="start"
-          className="z-[60] w-[220px] rounded-lg border bg-[var(--color-surface-elevated)] p-3 space-y-3"
+          className="z-[60] w-[220px] rounded-md border bg-[var(--bg-raised)] p-3 space-y-3"
         >
-          <div className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)]">
+          <div className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)]">
             {label}
           </div>
           {config.kind === 'select' ? (
@@ -107,7 +107,7 @@ export function PropChip({
                     'w-full text-left px-2 h-7 rounded text-sm transition-colors',
                     draft === opt.value
                       ? 'bg-[var(--fg)] text-[var(--fg-inverse)]'
-                      : 'hover:bg-[var(--color-surface-hover)]'
+                      : 'hover:bg-[var(--bg-hover)]'
                   )}
                 >
                   {opt.label}
@@ -118,7 +118,7 @@ export function PropChip({
                   type="button"
                   disabled={busy}
                   onClick={() => commit('')}
-                  className="w-full text-left px-2 h-7 rounded text-sm text-[var(--color-fg-muted)] hover:text-[hsl(var(--color-overdue))] hover:bg-[var(--color-surface-hover)]"
+                  className="w-full text-left px-2 h-7 rounded text-sm text-[var(--fg-dim)] hover:text-[var(--fg)] hover:bg-[var(--bg-hover)]"
                 >
                   Clear
                 </button>
@@ -140,14 +140,14 @@ export function PropChip({
                   min: config.min,
                   max: config.max,
                 })}
-                className="w-full h-9 px-2 rounded-md border bg-[var(--color-surface)] text-sm outline-none"
+                className="w-full h-9 px-2 rounded-md border bg-[var(--bg-raised)] text-sm outline-none"
               />
               <div className="flex items-center justify-between">
                 <button
                   type="button"
                   disabled={busy || !isSet}
                   onClick={() => commit('')}
-                  className="text-xs text-[var(--color-fg-muted)] hover:text-[hsl(var(--color-overdue))] disabled:opacity-40"
+                  className="text-xs text-[var(--fg-dim)] hover:text-[var(--fg)] disabled:opacity-40"
                 >
                   Clear
                 </button>
@@ -155,7 +155,7 @@ export function PropChip({
                   type="button"
                   disabled={busy}
                   onClick={() => commit(draft)}
-                  className="px-2.5 h-7 rounded text-xs font-medium bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] hover:bg-[var(--color-button-primary-hover)] disabled:opacity-50"
+                  className="px-2.5 h-7 rounded text-xs font-medium bg-[var(--fg)] text-[var(--fg-inverse)] hover:bg-[var(--fg)] disabled:opacity-50"
                 >
                   {busy ? 'Saving…' : 'Save'}
                 </button>

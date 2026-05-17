@@ -40,7 +40,7 @@ import {
   groupEventsByDay,
   fieldForKind,
   KIND_LABEL,
-  KIND_COLOR,
+  KIND_HEX,
   type CalendarEvent,
   type CalendarEventKind,
 } from '@/lib/calendar-events';
@@ -189,7 +189,7 @@ export function CalendarView({
       onDragEnd={onDragEnd}
       onDragCancel={() => setActiveId(null)}
     >
-      <div className="rounded-lg border bg-[var(--color-surface)] overflow-hidden">
+      <div className="rounded-md border bg-[var(--bg-raised)] overflow-hidden">
         <Header
           label={label}
           mode={mode}
@@ -206,11 +206,11 @@ export function CalendarView({
           }}
         />
 
-        <div className="grid grid-cols-7 border-b bg-[var(--color-surface-elevated)]">
+        <div className="grid grid-cols-7 border-b bg-[var(--bg-raised)]">
           {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
             <div
               key={d}
-              className="px-2 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--color-fg-muted)]"
+              className="px-2 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--fg-dim)]"
             >
               {d}
             </div>
@@ -264,7 +264,7 @@ function Header({
   return (
     <div className="flex items-center justify-between gap-3 px-4 py-2.5 border-b">
       <div className="flex items-center gap-2">
-        <h3 className="font-semibold tabular-nums">{label}</h3>
+        <h3 className="font-bold tabular-nums">{label}</h3>
       </div>
       <div className="flex items-center gap-2">
         <TypeToggles enabled={enabled} onToggle={onToggleType} />
@@ -277,7 +277,7 @@ function Header({
                 'px-2.5 h-7 transition-colors',
                 m === mode
                   ? 'bg-[var(--fg)] text-[var(--fg-inverse)]'
-                  : 'text-[var(--color-fg-muted)] hover:bg-[var(--color-surface-hover)]'
+                  : 'text-[var(--fg-dim)] hover:bg-[var(--bg-hover)]'
               )}
             >
               {m === 'month' ? 'Month' : 'Week'}
@@ -285,16 +285,16 @@ function Header({
           ))}
         </div>
         <div className="flex items-center gap-1">
-          <button onClick={onPrev} className="p-1.5 rounded hover:bg-[var(--color-surface-hover)]">
+          <button onClick={onPrev} className="p-1.5 rounded hover:bg-[var(--bg-hover)]">
             <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             onClick={onToday}
-            className="px-2 h-7 text-xs text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)] rounded hover:bg-[var(--color-surface-hover)]"
+            className="px-2 h-7 text-xs text-[var(--fg-muted)] hover:text-[var(--fg)] rounded hover:bg-[var(--bg-hover)]"
           >
             Today
           </button>
-          <button onClick={onNext} className="p-1.5 rounded hover:bg-[var(--color-surface-hover)]">
+          <button onClick={onNext} className="p-1.5 rounded hover:bg-[var(--bg-hover)]">
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
@@ -327,19 +327,19 @@ function TypeToggles({
             className={cn(
               'inline-flex items-center gap-1 h-7 px-2 rounded-md text-xs border',
               on
-                ? 'text-[var(--color-fg)]'
-                : 'text-[var(--color-fg-muted)] border-transparent hover:bg-[var(--color-surface-hover)]'
+                ? 'text-[var(--fg)]'
+                : 'text-[var(--fg-dim)] border-transparent hover:bg-[var(--bg-hover)]'
             )}
             style={
               on
                 ? {
-                    backgroundColor: `hsl(${KIND_COLOR[kind]} / 0.12)`,
-                    borderColor: `hsl(${KIND_COLOR[kind]} / 0.4)`,
+                    backgroundColor: `color-mix(in srgb, ${KIND_HEX[kind]} 12%, transparent)`,
+                    borderColor: `color-mix(in srgb, ${KIND_HEX[kind]} 40%, transparent)`,
                   }
                 : undefined
             }
           >
-            <Icon className="w-3 h-3" style={on ? { color: `hsl(${KIND_COLOR[kind]})` } : undefined} />
+            <Icon className="w-3 h-3" style={on ? { color: KIND_HEX[kind] } : undefined} />
             {label}
           </button>
         );
@@ -389,9 +389,9 @@ function DayCell({
         }
       }}
       className={cn(
-        'relative border-r border-b border-[var(--color-border-subtle)] p-1.5 cursor-pointer',
+        'relative border-r border-b border-[var(--line-faint)] p-1.5 cursor-pointer',
         minH,
-        !inMonth && 'bg-[var(--color-bg)] opacity-40',
+        !inMonth && 'bg-[var(--bg)] opacity-40',
         isOver && 'bg-[var(--bg-hover)]'
       )}
     >
@@ -400,10 +400,10 @@ function DayCell({
         className={cn(
           'inline-flex items-center justify-center w-6 h-6 rounded-full text-xs mb-1 tabular-nums relative z-10',
           today
-            ? 'bg-[var(--fg)] text-[var(--fg-inverse)] font-semibold'
+            ? 'bg-[var(--fg)] text-[var(--fg-inverse)] font-medium'
             : inMonth
-            ? 'text-[var(--color-fg-secondary)]'
-            : 'text-[var(--color-fg-muted)]'
+            ? 'text-[var(--fg-muted)]'
+            : 'text-[var(--fg-dim)]'
         )}
       >
         {format(day, 'd')}
@@ -423,7 +423,7 @@ function DayCell({
             <Popover.Trigger asChild>
               <button
                 onClick={(e) => e.stopPropagation()}
-                className="w-full text-[10px] text-[var(--color-fg-muted)] text-left px-1.5 py-0.5 rounded hover:bg-[var(--color-surface-hover)]"
+                className="w-full text-[10px] text-[var(--fg-dim)] text-left px-1.5 py-0.5 rounded hover:bg-[var(--bg-hover)]"
               >
                 + {overflow} more
               </button>
@@ -432,9 +432,9 @@ function DayCell({
               <Popover.Content
                 sideOffset={6}
                 align="start"
-                className="z-[60] w-[260px] rounded-lg border bg-[var(--color-surface-elevated)] p-2 space-y-1"
+                className="z-[60] w-[260px] rounded-md border bg-[var(--bg-raised)] p-2 space-y-1"
               >
-                <div className="font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--color-fg-muted)] px-2 pt-1">
+                <div className="font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--fg-dim)] px-2 pt-1">
                   {format(day, 'EEEE, MMM d')} · {events.length} events
                 </div>
                 {events.map((ev) => (
@@ -468,7 +468,7 @@ function CalendarChip({
 }) {
   const { attributes, listeners, setNodeRef } = useDraggable({ id: event.id });
   const Icon = KIND_ICON[event.kind];
-  const color = KIND_COLOR[event.kind];
+  const color = KIND_HEX[event.kind];
   const today = isoDay(new Date());
   const overdue =
     event.kind === 'target' &&
@@ -487,16 +487,16 @@ function CalendarChip({
         }}
         className={cn(
           'flex items-center gap-1 w-full text-left text-[10px] px-1 py-0.5 rounded',
-          'hover:bg-[var(--color-surface-hover)] transition-colors',
+          'hover:bg-[var(--bg-hover)] transition-colors',
           isBeingDragged && 'opacity-30'
         )}
         title={`${event.video.frontmatter.title} · ${KIND_LABEL[event.kind]}`}
       >
         <span
           className="w-1.5 h-1.5 rounded-full shrink-0"
-          style={{ backgroundColor: `hsl(${color})` }}
+          style={{ backgroundColor: color }}
         />
-        <span className="truncate text-[var(--color-fg-secondary)]">
+        <span className="truncate text-[var(--fg-muted)]">
           {event.video.frontmatter.title || event.slug}
         </span>
       </button>
@@ -518,12 +518,12 @@ function CalendarChip({
         'flex items-center gap-1.5 w-full text-left rounded transition-colors border cursor-grab active:cursor-grabbing',
         isCard ? 'px-2 py-1' : 'px-1.5 py-0.5',
         isBeingDragged && 'opacity-30',
-        overdue && 'ring-1 ring-[hsl(var(--color-overdue))]'
+        overdue && 'ring-1 ring-[var(--red)]'
       )}
       style={{
-        backgroundColor: `hsl(${color} / 0.12)`,
-        borderColor: `hsl(${color} / 0.3)`,
-        color: `hsl(${color})`,
+        backgroundColor: `color-mix(in srgb, ${color} 12%, transparent)`,
+        borderColor: `color-mix(in srgb, ${color} 30%, transparent)`,
+        color,
       }}
       title={`${event.video.frontmatter.title} · ${KIND_LABEL[event.kind]}`}
     >
@@ -537,14 +537,14 @@ function CalendarChip({
 
 function ChipGhost({ event }: { event: CalendarEvent }) {
   const Icon = KIND_ICON[event.kind];
-  const color = KIND_COLOR[event.kind];
+  const color = KIND_HEX[event.kind];
   return (
     <div
       className="inline-flex items-center gap-1.5 px-2 py-1 rounded border text-xs ring-1"
       style={{
-        backgroundColor: `hsl(${color} / 0.18)`,
-        borderColor: `hsl(${color} / 0.5)`,
-        color: `hsl(${color})`,
+        backgroundColor: `color-mix(in srgb, ${color} 18%, transparent)`,
+        borderColor: `color-mix(in srgb, ${color} 50%, transparent)`,
+        color,
       }}
     >
       <Icon className="w-3 h-3" />

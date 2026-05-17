@@ -6,7 +6,7 @@ import type { CodeMirrorEditorProps } from './CodeMirrorEditor.client';
 const Inner = dynamic(() => import('./CodeMirrorEditor.client'), {
   ssr: false,
   loading: () => (
-    <div className="text-sm text-[var(--color-fg-muted)] py-4">Loading editor…</div>
+    <div className="text-sm text-[var(--fg-dim)] py-4">Loading editor…</div>
   ),
 });
 

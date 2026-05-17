@@ -27,7 +27,7 @@ import { toast } from 'sonner';
 import { ChevronLeft, GripVertical, Plus } from 'lucide-react';
 import type { VideoSummary, VideoStatus } from '@/lib/types';
 import type { Density } from '@/lib/filter-types';
-import { STATUS_ORDER, STATUS_LABELS, STATUS_COLOR_VAR, IN_FLIGHT_STATUSES } from '@/lib/status';
+import { STATUS_ORDER, STATUS_LABELS, STATUS_SOLID_VAR, IN_FLIGHT_STATUSES } from '@/lib/status';
 import { updateVideoField } from '@/hooks/use-videos';
 import { useActiveView, viewStore } from '@/hooks/use-view-store';
 import { useUI } from '@/components/UIProvider';
@@ -254,11 +254,11 @@ function DragGhost({ video, density }: { video: VideoSummary; density: Density }
   return (
     <div
       className={cn(
-        'rounded-lg border bg-[var(--color-surface-elevated)] overflow-hidden w-72'
+        'rounded-md border bg-[var(--bg-raised)] overflow-hidden w-72'
       )}
     >
       {showThumbnail && (
-        <div className="aspect-video w-full bg-[var(--color-surface)] overflow-hidden">
+        <div className="aspect-video w-full bg-[var(--bg-raised)] overflow-hidden">
           <ThumbnailPreview slug={video.slug} />
         </div>
       )}
@@ -293,7 +293,7 @@ function Column({
   onCardClick: (slug: string) => void;
 }) {
   const { setNodeRef, isOver } = useDroppable({ id: status });
-  const colorVar = STATUS_COLOR_VAR[status];
+  const solidVar = STATUS_SOLID_VAR[status];
   const { openQuickAdd } = useUI();
 
   const overWip = WIP_TRACKED.includes(status) && videos.length > WIP_THRESHOLD;
@@ -305,23 +305,23 @@ function Column({
         ref={setNodeRef}
         onClick={onToggleCollapsed}
         className={cn(
-          'w-12 shrink-0 rounded-lg border bg-[var(--color-surface)] flex flex-col items-center py-3 gap-3',
-          'hover:bg-[var(--color-surface-hover)] transition-colors',
+          'w-12 shrink-0 rounded-md border bg-[var(--bg-raised)] flex flex-col items-center py-3 gap-3',
+          'hover:bg-[var(--bg-hover)] transition-colors',
           isOver && 'border-[var(--line-strong)]'
         )}
         title={`Expand ${STATUS_LABELS[status]}`}
       >
         <span
           className="w-1.5 h-1.5 rounded-full"
-          style={{ backgroundColor: `hsl(var(${colorVar}))` }}
+          style={{ backgroundColor: `var(${solidVar})` }}
         />
         <span
-          className="font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--color-fg-muted)]"
+          className="font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--fg-dim)]"
           style={{ writingMode: 'vertical-rl' }}
         >
           {STATUS_LABELS[status]}
         </span>
-        <span className="mt-auto text-[10px] tabular-nums text-[var(--color-fg-muted)]">
+        <span className="mt-auto text-[10px] tabular-nums text-[var(--fg-dim)]">
           {videos.length}
         </span>
       </button>
@@ -332,12 +332,12 @@ function Column({
     <div
       ref={setNodeRef}
       className={cn(
-        'flex flex-col w-72 shrink-0 rounded-lg border bg-[var(--color-surface)] transition-colors',
+        'flex flex-col w-72 shrink-0 rounded-md border bg-[var(--bg-raised)] transition-colors',
         isOver && 'border-[var(--line-strong)]'
       )}
       style={
         isOver
-          ? { backgroundColor: `hsl(var(${colorVar}) / 0.04)` }
+          ? { backgroundColor: `color-mix(in srgb, var(${solidVar}) 4%, transparent)` }
           : undefined
       }
     >
@@ -345,12 +345,12 @@ function Column({
         <button
           type="button"
           onClick={onToggleCollapsed}
-          className="flex items-center gap-2 text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)]"
+          className="flex items-center gap-2 text-[var(--fg-muted)] hover:text-[var(--fg)]"
           title="Collapse"
         >
           <span
             className="w-2 h-2 rounded-full"
-            style={{ background: `hsl(var(${colorVar}))` }}
+            style={{ background: `var(${solidVar})` }}
           />
           <span className="font-mono text-xs font-medium uppercase tracking-wider">
             {STATUS_LABELS[status]}
@@ -362,8 +362,8 @@ function Column({
             className={cn(
               'inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded text-[10px] tabular-nums font-medium border transition-colors',
               overWip
-                ? 'border-[hsl(var(--color-overdue)/0.5)] bg-[hsl(var(--color-overdue)/0.12)] text-[hsl(var(--color-overdue))]'
-                : 'border-transparent text-[var(--color-fg-muted)]'
+                ? 'border-[color-mix(in_srgb,var(--red)_50%,transparent)] bg-[var(--red-wash)] text-[var(--fg-muted)]'
+                : 'border-transparent text-[var(--fg-dim)]'
             )}
             title={overWip ? `WIP > ${WIP_THRESHOLD}` : undefined}
           >
@@ -372,7 +372,7 @@ function Column({
           <button
             type="button"
             onClick={() => openQuickAdd({ status })}
-            className="inline-flex items-center justify-center w-5 h-5 rounded text-[var(--color-fg-muted)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-fg)]"
+            className="inline-flex items-center justify-center w-5 h-5 rounded text-[var(--fg-dim)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg)]"
             title={`Add to ${STATUS_LABELS[status]}`}
           >
             <Plus className="w-3 h-3" />
@@ -404,9 +404,9 @@ function EmptyDropZone({ onAdd }: { onAdd: () => void }) {
       type="button"
       onClick={onAdd}
       className={cn(
-        'w-full rounded-md border border-dashed text-xs text-[var(--color-fg-muted)]',
+        'w-full rounded-md border border-dashed text-xs text-[var(--fg-dim)]',
         'py-6 flex flex-col items-center justify-center gap-1.5',
-        'hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-fg)] transition-colors'
+        'hover:bg-[var(--bg-hover)] hover:text-[var(--fg)] transition-colors'
       )}
     >
       <Plus className="w-3.5 h-3.5 opacity-60" />
@@ -438,7 +438,6 @@ function KanbanCard({
   } = useSortable({ id: video.slug });
   const selectedIds = useSelectionIds();
   const isSelected = selectedIds.has(video.slug);
-  const colorVar = STATUS_COLOR_VAR[video.frontmatter.status];
 
   const sortableStyle: React.CSSProperties = {
     transform: CSS.Transform.toString(transform),
@@ -469,8 +468,8 @@ function KanbanCard({
       style={sortableStyle}
       onClick={onCardClick}
       className={cn(
-        'group relative rounded-lg border bg-[var(--color-surface-elevated)] overflow-hidden transition-colors',
-        'hover:border-[var(--color-border)]',
+        'group relative rounded-md border bg-[var(--bg-raised)] overflow-hidden transition-colors',
+        'hover:border-[var(--line)]',
         isBeingDragged && 'opacity-30',
         isSelected && 'bg-[var(--bg-selected)]'
       )}
@@ -484,9 +483,9 @@ function KanbanCard({
         onClick={(e) => e.stopPropagation()}
         aria-label="Drag card"
         className={cn(
-          'absolute top-1.5 left-1.5 z-10 p-1 rounded text-[var(--color-fg-muted)] touch-none',
+          'absolute top-1.5 left-1.5 z-10 p-1 rounded text-[var(--fg-dim)] touch-none',
           'opacity-0 group-hover:opacity-100 transition-opacity',
-          'hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-fg)]',
+          'hover:bg-[var(--bg-hover)] hover:text-[var(--fg)]',
           'cursor-grab active:cursor-grabbing'
         )}
         tabIndex={-1}
@@ -494,7 +493,7 @@ function KanbanCard({
         <GripVertical className="w-3.5 h-3.5" />
       </button>
       {showThumbnail && (
-        <div className="aspect-video w-full bg-[var(--color-surface)] overflow-hidden">
+        <div className="aspect-video w-full bg-[var(--bg-raised)] overflow-hidden">
           <ThumbnailPreview slug={video.slug} />
         </div>
       )}
@@ -504,7 +503,7 @@ function KanbanCard({
         </div>
         <div className="flex items-center gap-1.5 flex-wrap">
           {video.frontmatter.target_date && (
-            <span className="text-xs text-[var(--color-fg-muted)] tabular-nums">
+            <span className="text-xs text-[var(--fg-dim)] tabular-nums">
               {fmt(video.frontmatter.target_date)}
             </span>
           )}

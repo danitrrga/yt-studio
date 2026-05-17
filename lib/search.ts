@@ -9,6 +9,7 @@ import matter from 'gray-matter';
 import fs from 'fs/promises';
 import type { Dirent } from 'fs';
 import path from 'path';
+import type { VideoStatus } from './types';
 import { getYtPaths } from './yt-config';
 
 const SNIPPET_RADIUS = 50;
@@ -23,7 +24,7 @@ export interface SearchHit {
 }
 
 export interface VideoSearchHit extends SearchHit {
-  status: string;
+  status: VideoStatus;
 }
 
 export interface ClipSearchHit extends SearchHit {
@@ -70,7 +71,7 @@ async function searchVideos(q: string): Promise<VideoSearchHit[]> {
       if (!Array.isArray(data.tags) || !(data.tags as string[]).includes('video')) continue;
       const title = (data.title as string) ?? '';
       const slug = path.basename(file, '.md');
-      const status = (data.status as string) ?? 'idea';
+      const status = (data.status as VideoStatus) ?? ('idea' as const);
 
       if (matchesQuery(title, q)) {
         hits.push({

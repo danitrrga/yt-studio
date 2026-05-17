@@ -21,15 +21,15 @@ export function WordCount({ body }: { body: string }) {
   const words = countWords(body);
   return (
     <div
-      className="text-xs text-[var(--color-fg-muted)] tabular-nums"
+      className="text-xs text-[var(--fg-dim)] tabular-nums"
       aria-live="polite"
     >
       <span>{words.toLocaleString()} {words === 1 ? 'word' : 'words'}</span>
       {words > 0 && (
         <>
-          <span className="mx-1.5 text-[var(--color-border)]">·</span>
+          <span className="mx-1.5 text-[var(--line)]">·</span>
           <span title="Spoken duration at 150 wpm">{fmtMin(words, SPOKEN_WPM)} spoken</span>
-          <span className="mx-1.5 text-[var(--color-border)]">·</span>
+          <span className="mx-1.5 text-[var(--line)]">·</span>
           <span title="Reading time at 220 wpm">{fmtMin(words, READING_WPM)} read</span>
         </>
       )}

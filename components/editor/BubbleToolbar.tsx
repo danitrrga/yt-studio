@@ -74,7 +74,7 @@ export function BubbleToolbar({ view }: { view: EditorView | null }) {
 
   return (
     <div
-      className="fixed z-50 flex items-center gap-0.5 rounded-md border bg-[var(--color-surface-elevated)] p-0.5"
+      className="fixed z-50 flex items-center gap-0.5 rounded-md border bg-[var(--bg-raised)] p-0.5"
       style={{ top: pos.top, left: pos.left }}
     >
       <Btn onClick={() => wrapSelection(view, '**')} Icon={Bold} />
@@ -94,7 +94,7 @@ function Btn({ onClick, Icon }: { onClick: () => void; Icon: React.ElementType }
         onClick();
       }}
       className={cn(
-        'p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)]'
+        'p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)]'
       )}
     >
       <Icon className="w-3.5 h-3.5" />

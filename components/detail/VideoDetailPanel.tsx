@@ -23,14 +23,14 @@ function DateField({
 }) {
   return (
     <label className="block">
-      <span className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)]">
+      <span className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)]">
         {label}
       </span>
       <input
         type="date"
         value={value ?? ''}
         onChange={(e) => onChange(e.target.value || null)}
-        className="mt-1 w-full h-9 px-2.5 rounded-md border bg-[var(--color-surface)] text-sm outline-none"
+        className="mt-1 w-full h-9 px-2.5 rounded-md border bg-[var(--bg-raised)] text-sm outline-none"
       />
     </label>
   );
@@ -99,13 +99,13 @@ export function VideoDetailPanel({
                 exit={{ x: '100%' }}
                 transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                 className={cn(
-                  'fixed right-0 top-0 bottom-0 bg-[var(--color-surface)] border-l z-50 flex flex-col transition-[width] duration-[180ms] ease-out',
+                  'fixed right-0 top-0 bottom-0 bg-[var(--bg-raised)] border-l z-50 flex flex-col transition-[width] duration-[180ms] ease-out',
                   expanded ? 'w-[min(960px,92vw)]' : 'w-[min(520px,92vw)]'
                 )}
               >
                 <Dialog.Title className="sr-only">Video details</Dialog.Title>
                 {!video ? (
-                  <div className="p-6 text-sm text-[var(--color-fg-muted)]">Loading...</div>
+                  <div className="p-6 text-sm text-[var(--fg-dim)]">Loading...</div>
                 ) : (
                   <>
                     <div className="flex items-center justify-between px-5 h-14 border-b">
@@ -117,7 +117,7 @@ export function VideoDetailPanel({
                         <Tooltip content="Open as page (E)" side="bottom">
                           <button
                             onClick={openAsPage}
-                            className="flex items-center gap-1 px-2 h-7 rounded border bg-[var(--color-surface)] hover:bg-[var(--color-surface-hover)] text-xs text-[var(--color-fg-secondary)]"
+                            className="flex items-center gap-1 px-2 h-7 rounded border bg-[var(--bg-raised)] hover:bg-[var(--bg-hover)] text-xs text-[var(--fg-muted)]"
                           >
                             <ArrowUpRight className="w-3.5 h-3.5" />
                             Open
@@ -126,7 +126,7 @@ export function VideoDetailPanel({
                         <Tooltip content={expanded ? 'Collapse' : 'Expand'} side="bottom">
                           <button
                             onClick={() => setExpanded((v) => !v)}
-                            className="p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)]"
+                            className="p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)]"
                           >
                             {expanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
                           </button>
@@ -134,7 +134,7 @@ export function VideoDetailPanel({
                         <Tooltip content="Open in Obsidian" side="bottom">
                           <a
                             href={video.obsidianUri}
-                            className="p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)]"
+                            className="p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)]"
                           >
                             <ExternalLink className="w-4 h-4" />
                           </a>
@@ -142,7 +142,7 @@ export function VideoDetailPanel({
                         <Tooltip content="Close (Esc)" side="bottom">
                           <button
                             onClick={onClose}
-                            className="p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)]"
+                            className="p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)]"
                           >
                             <X className="w-4 h-4" />
                           </button>
@@ -158,7 +158,7 @@ export function VideoDetailPanel({
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') (e.target as HTMLInputElement).blur();
                         }}
-                        className="w-full text-2xl font-bold tracking-tight bg-transparent outline-none focus:bg-[var(--color-surface-hover)] rounded px-1 -mx-1 py-0.5"
+                        className="w-full text-2xl font-bold tracking-tight bg-transparent outline-none focus:bg-[var(--bg-hover)] rounded px-1 -mx-1 py-0.5"
                       />
 
                       <div className="flex flex-wrap gap-2">
@@ -193,7 +193,7 @@ export function VideoDetailPanel({
 
                       {video.frontmatter.tags && video.frontmatter.tags.length > 0 && (
                         <div>
-                          <div className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)] mb-1.5">
+                          <div className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)] mb-1.5">
                             Tags
                           </div>
                           <div className="flex flex-wrap gap-1.5">

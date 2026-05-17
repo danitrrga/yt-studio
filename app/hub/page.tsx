@@ -102,18 +102,18 @@ export default function HubPage() {
     <div className="px-8 py-6 space-y-6 max-w-[1400px] mx-auto">
       <div className="flex items-end justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-[28px] font-semibold tracking-[-0.012em] leading-[1.2]">Hub</h1>
-          <p className="text-[13px] text-[var(--color-fg-muted)] mt-1">
+          <h1 className="text-[28px] font-bold tracking-[-0.012em] leading-[1.2]">Hub</h1>
+          <p className="text-[13px] text-[var(--fg-dim)] mt-1">
             capture inspiration before it becomes a script
           </p>
         </div>
-        <div className="flex items-center gap-3 text-xs text-[var(--color-fg-muted)]">
+        <div className="flex items-center gap-3 text-xs text-[var(--fg-dim)]">
           <span className="tabular-nums">
             {clips ? `${clips.length} clip${clips.length === 1 ? '' : 's'}` : ''}
           </span>
           <Link
             href="/hub/trash"
-            className="inline-flex items-center gap-1 hover:text-[var(--color-fg)]"
+            className="inline-flex items-center gap-1 hover:text-[var(--fg)]"
           >
             <Trash2 className="w-3.5 h-3.5" />
             Trash
@@ -138,12 +138,12 @@ export default function HubPage() {
               className={cn(
                 'inline-flex items-center gap-1.5 px-3 h-9 text-xs border-b-2 -mb-px transition-colors',
                 statusTab === t.id
-                  ? 'border-[var(--fg)] text-[var(--color-fg)]'
-                  : 'border-transparent text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)]'
+                  ? 'border-[var(--fg)] text-[var(--fg)]'
+                  : 'border-transparent text-[var(--fg-muted)] hover:text-[var(--fg)]'
               )}
             >
               {t.label}
-              <span className="text-[10px] tabular-nums text-[var(--color-fg-muted)]">
+              <span className="text-[10px] tabular-nums text-[var(--fg-dim)]">
                 {count}
               </span>
             </button>
@@ -160,7 +160,7 @@ export default function HubPage() {
               'px-2.5 h-7 rounded-md text-xs border transition-colors',
               sourceFilter === s.id
                 ? 'bg-[var(--fg)] text-[var(--fg-inverse)] border-transparent'
-                : 'bg-[var(--color-surface)] text-[var(--color-fg-secondary)] hover:bg-[var(--color-surface-hover)]'
+                : 'bg-[var(--bg-raised)] text-[var(--fg-muted)] hover:bg-[var(--bg-hover)]'
             )}
           >
             {s.label}
@@ -172,12 +172,12 @@ export default function HubPage() {
             placeholder="Search clips…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="h-7 px-2.5 rounded-md border bg-[var(--color-surface)] text-xs outline-none w-48"
+            className="h-7 px-2.5 rounded-md border bg-[var(--bg-raised)] text-xs outline-none w-48"
           />
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as SortKey)}
-            className="h-7 px-2 rounded-md border bg-[var(--color-surface)] text-xs outline-none"
+            className="h-7 px-2 rounded-md border bg-[var(--bg-raised)] text-xs outline-none"
           >
             <option value="newest">Newest</option>
             <option value="oldest">Oldest</option>
@@ -190,7 +190,7 @@ export default function HubPage() {
       {isLoading && (
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="rounded-lg border bg-[var(--color-surface)] overflow-hidden">
+            <div key={i} className="rounded-md border bg-[var(--bg-raised)] overflow-hidden">
               <div className="aspect-video">
                 <Skeleton variant="row" />
               </div>
@@ -212,7 +212,7 @@ export default function HubPage() {
       )}
 
       {!isLoading && filtered.length === 0 && (clips?.length ?? 0) > 0 && (
-        <div className="py-12 text-center text-sm text-[var(--color-fg-muted)]">
+        <div className="py-12 text-center text-sm text-[var(--fg-dim)]">
           No clips match. Clear the filter or search.
         </div>
       )}
@@ -243,10 +243,10 @@ function ReferenceDocs({
   const { pages } = useHubPages();
   if (!pages || pages.length === 0) return null;
   return (
-    <section className="pt-6 border-t border-[var(--color-border-subtle)]">
+    <section className="pt-6 border-t border-[var(--line-faint)]">
       <button
         onClick={() => setShowRefDocs(!showRefDocs)}
-        className="flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+        className="flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)] hover:text-[var(--fg)]"
       >
         {showRefDocs ? (
           <ChevronDown className="w-3.5 h-3.5" />
@@ -261,25 +261,25 @@ function ReferenceDocs({
             <Link
               key={p.slug}
               href={`/hub/docs/${p.slug}`}
-              className="group rounded-lg border bg-[var(--color-surface)] hover:bg-[var(--color-surface-hover)] transition-colors p-4 flex flex-col gap-2"
+              className="group rounded-md border bg-[var(--bg-raised)] hover:bg-[var(--bg-hover)] transition-colors p-4 flex flex-col gap-2"
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-2 min-w-0">
-                  <FileText className="w-4 h-4 text-[var(--color-fg-muted)] shrink-0" />
-                  <h3 className="font-semibold text-sm truncate">{p.title}</h3>
+                  <FileText className="w-4 h-4 text-[var(--fg-dim)] shrink-0" />
+                  <h3 className="font-bold text-sm truncate">{p.title}</h3>
                 </div>
                 <a
                   href={p.obsidianUri}
                   title="Open in Obsidian"
                   onClick={(e) => e.stopPropagation()}
-                  className="text-[var(--color-fg-muted)] hover:text-[var(--fg)] shrink-0 opacity-0 group-hover:opacity-100"
+                  className="text-[var(--fg-dim)] hover:text-[var(--fg)] shrink-0 opacity-0 group-hover:opacity-100"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
-              <p className="text-[11px] text-[var(--color-fg-secondary)] line-clamp-3 leading-relaxed">
+              <p className="text-[11px] text-[var(--fg-muted)] line-clamp-3 leading-relaxed">
                 {p.content.trim().slice(0, 220) || (
-                  <span className="italic text-[var(--color-fg-muted)]">empty</span>
+                  <span className="italic text-[var(--fg-dim)]">empty</span>
                 )}
               </p>
             </Link>

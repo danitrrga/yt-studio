@@ -41,7 +41,7 @@ export function GalleryView({
 
   if (videos.length === 0) {
     return (
-      <div className="px-4 py-12 text-center text-sm text-[var(--color-fg-muted)]">
+      <div className="px-4 py-12 text-center text-sm text-[var(--fg-dim)]">
         No videos.
       </div>
     );
@@ -60,12 +60,12 @@ export function GalleryView({
             layout
             onClick={(e) => handleClick(e, v.slug)}
             className={cn(
-              'group rounded-lg border bg-[var(--color-surface-elevated)] overflow-hidden cursor-pointer',
-              'hover:border-[var(--color-border)] transition-colors',
+              'group rounded-md border bg-[var(--bg-raised)] overflow-hidden cursor-pointer',
+              'hover:border-[var(--line)] transition-colors',
               isSelected && 'bg-[var(--bg-selected)] border-[var(--line-strong)]'
             )}
           >
-            <div className="aspect-video w-full bg-[var(--color-surface)] overflow-hidden relative">
+            <div className="aspect-video w-full bg-[var(--bg-raised)] overflow-hidden relative">
               <ThumbnailPreview slug={v.slug} />
               <div
                 className={cn(
@@ -87,7 +87,7 @@ export function GalleryView({
               <div className="flex items-center gap-2 flex-wrap">
                 <StatusPill status={v.frontmatter.status} size="sm" />
                 {v.frontmatter.target_date && (
-                  <span className="inline-flex items-center gap-1 text-[11px] text-[var(--color-fg-muted)] tabular-nums">
+                  <span className="inline-flex items-center gap-1 text-[11px] text-[var(--fg-dim)] tabular-nums">
                     <Target className="w-3 h-3" />
                     {fmt(v.frontmatter.target_date)}
                   </span>

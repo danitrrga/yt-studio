@@ -24,17 +24,17 @@ export function Breadcrumb({
         return (
           <span key={i} className="flex items-center gap-1.5 min-w-0">
             {i > 0 && (
-              <ChevronRight className="w-3 h-3 text-[var(--color-fg-muted)] shrink-0" />
+              <ChevronRight className="w-3 h-3 text-[var(--fg-dim)] shrink-0" />
             )}
             {item.href && !last ? (
               <Link
                 href={item.href}
-                className="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] shrink-0"
+                className="text-[var(--fg-dim)] hover:text-[var(--fg)] shrink-0"
               >
                 {item.label}
               </Link>
             ) : (
-              <span className={cn('truncate', last ? 'text-[var(--color-fg)] font-medium' : 'text-[var(--color-fg-muted)]')}>
+              <span className={cn('truncate', last ? 'text-[var(--fg)] font-medium' : 'text-[var(--fg-dim)]')}>
                 {item.label}
               </span>
             )}

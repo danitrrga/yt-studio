@@ -34,14 +34,14 @@ export default function VideoDashboardPage({
 
   if (!video) {
     return (
-      <div className="h-full flex items-center justify-center text-sm text-[var(--color-fg-muted)]">
+      <div className="h-full flex items-center justify-center text-sm text-[var(--fg-dim)]">
         Loading...
       </div>
     );
   }
 
   return (
-    <div className={cn('h-screen flex flex-col bg-[var(--color-bg)]')}>
+    <div className={cn('h-screen flex flex-col bg-[var(--bg)]')}>
       <FullPageHeader
         video={video}
         prevSlug={prev}
@@ -72,20 +72,20 @@ export default function VideoDashboardPage({
         </div>
       </div>
 
-      <footer className="h-10 shrink-0 border-t flex items-center justify-between px-6 text-xs text-[var(--color-fg-muted)] bg-[var(--color-surface)]">
+      <footer className="h-10 shrink-0 border-t flex items-center justify-between px-6 text-xs text-[var(--fg-dim)] bg-[var(--bg-raised)]">
         <span>Dashboard</span>
         <div className="flex items-center gap-3">
-          <kbd className="px-1.5 py-0.5 rounded border bg-[var(--color-surface-elevated)] text-[10px]">E</kbd>
+          <kbd className="px-1.5 py-0.5 rounded border bg-[var(--bg-raised)] text-[10px]">E</kbd>
           <span>Edit idea</span>
-          <span className="text-[var(--color-border)]">·</span>
-          <kbd className="px-1.5 py-0.5 rounded border bg-[var(--color-surface-elevated)] text-[10px]">⇧S</kbd>
+          <span className="text-[var(--line)]">·</span>
+          <kbd className="px-1.5 py-0.5 rounded border bg-[var(--bg-raised)] text-[10px]">⇧S</kbd>
           <span>Advance</span>
-          <span className="text-[var(--color-border)]">·</span>
-          <kbd className="px-1.5 py-0.5 rounded border bg-[var(--color-surface-elevated)] text-[10px]">J</kbd>
-          <kbd className="px-1.5 py-0.5 rounded border bg-[var(--color-surface-elevated)] text-[10px]">K</kbd>
+          <span className="text-[var(--line)]">·</span>
+          <kbd className="px-1.5 py-0.5 rounded border bg-[var(--bg-raised)] text-[10px]">J</kbd>
+          <kbd className="px-1.5 py-0.5 rounded border bg-[var(--bg-raised)] text-[10px]">K</kbd>
           <span>Next / prev</span>
-          <span className="text-[var(--color-border)]">·</span>
-          <kbd className="px-1.5 py-0.5 rounded border bg-[var(--color-surface-elevated)] text-[10px]">Esc</kbd>
+          <span className="text-[var(--line)]">·</span>
+          <kbd className="px-1.5 py-0.5 rounded border bg-[var(--bg-raised)] text-[10px]">Esc</kbd>
           <span>Back</span>
         </div>
       </footer>

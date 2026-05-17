@@ -83,3 +83,10 @@ export const KIND_COLOR: Record<CalendarEventKind, string> = {
   record: '38 95% 55%', // amber
   published: '145 65% 50%', // green
 };
+
+/** Resolved hex color for a kind — use instead of hsl(KIND_COLOR[kind]) in components. */
+export const KIND_HEX: Record<CalendarEventKind, string> = {
+  target: '#7C7CFF',
+  record: '#F0A030',
+  published: '#3FB984',
+};

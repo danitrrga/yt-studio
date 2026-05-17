@@ -165,9 +165,9 @@ export function TableView({
       <th
         onClick={(e) => toggleSort(k, e.shiftKey || e.metaKey || e.ctrlKey)}
         className={cn(
-          'text-left font-mono text-xs font-medium uppercase tracking-wider text-[var(--color-fg-muted)]',
+          'text-left font-mono text-xs font-medium uppercase tracking-wider text-[var(--fg-dim)]',
           tokens.pad,
-          'cursor-pointer hover:text-[var(--color-fg-secondary)] select-none',
+          'cursor-pointer hover:text-[var(--fg-muted)] select-none',
           className
         )}
       >
@@ -187,9 +187,9 @@ export function TableView({
   const showCheckboxes = selectedIds.size > 0;
 
   return (
-    <div className="rounded-lg border bg-[var(--color-surface)] overflow-hidden">
+    <div className="rounded-md border bg-[var(--bg-raised)] overflow-hidden">
       <table className="w-full">
-        <thead className="bg-[var(--color-surface-elevated)] border-b">
+        <thead className="bg-[var(--bg-raised)] border-b">
           <tr>
             <th className={cn('w-8', tokens.pad)}>
               <Checkbox
@@ -222,16 +222,16 @@ export function TableView({
           return (
         <tbody key={g.key}>
           {groupBy !== 'none' && (
-            <tr className="bg-[var(--color-surface-elevated)]/60 border-b border-[var(--color-border-subtle)] sticky top-0 z-[5]">
+            <tr className="bg-[var(--bg-raised)]/60 border-b border-[var(--line-faint)] sticky top-0 z-[5]">
               <td colSpan={8} className="px-3 py-1.5">
                 <button
                   type="button"
                   onClick={() => toggleCollapsed(g.key)}
-                  className="inline-flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)]"
+                  className="inline-flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--fg-muted)] hover:text-[var(--fg)]"
                 >
                   {isCollapsed ? <ChevronRight className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
                   {g.label || 'Group'}
-                  <span className="text-[var(--color-fg-muted)] ml-1 normal-case font-normal tracking-normal">
+                  <span className="text-[var(--fg-dim)] ml-1 normal-case font-normal tracking-normal">
                     {g.items.length}
                   </span>
                 </button>
@@ -244,10 +244,10 @@ export function TableView({
               <tr
                 key={v.slug}
                 className={cn(
-                  'border-b border-[var(--color-border-subtle)] transition-colors group',
+                  'border-b border-[var(--line-faint)] transition-colors group',
                   isSelected
                     ? 'bg-[var(--bg-hover)] hover:bg-[var(--bg-selected)]'
-                    : 'hover:bg-[var(--color-surface-hover)]'
+                    : 'hover:bg-[var(--bg-hover)]'
                 )}
               >
                 <td
@@ -271,11 +271,11 @@ export function TableView({
                   onClick={(e) => handleRowClick(e, v.slug)}
                   className={cn(tokens.pad, 'cursor-pointer')}
                 >
-                  <div className={cn('font-medium text-[var(--color-fg)] line-clamp-1', tokens.text)}>
+                  <div className={cn('font-medium text-[var(--fg)] line-clamp-1', tokens.text)}>
                     {v.frontmatter.title || v.slug}
                   </div>
                   {v.frontmatter.tags && v.frontmatter.tags.length > 0 && density !== 'compact' && (
-                    <div className="text-xs text-[var(--color-fg-muted)] line-clamp-1 mt-0.5">
+                    <div className="text-xs text-[var(--fg-dim)] line-clamp-1 mt-0.5">
                       {v.frontmatter.tags
                         .filter((t) => t !== 'youtube' && t !== 'video')
                         .slice(0, 3)
@@ -331,7 +331,7 @@ export function TableView({
                     <a
                       href={v.obsidianUri}
                       title="Open in Obsidian"
-                      className="p-1 rounded text-[var(--color-fg-muted)] hover:text-[var(--fg)]"
+                      className="p-1 rounded text-[var(--fg-dim)] hover:text-[var(--fg)]"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
@@ -342,7 +342,7 @@ export function TableView({
                         e.stopPropagation();
                         setConfirmSlug(v.slug);
                       }}
-                      className="p-1 rounded text-[var(--color-fg-muted)] hover:text-[var(--color-danger)]"
+                      className="p-1 rounded text-[var(--fg-dim)] hover:text-[var(--fg)]"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -356,7 +356,7 @@ export function TableView({
         })}
       </table>
       {videos.length === 0 && (
-        <div className="px-4 py-12 text-center text-sm text-[var(--color-fg-muted)]">
+        <div className="px-4 py-12 text-center text-sm text-[var(--fg-dim)]">
           No videos match these filters.
         </div>
       )}
@@ -416,8 +416,8 @@ function DateCell({
             setOpen((o) => !o);
           }}
           className={cn(
-            'text-left rounded px-1 -mx-1 py-0.5 hover:bg-[var(--color-surface-hover)]',
-            value ? 'text-[var(--color-fg-secondary)]' : 'text-[var(--color-fg-muted)]'
+            'text-left rounded px-1 -mx-1 py-0.5 hover:bg-[var(--bg-hover)]',
+            value ? 'text-[var(--fg-muted)]' : 'text-[var(--fg-dim)]'
           )}
         >
           {fmt(value)}
@@ -427,7 +427,7 @@ function DateCell({
         <Popover.Content
           sideOffset={4}
           align="start"
-          className="z-[60] w-[220px] rounded-lg border bg-[var(--color-surface-elevated)] p-3 space-y-3"
+          className="z-[60] w-[220px] rounded-md border bg-[var(--bg-raised)] p-3 space-y-3"
         >
           <input
             type="date"
@@ -438,14 +438,14 @@ function DateCell({
               if (e.key === 'Enter') commit(draft || null);
               if (e.key === 'Escape') setOpen(false);
             }}
-            className="w-full h-9 px-2 rounded-md border bg-[var(--color-surface)] text-sm outline-none"
+            className="w-full h-9 px-2 rounded-md border bg-[var(--bg-raised)] text-sm outline-none"
           />
           <div className="flex items-center justify-between">
             <button
               type="button"
               disabled={busy || !value}
               onClick={() => commit(null)}
-              className="text-xs text-[var(--color-fg-muted)] hover:text-[hsl(var(--color-overdue))] disabled:opacity-40"
+              className="text-xs text-[var(--fg-dim)] hover:text-[var(--fg)] disabled:opacity-40"
             >
               Clear
             </button>
@@ -453,7 +453,7 @@ function DateCell({
               type="button"
               disabled={busy}
               onClick={() => commit(draft || null)}
-              className="px-2.5 h-7 rounded text-xs font-medium bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] hover:bg-[var(--color-button-primary-hover)]"
+              className="px-2.5 h-7 rounded text-xs font-medium bg-[var(--fg)] text-[var(--fg-inverse)] hover:bg-[var(--fg)]"
             >
               {busy ? 'Saving…' : 'Save'}
             </button>
@@ -483,8 +483,8 @@ function TextCell({
       <button
         onClick={() => setEditing(true)}
         className={cn(
-          'text-left w-full rounded px-1 -mx-1 py-0.5 hover:bg-[var(--color-surface-hover)] truncate',
-          value ? 'text-[var(--color-fg-secondary)]' : 'text-[var(--color-fg-muted)]'
+          'text-left w-full rounded px-1 -mx-1 py-0.5 hover:bg-[var(--bg-hover)] truncate',
+          value ? 'text-[var(--fg-muted)]' : 'text-[var(--fg-dim)]'
         )}
       >
         {value || placeholder || '—'}
@@ -508,7 +508,7 @@ function TextCell({
           setEditing(false);
         }
       }}
-      className="w-full h-7 px-1 -mx-1 bg-[var(--color-surface)] outline-none text-sm rounded"
+      className="w-full h-7 px-1 -mx-1 bg-[var(--bg-raised)] outline-none text-sm rounded"
     />
   );
 }
@@ -524,11 +524,11 @@ function AudienceCell({
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
-        <button className="rounded px-1 -mx-1 py-0.5 hover:bg-[var(--color-surface-hover)]">
+        <button className="rounded px-1 -mx-1 py-0.5 hover:bg-[var(--bg-hover)]">
           {value ? (
             <Badge>{value}</Badge>
           ) : (
-            <span className="text-[var(--color-fg-muted)] text-sm">—</span>
+            <span className="text-[var(--fg-dim)] text-sm">—</span>
           )}
         </button>
       </Popover.Trigger>
@@ -536,13 +536,13 @@ function AudienceCell({
         <Popover.Content
           sideOffset={4}
           align="start"
-          className="z-[60] rounded-lg border bg-[var(--color-surface-elevated)] py-1 min-w-[160px]"
+          className="z-[60] rounded-md border bg-[var(--bg-raised)] py-1 min-w-[160px]"
         >
           {(['TOFU', 'MOFU', 'BOFU'] as Audience[]).map((a) => (
             <Popover.Close
               key={a}
               onClick={() => onSave(a)}
-              className="w-full text-left px-3 h-8 text-sm hover:bg-[var(--color-surface-hover)]"
+              className="w-full text-left px-3 h-8 text-sm hover:bg-[var(--bg-hover)]"
             >
               {a}
             </Popover.Close>
@@ -550,7 +550,7 @@ function AudienceCell({
           {value && (
             <Popover.Close
               onClick={() => onSave(null)}
-              className="w-full text-left px-3 h-8 text-sm text-[var(--color-fg-muted)] hover:text-[hsl(var(--color-overdue))] hover:bg-[var(--color-surface-hover)]"
+              className="w-full text-left px-3 h-8 text-sm text-[var(--fg-dim)] hover:text-[var(--fg)] hover:bg-[var(--bg-hover)]"
             >
               Clear
             </Popover.Close>

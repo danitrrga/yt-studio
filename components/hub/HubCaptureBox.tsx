@@ -52,8 +52,8 @@ export function HubCaptureBox() {
   };
 
   return (
-    <div className="flex items-center gap-2 rounded-lg border bg-[var(--color-surface)] focus-within:border-[var(--line-strong)] transition-colors h-11 px-3">
-      <Plus className="w-4 h-4 text-[var(--color-fg-muted)] shrink-0" />
+    <div className="flex items-center gap-2 rounded-md border bg-[var(--bg-raised)] focus-within:border-[var(--line-strong)] transition-colors h-11 px-3">
+      <Plus className="w-4 h-4 text-[var(--fg-dim)] shrink-0" />
       <input
         ref={inputRef}
         value={url}
@@ -65,14 +65,14 @@ export function HubCaptureBox() {
           }
         }}
         placeholder="Paste any URL to capture inspiration…"
-        className="flex-1 h-full bg-transparent outline-none text-sm placeholder:text-[var(--color-fg-muted)]"
+        className="flex-1 h-full bg-transparent outline-none text-sm placeholder:text-[var(--fg-dim)]"
         autoComplete="off"
         spellCheck={false}
         type="url"
         disabled={busy}
       />
-      {busy && <Loader2 className="w-4 h-4 animate-spin text-[var(--color-fg-muted)]" />}
-      <kbd className="hidden md:inline-flex items-center px-1.5 h-5 rounded border text-[10px] text-[var(--color-fg-muted)] font-mono">
+      {busy && <Loader2 className="w-4 h-4 animate-spin text-[var(--fg-dim)]" />}
+      <kbd className="hidden md:inline-flex items-center px-1.5 h-5 rounded border text-[10px] text-[var(--fg-dim)] font-mono">
         N
       </kbd>
     </div>

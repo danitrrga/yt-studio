@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { EditorState, Compartment } from '@codemirror/state';
 import { EditorView, keymap, highlightActiveLine, placeholder as cmPlaceholder, drawSelection, highlightSpecialChars } from '@codemirror/view';
 import { defaultKeymap, history, historyKeymap, indentWithTab } from '@codemirror/commands';
@@ -20,7 +20,6 @@ import { mathPlugin } from './extensions/math';
 import { focusLinePlugin } from './extensions/focus-line';
 import { slashMenu } from './extensions/slash-menu';
 import { markdownKeymap } from './extensions/markdown-keymap';
-import { BubbleToolbar } from './BubbleToolbar';
 import 'katex/dist/katex.min.css';
 import { cn } from '@/lib/utils';
 
@@ -48,7 +47,6 @@ export default function CodeMirrorEditor({
   const loadingRef = useRef(false);
   const onChangeRef = useRef(onMarkdownChange);
   onChangeRef.current = onMarkdownChange;
-  const [view, setView] = useState<EditorView | null>(null);
   const { settings } = useSettings();
 
   // Mount
@@ -105,7 +103,6 @@ export default function CodeMirrorEditor({
       parent: hostRef.current,
     });
     viewRef.current = v;
-    setView(v);
 
     if (writingMode) v.dom.classList.add('cm-writing-mode');
     if (autoFocus) setTimeout(() => v.focus(), 0);
@@ -113,7 +110,6 @@ export default function CodeMirrorEditor({
     return () => {
       v.destroy();
       viewRef.current = null;
-      setView(null);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -159,13 +155,10 @@ export default function CodeMirrorEditor({
   }, [settings.tabWidth]);
 
   return (
-    <>
-      <div
-        ref={hostRef}
-        className={cn('cm-editor-root', writingMode && 'cm-writing-mode-root')}
-        style={{ fontSize: `${settings.bodyFontSize}px` }}
-      />
-      <BubbleToolbar view={view} />
-    </>
+    <div
+      ref={hostRef}
+      className={cn('cm-editor-root', writingMode && 'cm-writing-mode-root')}
+      style={{ fontSize: `${settings.bodyFontSize}px` }}
+    />
   );
 }

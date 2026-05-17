@@ -74,11 +74,11 @@ export default function SettingsPage() {
   return (
     <div className="px-8 py-6 space-y-6 max-w-[760px] mx-auto">
       <div>
-        <h1 className="text-[28px] font-semibold tracking-[-0.012em] leading-[1.2] inline-flex items-center gap-2">
-          <SettingsIcon className="w-5 h-5 text-[var(--color-fg-secondary)]" />
+        <h1 className="text-[28px] font-bold tracking-[-0.012em] leading-[1.2] inline-flex items-center gap-2">
+          <SettingsIcon className="w-5 h-5 text-[var(--fg-muted)]" />
           Settings
         </h1>
-        <p className="text-[13px] text-[var(--color-fg-muted)] mt-1">
+        <p className="text-[13px] text-[var(--fg-dim)] mt-1">
           editor preferences and app-level toggles
         </p>
       </div>
@@ -127,8 +127,8 @@ export default function SettingsPage() {
                 className={cn(
                   'inline-flex items-center gap-2 cursor-pointer text-[13px]',
                   settings.nowWorkingRule === o.value
-                    ? 'text-[var(--color-fg)]'
-                    : 'text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)]'
+                    ? 'text-[var(--fg)]'
+                    : 'text-[var(--fg-muted)] hover:text-[var(--fg)]'
                 )}
               >
                 <input
@@ -139,7 +139,7 @@ export default function SettingsPage() {
                   className="accent-[var(--fg)]"
                 />
                 <span>{o.label}</span>
-                <span className="text-[11px] text-[var(--color-fg-muted)]">— {o.hint}</span>
+                <span className="text-[11px] text-[var(--fg-dim)]">— {o.hint}</span>
               </label>
             ))}
           </div>
@@ -152,7 +152,7 @@ export default function SettingsPage() {
         </SettingRow>
       </Section>
 
-      <p className="text-[11px] text-[var(--color-fg-muted)]">
+      <p className="text-[11px] text-[var(--fg-dim)]">
         settings persist locally in this browser only. no server sync.
       </p>
     </div>
@@ -212,33 +212,33 @@ function VaultSection() {
               }}
               disabled={saving || isLoading}
               spellCheck={false}
-              className="flex-1 h-8 px-2.5 rounded-md border bg-[var(--color-surface-elevated)] text-[12px] font-mono outline-none disabled:opacity-50"
+              className="flex-1 h-8 px-2.5 rounded-md border bg-[var(--bg-raised)] text-[12px] font-mono outline-none disabled:opacity-50"
               placeholder="/vault"
             />
             <button
               onClick={save}
               disabled={!dirty || saving}
-              className="inline-flex items-center gap-1 h-8 px-3 rounded-md bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] text-[12px] font-medium hover:bg-[var(--color-button-primary-hover)] disabled:opacity-40 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-1 h-8 px-3 rounded-md bg-[var(--fg)] text-[var(--fg-inverse)] text-[12px] font-medium hover:bg-[var(--fg)] disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : null}
               Save
             </button>
           </div>
           {data && !dirty && (
-            <div className="flex items-center gap-1 text-[11px] text-[var(--color-fg-muted)]">
+            <div className="flex items-center gap-1 text-[11px] text-[var(--fg-dim)]">
               {data.exists && data.hasStructure ? (
                 <>
-                  <Check className="w-3 h-3 text-[hsl(var(--status-published))]" />
+                  <Check className="w-3 h-3 text-[var(--status-published-color)]" />
                   Path exists, structure detected
                 </>
               ) : data.exists ? (
                 <>
-                  <AlertCircle className="w-3 h-3 text-[var(--color-warning)]" />
+                  <AlertCircle className="w-3 h-3 text-[var(--status-warn-color)]" />
                   Path exists; missing subdirs will be created on save
                 </>
               ) : (
                 <>
-                  <AlertCircle className="w-3 h-3 text-[var(--color-warning)]" />
+                  <AlertCircle className="w-3 h-3 text-[var(--status-warn-color)]" />
                   Path does not exist yet — will be created on save
                 </>
               )}
@@ -252,8 +252,8 @@ function VaultSection() {
 
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-lg border bg-[var(--color-surface)] divide-y divide-[var(--color-border-subtle)]">
-      <header className="px-4 h-10 flex items-center font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--color-fg-muted)]">
+    <section className="rounded-md border bg-[var(--bg-raised)] divide-y divide-[var(--line-faint)]">
+      <header className="px-4 h-10 flex items-center font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--fg-dim)]">
         {label}
       </header>
       {children}
@@ -273,8 +273,8 @@ function SettingRow({
   return (
     <div className="px-4 py-4 flex items-start justify-between gap-6">
       <div className="min-w-0 flex-1">
-        <div className="text-[13px] font-medium text-[var(--color-fg)]">{label}</div>
-        {hint && <div className="text-[12px] text-[var(--color-fg-muted)] mt-1 leading-snug">{hint}</div>}
+        <div className="text-[13px] font-medium text-[var(--fg)]">{label}</div>
+        {hint && <div className="text-[12px] text-[var(--fg-dim)] mt-1 leading-snug">{hint}</div>}
       </div>
       <div className="shrink-0">{children}</div>
     </div>
@@ -299,8 +299,8 @@ function Segmented<T extends string | number>({
           className={cn(
             'px-3 h-8 transition-colors tabular-nums',
             value === o.value
-              ? 'bg-[var(--fg)] text-black'
-              : 'bg-[var(--color-surface)] text-[var(--color-fg-secondary)] hover:bg-[var(--color-surface-hover)]'
+              ? 'bg-[var(--fg)] text-[var(--fg-inverse)]'
+              : 'bg-[var(--bg-raised)] text-[var(--fg-muted)] hover:bg-[var(--bg-hover)]'
           )}
         >
           {o.label}
@@ -323,7 +323,7 @@ function Select<T extends string>({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value as T)}
-      className="h-8 px-2 rounded-md border bg-[var(--color-surface-elevated)] text-[13px] outline-none min-w-[160px]"
+      className="h-8 px-2 rounded-md border bg-[var(--bg-raised)] text-[13px] outline-none min-w-[160px]"
     >
       {options.map((o) => (
         <option key={o.value} value={o.value}>

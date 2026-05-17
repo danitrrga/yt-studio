@@ -31,7 +31,7 @@ export function Tooltip({
           side={side}
           sideOffset={8}
           className={cn(
-            'z-50 rounded-md border bg-[var(--color-surface-elevated)] px-2 py-1 text-xs text-[var(--color-fg)]',
+            'z-50 rounded-md border bg-[var(--bg-raised)] px-2 py-1 text-xs text-[var(--fg)]',
             className
           )}
         >

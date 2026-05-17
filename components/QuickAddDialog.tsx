@@ -169,16 +169,16 @@ export function QuickAddDialog() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.15 }}
-                className="fixed left-1/2 top-[20vh] -translate-x-1/2 z-[56] w-[min(480px,92vw)] rounded-xl border bg-[var(--color-surface-elevated)]"
+                className="fixed left-1/2 top-[20vh] -translate-x-1/2 z-[56] w-[min(480px,92vw)] rounded-md border bg-[var(--bg-raised)]"
               >
                 <div className="flex items-center justify-between px-5 h-12 border-b">
-                  <Dialog.Title className="text-sm font-semibold inline-flex items-center gap-2">
+                  <Dialog.Title className="text-sm font-medium inline-flex items-center gap-2">
                     <Plus className="w-3.5 h-3.5" />
                     New video
                   </Dialog.Title>
                   <button
                     onClick={() => setQuickAddOpen(false)}
-                    className="p-1.5 rounded hover:bg-[var(--color-surface-hover)] text-[var(--color-fg-secondary)]"
+                    className="p-1.5 rounded hover:bg-[var(--bg-hover)] text-[var(--fg-muted)]"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -196,7 +196,7 @@ export function QuickAddDialog() {
                         }
                       }}
                       placeholder="How to break bad cycles"
-                      className="w-full h-9 px-3 rounded-md border bg-[var(--color-surface)] text-sm outline-none"
+                      className="w-full h-9 px-3 rounded-md border bg-[var(--bg-raised)] text-sm outline-none"
                     />
                   </Field>
                   <Field label="Slug" hint="Filename — a-z, 0-9, hyphens">
@@ -214,19 +214,19 @@ export function QuickAddDialog() {
                       }}
                       placeholder="how-to-break-bad-cycles"
                       className={cn(
-                        'w-full h-9 px-3 rounded-md border bg-[var(--color-surface)] text-sm outline-none focus:ring-1 font-mono',
+                        'w-full h-9 px-3 rounded-md border bg-[var(--bg-raised)] text-sm outline-none focus:ring-1 font-mono',
                         collision
-                          ? 'border-[hsl(var(--color-overdue))] focus:ring-[hsl(var(--color-overdue))]'
+                          ? 'border-[var(--red)] focus:ring-[var(--red)]'
                           : ''
                       )}
                     />
                     {collision && existingTitle && (
-                      <div className="mt-1.5 flex items-center gap-1.5 text-xs text-[hsl(var(--color-overdue))]">
+                      <div className="mt-1.5 flex items-center gap-1.5 text-xs text-[var(--red)]">
                         <AlertCircle className="w-3 h-3 shrink-0" />
                         <span>Already exists —</span>
                         <Link
                           href={`/videos/${slug}`}
-                          className="underline hover:text-[var(--color-fg)]"
+                          className="underline hover:text-[var(--fg)]"
                           onClick={() => setQuickAddOpen(false)}
                         >
                           {existingTitle}
@@ -238,7 +238,7 @@ export function QuickAddDialog() {
                   <button
                     type="button"
                     onClick={toggleMore}
-                    className="inline-flex items-center gap-1 text-[11px] uppercase tracking-wider text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors"
+                    className="inline-flex items-center gap-1 text-[11px] uppercase tracking-wider text-[var(--fg-dim)] hover:text-[var(--fg)] transition-colors"
                   >
                     <ChevronDown
                       className={cn(
@@ -264,7 +264,7 @@ export function QuickAddDialog() {
                             type="date"
                             value={target}
                             onChange={(e) => setTarget(e.target.value)}
-                            className="w-full h-9 px-3 rounded-md border bg-[var(--color-surface)] text-sm outline-none"
+                            className="w-full h-9 px-3 rounded-md border bg-[var(--bg-raised)] text-sm outline-none"
                           />
                         </Field>
                         <Field label="Category" hint="Optional">
@@ -272,7 +272,7 @@ export function QuickAddDialog() {
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
                             placeholder="Productivity"
-                            className="w-full h-9 px-3 rounded-md border bg-[var(--color-surface)] text-sm outline-none"
+                            className="w-full h-9 px-3 rounded-md border bg-[var(--bg-raised)] text-sm outline-none"
                           />
                         </Field>
                         <Field label="Tags" hint="Comma-separated">
@@ -280,7 +280,7 @@ export function QuickAddDialog() {
                             value={tagsInput}
                             onChange={(e) => setTagsInput(e.target.value)}
                             placeholder="productivity, habits"
-                            className="w-full h-9 px-3 rounded-md border bg-[var(--color-surface)] text-sm outline-none"
+                            className="w-full h-9 px-3 rounded-md border bg-[var(--bg-raised)] text-sm outline-none"
                           />
                         </Field>
                       </motion.div>
@@ -288,12 +288,12 @@ export function QuickAddDialog() {
                   </AnimatePresence>
                 </div>
 
-                <div className="flex items-center justify-between px-5 h-12 border-t text-xs text-[var(--color-fg-muted)]">
+                <div className="flex items-center justify-between px-5 h-12 border-t text-xs text-[var(--fg-dim)]">
                   <span className="flex items-center gap-1.5">
-                    <kbd className="px-1.5 py-0.5 rounded border bg-[var(--color-surface)] text-[10px] font-mono">↵</kbd>
+                    <kbd className="px-1.5 py-0.5 rounded border bg-[var(--bg-raised)] text-[10px] font-mono">↵</kbd>
                     create
-                    <span className="text-[var(--color-border)]">·</span>
-                    <kbd className="px-1.5 py-0.5 rounded border bg-[var(--color-surface)] text-[10px] font-mono">⇧↵</kbd>
+                    <span className="text-[var(--line)]">·</span>
+                    <kbd className="px-1.5 py-0.5 rounded border bg-[var(--bg-raised)] text-[10px] font-mono">⇧↵</kbd>
                     create &amp; write
                   </span>
                   <button
@@ -302,8 +302,8 @@ export function QuickAddDialog() {
                     className={cn(
                       'px-3 h-7 rounded text-xs font-medium transition-colors',
                       canSubmit
-                        ? 'bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] hover:bg-[var(--color-button-primary-hover)]'
-                        : 'bg-[var(--color-surface)] text-[var(--color-fg-muted)] cursor-not-allowed'
+                        ? 'bg-[var(--fg)] text-[var(--fg-inverse)] hover:bg-[var(--fg)]'
+                        : 'bg-[var(--bg-raised)] text-[var(--fg-dim)] cursor-not-allowed'
                     )}
                   >
                     {submitting ? 'Creating…' : 'Create'}
@@ -322,10 +322,10 @@ function Field({ label, hint, children }: { label: string; hint?: string; childr
   return (
     <label className="block">
       <div className="flex items-center justify-between mb-1.5">
-        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)]">
+        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)]">
           {label}
         </span>
-        {hint && <span className="text-[11px] text-[var(--color-fg-muted)]">{hint}</span>}
+        {hint && <span className="text-[11px] text-[var(--fg-dim)]">{hint}</span>}
       </div>
       {children}
     </label>

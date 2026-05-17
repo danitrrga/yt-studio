@@ -25,17 +25,17 @@ export function FilterPill({
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
-      <div className="inline-flex items-center h-7 rounded-md border bg-[var(--color-surface)] text-xs">
+      <div className="inline-flex items-center h-7 rounded-md border bg-[var(--bg-raised)] text-xs">
         <Popover.Trigger asChild>
-          <button className="flex items-center gap-1.5 px-2 h-full hover:bg-[var(--color-surface-hover)] rounded-l-md outline-none">
-            <span className="font-medium text-[var(--color-fg)]">{meta.label}</span>
-            <span className="text-[var(--color-fg-muted)]">{OP_LABELS[condition.op]}</span>
+          <button className="flex items-center gap-1.5 px-2 h-full hover:bg-[var(--bg-hover)] rounded-l-md outline-none">
+            <span className="font-medium text-[var(--fg)]">{meta.label}</span>
+            <span className="text-[var(--fg-dim)]">{OP_LABELS[condition.op]}</span>
             {valueLabel && <span className="text-[var(--fg)] truncate max-w-[200px]">{valueLabel}</span>}
           </button>
         </Popover.Trigger>
         <button
           onClick={() => viewStore.removeCondition(condition.id)}
-          className="flex items-center justify-center w-6 h-full border-l border-[var(--color-border-subtle)] text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] hover:bg-[var(--color-surface-hover)] rounded-r-md"
+          className="flex items-center justify-center w-6 h-full border-l border-[var(--line-faint)] text-[var(--fg-dim)] hover:text-[var(--fg)] hover:bg-[var(--bg-hover)] rounded-r-md"
           aria-label="Remove filter"
         >
           <X className="w-3 h-3" />
@@ -46,7 +46,7 @@ export function FilterPill({
           sideOffset={6}
           align="start"
           className={cn(
-            'z-50 w-[260px] rounded-md border bg-[var(--color-surface-elevated)] overflow-hidden'
+            'z-50 w-[260px] rounded-md border bg-[var(--bg-raised)] overflow-hidden'
           )}
         >
           <FilterPopover

@@ -73,11 +73,11 @@ export function HubCard({ clip }: { clip: HubClipSummary }) {
         }
       }}
       className={cn(
-        'group rounded-lg border bg-[var(--color-surface)] hover:bg-[var(--color-surface-hover)] transition-colors overflow-hidden flex flex-col',
+        'group rounded-md border bg-[var(--bg-raised)] hover:bg-[var(--bg-hover)] transition-colors overflow-hidden flex flex-col',
         isArchived && 'opacity-55 hover:opacity-90'
       )}
     >
-      <div className="aspect-video bg-[var(--color-surface-elevated)] relative overflow-hidden">
+      <div className="aspect-video bg-[var(--bg-raised)] relative overflow-hidden">
         {thumbUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -87,13 +87,13 @@ export function HubCard({ clip }: { clip: HubClipSummary }) {
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-[var(--color-fg-muted)]">
+          <div className="w-full h-full flex items-center justify-center text-[var(--fg-dim)]">
             <Icon className="w-10 h-10" />
           </div>
         )}
         {isNew && (
           <span
-            className="absolute top-2 left-2 inline-flex items-center gap-1 px-1.5 h-5 rounded text-[10px] font-medium bg-[var(--fg)] text-black"
+            className="absolute top-2 left-2 inline-flex items-center gap-1 px-1.5 h-5 rounded text-[10px] font-medium bg-[var(--fg)] text-[var(--fg-inverse)]"
             title="New — unread"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-black/70" />
@@ -119,7 +119,7 @@ export function HubCard({ clip }: { clip: HubClipSummary }) {
         </div>
       </div>
       <div className="p-3 flex-1 flex flex-col gap-1.5">
-        <div className="flex items-center gap-1.5 text-[11px] text-[var(--color-fg-muted)]">
+        <div className="flex items-center gap-1.5 text-[11px] text-[var(--fg-dim)]">
           <Icon className="w-3.5 h-3.5" />
           <span className="truncate">{hostFrom(clip.frontmatter.url)}</span>
           <a
@@ -127,17 +127,17 @@ export function HubCard({ clip }: { clip: HubClipSummary }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="ml-auto opacity-0 group-hover:opacity-100 hover:text-[var(--color-fg)]"
+            className="ml-auto opacity-0 group-hover:opacity-100 hover:text-[var(--fg)]"
             aria-label="Open URL"
           >
             <ExternalLink className="w-3 h-3" />
           </a>
         </div>
-        <div className="text-sm font-medium line-clamp-2 leading-snug text-[var(--color-fg)]">
+        <div className="text-sm font-medium line-clamp-2 leading-snug text-[var(--fg)]">
           {clip.frontmatter.title || clip.frontmatter.url}
         </div>
         {clip.frontmatter.description && (
-          <div className="text-[11px] text-[var(--color-fg-muted)] line-clamp-2 leading-snug">
+          <div className="text-[11px] text-[var(--fg-dim)] line-clamp-2 leading-snug">
             {clip.frontmatter.description}
           </div>
         )}
@@ -145,13 +145,13 @@ export function HubCard({ clip }: { clip: HubClipSummary }) {
           {clip.frontmatter.tags.slice(0, 3).map((t) => (
             <span
               key={t}
-              className="text-[10px] px-1.5 py-0.5 rounded bg-[var(--color-surface-elevated)] text-[var(--color-fg-secondary)]"
+              className="text-[10px] px-1.5 py-0.5 rounded bg-[var(--bg-raised)] text-[var(--fg-muted)]"
             >
               #{t}
             </span>
           ))}
           {linkCount > 0 && (
-            <span className="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-[hsl(var(--status-scripting)/0.15)] text-[hsl(var(--status-scripting))] inline-flex items-center gap-1">
+            <span className="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-[var(--status-scripting-tint)] text-[var(--status-scripting-color)] inline-flex items-center gap-1">
               <Link2 className="w-2.5 h-2.5" />
               {linkCount}
             </span>

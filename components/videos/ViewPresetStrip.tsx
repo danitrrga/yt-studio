@@ -41,7 +41,7 @@ export function ViewPresetStrip() {
 
   return (
     <div className="flex items-center gap-1.5 overflow-x-auto -mx-1 px-1 pb-0.5 scrollbar-thin">
-      <span className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-muted)] mr-1 shrink-0">
+      <span className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-wider text-[var(--fg-dim)] mr-1 shrink-0">
         <Sparkles className="w-3 h-3" />
         Quick views
       </span>
@@ -50,7 +50,7 @@ export function ViewPresetStrip() {
       ))}
       {saved.length > 0 && (
         <>
-          <span className="h-4 w-px bg-[var(--color-border-subtle)] mx-1 shrink-0" />
+          <span className="h-4 w-px bg-[var(--line-faint)] mx-1 shrink-0" />
           {saved.map((v) => (
             <PresetPill key={v.id} view={v} onClick={() => apply(v)} muted />
           ))}
@@ -79,11 +79,11 @@ function PresetPill({
         'inline-flex items-center gap-1.5 h-7 px-2.5 rounded-md border text-xs whitespace-nowrap shrink-0',
         'transition-colors',
         muted
-          ? 'text-[var(--color-fg-secondary)] hover:bg-[var(--color-surface-hover)]'
-          : 'text-[var(--color-fg)] bg-[var(--color-surface)] hover:bg-[var(--color-surface-hover)]'
+          ? 'text-[var(--fg-muted)] hover:bg-[var(--bg-hover)]'
+          : 'text-[var(--fg)] bg-[var(--bg-raised)] hover:bg-[var(--bg-hover)]'
       )}
     >
-      <Icon className="w-3 h-3 text-[var(--color-fg-muted)]" />
+      <Icon className="w-3 h-3 text-[var(--fg-dim)]" />
       {view.name}
     </button>
   );

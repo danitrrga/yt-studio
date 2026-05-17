@@ -99,7 +99,7 @@ export function NumberInput({
   return (
     <div
       className={cn(
-        'inline-flex items-stretch h-8 rounded-md border bg-[var(--color-surface-elevated)]',
+        'inline-flex items-stretch h-8 rounded-md border bg-[var(--bg-raised)]',
         'focus-within:ring-1',
         'transition-colors',
         disabled && 'opacity-50 pointer-events-none',
@@ -119,10 +119,10 @@ export function NumberInput({
         className={cn(
           width,
           'bg-transparent outline-none text-[13px] text-right tabular-nums px-2',
-          'placeholder:text-[var(--color-fg-muted)]'
+          'placeholder:text-[var(--fg-dim)]'
         )}
       />
-      <div className="flex flex-col border-l border-[var(--color-border-subtle)]">
+      <div className="flex flex-col border-l border-[var(--line-faint)]">
         <Stepper
           dir={1}
           disabled={disabled || atMax}
@@ -172,11 +172,11 @@ function Stepper({
       disabled={disabled}
       aria-label={dir === 1 ? 'Increment' : 'Decrement'}
       className={cn(
-        'flex-1 w-5 inline-flex items-center justify-center text-[var(--color-fg-muted)]',
-        'hover:text-[var(--color-fg)] hover:bg-[var(--color-surface-hover)]',
+        'flex-1 w-5 inline-flex items-center justify-center text-[var(--fg-dim)]',
+        'hover:text-[var(--fg)] hover:bg-[var(--bg-hover)]',
         'transition-colors first:rounded-tr-md last:rounded-br-md',
-        'border-b border-[var(--color-border-subtle)] last:border-b-0',
-        disabled && 'opacity-40 cursor-not-allowed hover:bg-transparent hover:text-[var(--color-fg-muted)]'
+        'border-b border-[var(--line-faint)] last:border-b-0',
+        disabled && 'opacity-40 cursor-not-allowed hover:bg-transparent hover:text-[var(--fg-dim)]'
       )}
     >
       {children}

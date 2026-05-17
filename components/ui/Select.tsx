@@ -16,7 +16,7 @@ export function SelectTrigger({
     <SelectPrimitive.Trigger
       {...props}
       className={cn(
-        'flex items-center justify-between gap-2 h-8 px-2.5 rounded-md border bg-[var(--color-surface)] text-sm text-[var(--color-fg)] hover:bg-[var(--color-surface-hover)] transition-colors outline-none',
+        'flex items-center justify-between gap-2 h-8 px-2.5 rounded-md border bg-[var(--bg-raised)] text-sm text-[var(--fg)] hover:bg-[var(--bg-hover)] transition-colors outline-none',
         className
       )}
     >
@@ -40,7 +40,7 @@ export function SelectContent({
         position="popper"
         sideOffset={4}
         className={cn(
-          'z-50 min-w-[160px] rounded-md border bg-[var(--color-surface-elevated)] overflow-hidden p-1',
+          'z-50 min-w-[160px] rounded-md border bg-[var(--bg-raised)] overflow-hidden p-1',
           className
         )}
       >
@@ -59,7 +59,7 @@ export function SelectItem({
     <SelectPrimitive.Item
       {...props}
       className={cn(
-        'relative flex items-center gap-2 px-2 py-1.5 rounded text-sm cursor-pointer outline-none hover:bg-[var(--color-surface-hover)] data-[state=checked]:text-[var(--fg)]',
+        'relative flex items-center gap-2 px-2 py-1.5 rounded text-sm cursor-pointer outline-none hover:bg-[var(--bg-hover)] data-[state=checked]:text-[var(--fg)]',
         className
       )}
     >

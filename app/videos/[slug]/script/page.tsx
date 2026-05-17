@@ -60,7 +60,7 @@ export default function VideoScriptPage({
 
   if (!video) {
     return (
-      <div className="h-full flex items-center justify-center text-sm text-[var(--color-fg-muted)]">
+      <div className="h-full flex items-center justify-center text-sm text-[var(--fg-dim)]">
         Loading...
       </div>
     );
@@ -80,19 +80,19 @@ export default function VideoScriptPage({
       )}
     >
       {!writingMode && (
-        <div className="h-10 shrink-0 border-b flex items-center justify-between px-5 text-[12px] bg-[var(--color-surface)]">
+        <div className="h-10 shrink-0 border-b flex items-center justify-between px-5 text-[12px] bg-[var(--bg-raised)]">
           <Link
             href={`/videos/${slug}`}
-            className="inline-flex items-center gap-1.5 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+            className="inline-flex items-center gap-1.5 text-[var(--fg-dim)] hover:text-[var(--fg)]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Dashboard
           </Link>
-          <span className="text-[var(--color-fg-secondary)] truncate mx-4">
+          <span className="text-[var(--fg-muted)] truncate mx-4">
             {video.frontmatter.title || video.slug}
           </span>
           <div className="flex items-center gap-3">
-            <span className="text-[var(--color-fg-muted)] tabular-nums">
+            <span className="text-[var(--fg-dim)] tabular-nums">
               {saveState === 'clean' && 'Saved'}
               {saveState === 'dirty' && 'Editing…'}
               {saveState === 'saving' && 'Saving…'}
@@ -101,7 +101,7 @@ export default function VideoScriptPage({
             </span>
             <button
               onClick={toggleWritingMode}
-              className="inline-flex items-center gap-1.5 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+              className="inline-flex items-center gap-1.5 text-[var(--fg-dim)] hover:text-[var(--fg)]"
               title="Focus (W)"
             >
               <Maximize2 className="w-3.5 h-3.5" />
@@ -130,7 +130,7 @@ export default function VideoScriptPage({
                   if (e.key === 'Enter') (e.target as HTMLInputElement).blur();
                 }}
                 placeholder="Untitled video"
-                className="w-full bg-transparent outline-none font-semibold tracking-[-0.012em] text-[28px] leading-[1.2] focus:bg-[var(--color-surface-hover)] rounded px-1 -mx-1 py-1"
+                className="w-full bg-transparent outline-none font-bold tracking-[-0.012em] text-[28px] leading-[1.2] focus:bg-[var(--bg-hover)] rounded px-1 -mx-1 py-1"
               />
               <PropStrip video={video} onMutate={mutate} />
             </>
@@ -152,13 +152,13 @@ export default function VideoScriptPage({
       </div>
 
       {!writingMode && (
-        <footer className="h-10 shrink-0 border-t flex items-center justify-between px-6 text-xs text-[var(--color-fg-muted)] bg-[var(--color-surface)]">
+        <footer className="h-10 shrink-0 border-t flex items-center justify-between px-6 text-xs text-[var(--fg-dim)] bg-[var(--bg-raised)]">
           <WordCount body={liveBody} />
           <div className="flex items-center gap-3">
-            <kbd className="px-1.5 py-0.5 rounded border bg-[var(--color-surface-elevated)] text-[10px]">W</kbd>
+            <kbd className="px-1.5 py-0.5 rounded border bg-[var(--bg-raised)] text-[10px]">W</kbd>
             <span>Focus</span>
-            <span className="text-[var(--color-border)]">·</span>
-            <kbd className="px-1.5 py-0.5 rounded border bg-[var(--color-surface-elevated)] text-[10px]">Esc</kbd>
+            <span className="text-[var(--line)]">·</span>
+            <kbd className="px-1.5 py-0.5 rounded border bg-[var(--bg-raised)] text-[10px]">Esc</kbd>
             <span>Dashboard</span>
           </div>
         </footer>
@@ -173,8 +173,8 @@ function MinimalWritingBar({ saveState }: { saveState: SaveState }) {
   const { toggleWritingMode } = useUI();
   return (
     <div className="h-10 shrink-0 flex items-center justify-between px-4 text-xs">
-      <span className="text-[var(--color-fg-muted)]">Focus mode</span>
-      <div className="flex items-center gap-3 text-[var(--color-fg-muted)]">
+      <span className="text-[var(--fg-dim)]">Focus mode</span>
+      <div className="flex items-center gap-3 text-[var(--fg-dim)]">
         <span>
           {saveState === 'dirty' && 'Editing...'}
           {saveState === 'saving' && 'Saving...'}
@@ -184,7 +184,7 @@ function MinimalWritingBar({ saveState }: { saveState: SaveState }) {
         </span>
         <button
           onClick={toggleWritingMode}
-          className="hover:text-[var(--color-fg)]"
+          className="hover:text-[var(--fg)]"
         >
           Exit focus (Esc)
         </button>
@@ -199,11 +199,11 @@ function WritingModeFooter({ body, saveState }: { body: string; saveState: SaveS
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3 bg-[var(--color-surface-elevated)] border rounded-full px-4 py-1.5 text-xs text-[var(--color-fg-muted)]"
+      className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3 bg-[var(--bg-raised)] border rounded-full px-4 py-1.5 text-xs text-[var(--fg-dim)]"
     >
       <WordCount body={body} />
-      <span className="text-[var(--color-border)]">·</span>
-      <span className={saveState === 'clean' ? 'text-[hsl(var(--status-published))]' : ''}>
+      <span className="text-[var(--line)]">·</span>
+      <span className={saveState === 'clean' ? 'text-[var(--status-published-color)]' : ''}>
         {saveState === 'dirty' && '...'}
         {saveState === 'saving' && 'Saving'}
         {saveState === 'clean' && 'Saved'}

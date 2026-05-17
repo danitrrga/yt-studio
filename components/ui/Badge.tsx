@@ -9,11 +9,12 @@ export function Badge({
   className?: string;
   colorVar?: string;
 }) {
+  // colorVar is expected to be a --status-X-color token; derive tint from solid color
   const style = colorVar
     ? {
-        backgroundColor: `hsl(var(${colorVar}) / 0.15)`,
-        color: `hsl(var(${colorVar}))`,
-        borderColor: `hsl(var(${colorVar}) / 0.3)`,
+        backgroundColor: `color-mix(in srgb, var(${colorVar}) 15%, transparent)`,
+        color: `var(${colorVar})`,
+        borderColor: `color-mix(in srgb, var(${colorVar}) 30%, transparent)`,
       }
     : undefined;
   return (

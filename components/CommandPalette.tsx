@@ -22,7 +22,7 @@ import { useVideos } from '@/hooks/use-videos';
 import { useGlobalSearch } from '@/hooks/use-search';
 import { useMRU, type MRUEntry } from '@/hooks/use-mru';
 import { useUI } from './UIProvider';
-import { STATUS_LABELS, STATUS_COLOR_VAR } from '@/lib/status';
+import { STATUS_LABELS, STATUS_SOLID_VAR } from '@/lib/status';
 import { cn } from '@/lib/utils';
 import './command-palette.css';
 
@@ -43,7 +43,7 @@ function Snippet({ text, query }: { text: string; query: string }) {
   const idx = text.toLowerCase().indexOf(query.toLowerCase());
   if (idx === -1) return <span>{text}</span>;
   return (
-    <span className="text-[11px] text-[var(--color-fg-muted)] leading-snug">
+    <span className="text-[11px] text-[var(--fg-dim)] leading-snug">
       {text.slice(0, idx)}
       <mark className="bg-[var(--bg-selected)] text-[var(--fg)] rounded-sm px-0.5">
         {text.slice(idx, idx + query.length)}
@@ -104,28 +104,28 @@ export function CommandPalette() {
           >
             <Command
               label="Command palette"
-              className="rounded-lg border bg-[var(--color-surface-elevated)] overflow-hidden"
+              className="rounded-md border bg-[var(--bg-raised)] overflow-hidden"
             >
               <div className="flex items-center gap-2 border-b px-3 h-11">
                 {isSearching ? (
-                  <Loader2 className="w-4 h-4 text-[var(--color-fg-muted)] animate-spin" />
+                  <Loader2 className="w-4 h-4 text-[var(--fg-dim)] animate-spin" />
                 ) : (
-                  <Search className="w-4 h-4 text-[var(--color-fg-muted)]" />
+                  <Search className="w-4 h-4 text-[var(--fg-dim)]" />
                 )}
                 <Command.Input
                   autoFocus
                   placeholder="search videos, clips, docs, or jump to…"
                   value={search}
                   onValueChange={setSearch}
-                  className="flex-1 bg-transparent outline-none text-[13px] text-[var(--color-fg)] placeholder:text-[var(--color-fg-muted)]"
+                  className="flex-1 bg-transparent outline-none text-[13px] text-[var(--fg)] placeholder:text-[var(--fg-dim)]"
                 />
-                <kbd className="px-1.5 py-0.5 rounded border bg-[var(--color-surface)] text-[10px] font-mono text-[var(--color-fg-muted)]">
+                <kbd className="px-1.5 py-0.5 rounded border bg-[var(--bg-raised)] text-[10px] font-mono text-[var(--fg-dim)]">
                   Esc
                 </kbd>
               </div>
 
               <Command.List className="max-h-[50vh] overflow-y-auto p-1.5">
-                <Command.Empty className="px-3 py-8 text-center text-[13px] text-[var(--color-fg-muted)]">
+                <Command.Empty className="px-3 py-8 text-center text-[13px] text-[var(--fg-dim)]">
                   {isSearching ? 'searching…' : 'no matches.'}
                 </Command.Empty>
 
@@ -141,10 +141,10 @@ export function CommandPalette() {
                           onSelect={() => go(hrefFor(entry))}
                           className="command-item"
                         >
-                          <Clock className="w-3 h-3 text-[var(--color-fg-muted)] shrink-0" />
-                          <Icon className="w-3.5 h-3.5 text-[var(--color-fg-secondary)] shrink-0" />
+                          <Clock className="w-3 h-3 text-[var(--fg-dim)] shrink-0" />
+                          <Icon className="w-3.5 h-3.5 text-[var(--fg-muted)] shrink-0" />
                           <span className="flex-1 truncate text-[13px]">{entry.title || entry.slug}</span>
-                          <span className="text-[10px] text-[var(--color-fg-muted)]">{entry.type}</span>
+                          <span className="text-[10px] text-[var(--fg-dim)]">{entry.type}</span>
                         </Command.Item>
                       );
                     })}
@@ -180,7 +180,7 @@ export function CommandPalette() {
                     {results.videos.length > 0 && (
                       <Command.Group heading={`Videos · ${results.videos.length}`} className="command-group">
                         {results.videos.map((v) => {
-                          const color = STATUS_COLOR_VAR[v.status as keyof typeof STATUS_COLOR_VAR] ?? STATUS_COLOR_VAR.idea;
+                          const solidVar = STATUS_SOLID_VAR[v.status] ?? STATUS_SOLID_VAR.idea;
                           return (
                             <Command.Item
                               key={`sv-${v.slug}`}
@@ -190,7 +190,7 @@ export function CommandPalette() {
                             >
                               <span
                                 className="w-1.5 h-1.5 rounded-full shrink-0"
-                                style={{ background: `hsl(var(${color}))` }}
+                                style={{ background: `var(${solidVar})` }}
                               />
                               <div className="flex-1 min-w-0">
                                 <div className="text-[13px] truncate">{v.title || v.slug}</div>
@@ -198,8 +198,8 @@ export function CommandPalette() {
                                   <Snippet text={v.snippet} query={results.query} />
                                 )}
                               </div>
-                              <span className="text-[10px] text-[var(--color-fg-muted)] shrink-0">
-                                {v.matchField === 'body' ? 'in script' : STATUS_LABELS[v.status as keyof typeof STATUS_LABELS] ?? v.status}
+                              <span className="text-[10px] text-[var(--fg-dim)] shrink-0">
+                                {v.matchField === 'body' ? 'in script' : STATUS_LABELS[v.status] ?? v.status}
                               </span>
                             </Command.Item>
                           );
@@ -216,14 +216,14 @@ export function CommandPalette() {
                             onSelect={() => go(`/hub/${c.slug}`)}
                             className="command-item"
                           >
-                            <Library className="w-3.5 h-3.5 text-[var(--color-fg-secondary)] shrink-0" />
+                            <Library className="w-3.5 h-3.5 text-[var(--fg-muted)] shrink-0" />
                             <div className="flex-1 min-w-0">
                               <div className="text-[13px] truncate">{c.title || c.slug}</div>
                               {c.matchField === 'body' && (
                                 <Snippet text={c.snippet} query={results.query} />
                               )}
                             </div>
-                            <span className="text-[10px] text-[var(--color-fg-muted)] shrink-0">
+                            <span className="text-[10px] text-[var(--fg-dim)] shrink-0">
                               {c.source}
                             </span>
                           </Command.Item>
@@ -240,7 +240,7 @@ export function CommandPalette() {
                             onSelect={() => go(`/hub/docs/${d.slug}`)}
                             className="command-item"
                           >
-                            <FileText className="w-3.5 h-3.5 text-[var(--color-fg-secondary)] shrink-0" />
+                            <FileText className="w-3.5 h-3.5 text-[var(--fg-muted)] shrink-0" />
                             <div className="flex-1 min-w-0">
                               <div className="text-[13px] truncate">{d.title || d.slug}</div>
                               {d.matchField === 'body' && (
@@ -258,7 +258,7 @@ export function CommandPalette() {
                 {!isDeepSearch && videos && videos.length > 0 && (
                   <Command.Group heading={`Videos · ${videos.length}`} className="command-group">
                     {videos.slice(0, 12).map((v) => {
-                      const color = STATUS_COLOR_VAR[v.frontmatter.status];
+                      const solidVar = STATUS_SOLID_VAR[v.frontmatter.status];
                       return (
                         <Command.Item
                           key={v.slug}
@@ -268,12 +268,12 @@ export function CommandPalette() {
                         >
                           <span
                             className="w-1.5 h-1.5 rounded-full shrink-0"
-                            style={{ background: `hsl(var(${color}))` }}
+                            style={{ background: `var(${solidVar})` }}
                           />
                           <span className="flex-1 truncate text-[13px]">
                             {v.frontmatter.title || v.slug}
                           </span>
-                          <span className="text-[10px] text-[var(--color-fg-muted)]">
+                          <span className="text-[10px] text-[var(--fg-dim)]">
                             {STATUS_LABELS[v.frontmatter.status]}
                           </span>
                         </Command.Item>
@@ -303,7 +303,7 @@ function NavItem({
 }) {
   return (
     <Command.Item value={label} onSelect={onSelect} className="command-item">
-      <Icon className="w-3.5 h-3.5 text-[var(--color-fg-secondary)] shrink-0" />
+      <Icon className="w-3.5 h-3.5 text-[var(--fg-muted)] shrink-0" />
       <span className="flex-1 text-[13px]">{label}</span>
       {kbd && (
         <span className="flex items-center gap-0.5">
@@ -311,8 +311,8 @@ function NavItem({
             <kbd
               key={i}
               className={cn(
-                'px-1.5 py-0.5 rounded border bg-[var(--color-surface)]',
-                'text-[10px] font-mono text-[var(--color-fg-muted)]'
+                'px-1.5 py-0.5 rounded border bg-[var(--bg-raised)]',
+                'text-[10px] font-mono text-[var(--fg-dim)]'
               )}
             >
               {k}

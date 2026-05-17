@@ -5,17 +5,17 @@ import { cn } from '@/lib/utils';
 type Tone = 'neutral' | 'good' | 'warn' | 'bad';
 
 const TONE_TEXT: Record<Tone, string> = {
-  neutral: 'text-[var(--color-fg)]',
-  good: 'text-[hsl(var(--status-published))]',
-  warn: 'text-[hsl(var(--color-warn))]',
-  bad: 'text-[hsl(var(--color-overdue))]',
+  neutral: 'text-[var(--fg)]',
+  good: 'text-[var(--status-published-color)]',
+  warn: 'text-[var(--status-warn-color)]',
+  bad: 'text-[var(--red)]',
 };
 
 const TONE_BAR: Record<Tone, string> = {
   neutral: 'bg-[var(--fg-muted)]',
-  good: 'bg-[hsl(var(--status-published))]',
-  warn: 'bg-[hsl(var(--color-warn))]',
-  bad: 'bg-[hsl(var(--color-overdue))]',
+  good: 'bg-[var(--status-published-color)]',
+  warn: 'bg-[var(--status-warn-color)]',
+  bad: 'bg-[var(--red)]',
 };
 
 export function CounterCard({
@@ -40,12 +40,12 @@ export function CounterCard({
       onClick={onClick}
       type="button"
       className={cn(
-        'rounded-lg border bg-[var(--color-surface)] p-4 text-left transition-colors',
-        onClick ? 'hover:bg-[var(--color-surface-hover)] cursor-pointer' : 'cursor-default',
-        active && 'ring-1 ring-[var(--line-strong)] bg-[var(--color-surface-hover)]'
+        'rounded-md border bg-[var(--bg-raised)] p-4 text-left transition-colors',
+        onClick ? 'hover:bg-[var(--bg-hover)] cursor-pointer' : 'cursor-default',
+        active && 'ring-1 ring-[var(--line-strong)] bg-[var(--bg-hover)]'
       )}
     >
-      <div className="font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--color-fg-muted)]">
+      <div className="font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--fg-dim)]">
         {label}
       </div>
       <div className={cn('mt-2 text-3xl font-bold tabular-nums leading-none', TONE_TEXT[tone])}>
@@ -56,7 +56,7 @@ export function CounterCard({
           {sparkline.map((v, i) => (
             <span
               key={i}
-              className={cn('flex-1 rounded-sm', v > 0 ? TONE_BAR[tone] : 'bg-[var(--color-border-subtle)]')}
+              className={cn('flex-1 rounded-sm', v > 0 ? TONE_BAR[tone] : 'bg-[var(--line-faint)]')}
               style={{
                 height: v > 0 ? `${Math.max(8, (v / max) * 100)}%` : '12%',
                 opacity: v > 0 ? 1 : 0.4,

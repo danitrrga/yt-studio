@@ -78,8 +78,8 @@ export function ThumbnailUploader({ slug }: { slug: string }) {
   const exists = data?.exists ?? false;
 
   return (
-    <div className="rounded-lg border bg-[var(--color-surface)] overflow-hidden">
-      <div className="flex items-center gap-2 px-4 h-10 border-b font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--color-fg-muted)]">
+    <div className="rounded-md border bg-[var(--bg-raised)] overflow-hidden">
+      <div className="flex items-center gap-2 px-4 h-10 border-b font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-[var(--fg-dim)]">
         <ImageIcon className="w-3.5 h-3.5" />
         <span>Thumbnail</span>
         {uploading && <span className="ml-auto text-[10px]">Uploading…</span>}
@@ -87,7 +87,7 @@ export function ThumbnailUploader({ slug }: { slug: string }) {
       <div className="p-4">
         {exists ? (
           <div className="relative group">
-            <div className="aspect-video w-full rounded-md overflow-hidden bg-[var(--color-surface-elevated)]">
+            <div className="aspect-video w-full rounded-md overflow-hidden bg-[var(--bg-raised)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`${probeUrl}?b=${bust}`}
@@ -98,13 +98,13 @@ export function ThumbnailUploader({ slug }: { slug: string }) {
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 bg-black/50 rounded-md">
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="px-3 h-8 rounded-md text-xs font-medium bg-[var(--color-surface)] text-[var(--color-fg)] hover:bg-[var(--color-surface-hover)]"
+                className="px-3 h-8 rounded-md text-xs font-medium bg-[var(--bg-raised)] text-[var(--fg)] hover:bg-[var(--bg-hover)]"
               >
                 Replace
               </button>
               <button
                 onClick={remove}
-                className="px-3 h-8 rounded-md text-xs font-medium bg-[hsl(var(--color-overdue))] text-black hover:opacity-90"
+                className="px-3 h-8 rounded-md text-xs font-medium bg-[var(--red)] text-[var(--fg-inverse)] hover:opacity-90"
               >
                 Remove
               </button>
@@ -125,14 +125,14 @@ export function ThumbnailUploader({ slug }: { slug: string }) {
               'flex flex-col items-center justify-center gap-2 cursor-pointer',
               dragOver
                 ? 'border-[var(--line-strong)] bg-[var(--bg-hover)]'
-                : 'border-[var(--color-border)] hover:border-[var(--color-fg-muted)] hover:bg-[var(--color-surface-hover)]'
+                : 'border-[var(--line)] hover:border-[var(--fg-dim)] hover:bg-[var(--bg-hover)]'
             )}
           >
-            <Upload className="w-5 h-5 text-[var(--color-fg-muted)]" strokeWidth={1.5} />
-            <div className="text-sm text-[var(--color-fg-muted)]">
+            <Upload className="w-5 h-5 text-[var(--fg-dim)]" strokeWidth={1.5} />
+            <div className="text-sm text-[var(--fg-dim)]">
               Click or drop image to upload
             </div>
-            <div className="text-[11px] text-[var(--color-fg-muted)]">
+            <div className="text-[11px] text-[var(--fg-dim)]">
               jpg · png · webp · max 5MB
             </div>
           </button>
@@ -165,7 +165,7 @@ export function ThumbnailPreview({
   const { data } = useSWR(probeUrl, probeFetcher, { revalidateOnFocus: false });
   if (!data?.exists) {
     return (
-      <div className={cn('w-full h-full flex items-center justify-center text-[var(--color-fg-muted)]', className)}>
+      <div className={cn('w-full h-full flex items-center justify-center text-[var(--fg-dim)]', className)}>
         <ImageIcon className="w-4 h-4 opacity-40" strokeWidth={1.25} />
       </div>
     );

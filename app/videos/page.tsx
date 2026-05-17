@@ -68,15 +68,15 @@ function VideosPageInner() {
       <div className="flex items-center justify-between gap-4">
         {focus ? (
           <div className="flex items-baseline gap-3">
-            <h1 className="text-base font-semibold tracking-tight">{pageTitle}</h1>
-            <span className="text-xs text-[var(--color-fg-muted)] tabular-nums">
+            <h1 className="text-base font-bold tracking-tight">{pageTitle}</h1>
+            <span className="text-xs text-[var(--fg-dim)] tabular-nums">
               {filtered.length}/{videos?.length ?? 0}
             </span>
           </div>
         ) : (
           <div>
-            <h1 className="text-[28px] font-semibold tracking-[-0.012em] leading-[1.2]">{pageTitle}</h1>
-            <p className="text-[13px] text-[var(--color-fg-muted)] mt-1">
+            <h1 className="text-[28px] font-bold tracking-[-0.012em] leading-[1.2]">{pageTitle}</h1>
+            <p className="text-[13px] text-[var(--fg-dim)] mt-1">
               {pageSubtitle ?? `${filtered.length} of ${videos?.length ?? 0}`}
             </p>
           </div>

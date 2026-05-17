@@ -18,15 +18,15 @@ export function ConflictBanner({
   const hasHunks = conflictHunks && conflictHunks.length > 0;
 
   return (
-    <div className="flex items-center gap-3 px-3 py-2.5 rounded-md border border-[hsl(var(--status-review)/0.4)] bg-[hsl(var(--status-review)/0.1)] text-sm mb-3">
-      <AlertCircle className="w-4 h-4 shrink-0 text-[hsl(var(--status-review))]" />
+    <div className="flex items-center gap-3 px-3 py-2.5 rounded-md border border-[color-mix(in_srgb,var(--status-review-color)_40%,transparent)] bg-[var(--status-review-tint)] text-sm mb-3">
+      <AlertCircle className="w-4 h-4 shrink-0 text-[var(--status-review-color)]" />
       <div className="flex-1 min-w-0">
-        <div className="font-medium text-[var(--color-fg)]">
+        <div className="font-medium text-[var(--fg)]">
           {hasHunks
             ? `External edits conflict (${conflictHunks!.length} ${conflictHunks!.length === 1 ? 'hunk' : 'hunks'})`
             : 'File changed outside the app'}
         </div>
-        <div className="text-xs text-[var(--color-fg-muted)]">
+        <div className="text-xs text-[var(--fg-dim)]">
           {hasHunks
             ? 'Your version is saved. Disk lines were rejected — view diff to copy any manually.'
             : 'You have unsaved changes. Reload loses them. Keep overwrites the file on next save.'}
@@ -35,7 +35,7 @@ export function ConflictBanner({
       {hasHunks && (
         <button
           onClick={() => setDiffOpen(true)}
-          className="px-2.5 h-7 rounded border text-xs inline-flex items-center gap-1.5 hover:bg-[var(--color-surface-hover)]"
+          className="px-2.5 h-7 rounded border text-xs inline-flex items-center gap-1.5 hover:bg-[var(--bg-hover)]"
         >
           <Eye className="w-3 h-3" />
           View diff
@@ -43,13 +43,13 @@ export function ConflictBanner({
       )}
       <button
         onClick={onReload}
-        className="px-2.5 h-7 rounded border text-xs hover:bg-[var(--color-surface-hover)]"
+        className="px-2.5 h-7 rounded border text-xs hover:bg-[var(--bg-hover)]"
       >
         Reload
       </button>
       <button
         onClick={onKeep}
-        className="px-2.5 h-7 rounded text-xs bg-[hsl(var(--status-review))] text-black font-medium hover:bg-[hsl(var(--status-review)/0.9)]"
+        className="px-2.5 h-7 rounded text-xs bg-[var(--status-review-color)] text-[var(--fg-inverse)] font-medium hover:opacity-90"
       >
         Keep draft
       </button>

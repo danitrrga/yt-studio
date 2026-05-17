@@ -66,7 +66,7 @@ export function SavedViewsMenu() {
         <button
           type="button"
           title="Views"
-          className="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-md border text-[var(--color-fg-secondary)] hover:bg-[var(--color-surface-hover)]"
+          className="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-md border text-[var(--fg-muted)] hover:bg-[var(--bg-hover)]"
         >
           <Bookmark className="w-3 h-3" />
           Views
@@ -76,11 +76,11 @@ export function SavedViewsMenu() {
         <Popover.Content
           sideOffset={6}
           align="end"
-          className="z-[60] w-[300px] rounded-lg border bg-[var(--color-surface-elevated)] overflow-hidden"
+          className="z-[60] w-[300px] rounded-md border bg-[var(--bg-raised)] overflow-hidden"
         >
           <div className="px-3 pt-3 pb-2">
-            <div className="text-[13px] font-semibold text-[var(--color-fg)]">Views</div>
-            <div className="text-[11px] text-[var(--color-fg-muted)] mt-0.5">
+            <div className="text-[13px] font-medium text-[var(--fg)]">Views</div>
+            <div className="text-[11px] text-[var(--fg-dim)] mt-0.5">
               one click to slice your pipeline
             </div>
           </div>
@@ -112,8 +112,8 @@ export function SavedViewsMenu() {
             )}
           </div>
 
-          <div className="border-t px-3 py-2.5 bg-[var(--color-surface)]">
-            <div className="font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--color-fg-muted)] mb-1.5">
+          <div className="border-t px-3 py-2.5 bg-[var(--bg-raised)]">
+            <div className="font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--fg-dim)] mb-1.5">
               Save current as…
             </div>
             <div className="flex gap-1">
@@ -124,7 +124,7 @@ export function SavedViewsMenu() {
                   if (e.key === 'Enter') save();
                 }}
                 placeholder="Name…"
-                className="flex-1 h-7 px-2 rounded-md border bg-[var(--color-surface-elevated)] text-xs outline-none"
+                className="flex-1 h-7 px-2 rounded-md border bg-[var(--bg-raised)] text-xs outline-none"
               />
               <button
                 onClick={save}
@@ -132,8 +132,8 @@ export function SavedViewsMenu() {
                 className={cn(
                   'inline-flex items-center justify-center w-7 h-7 rounded-md text-xs',
                   name.trim()
-                    ? 'bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] hover:bg-[var(--color-button-primary-hover)]'
-                    : 'bg-[var(--color-surface-elevated)] text-[var(--color-fg-muted)] cursor-not-allowed'
+                    ? 'bg-[var(--fg)] text-[var(--fg-inverse)] hover:bg-[var(--fg)]'
+                    : 'bg-[var(--bg-raised)] text-[var(--fg-dim)] cursor-not-allowed'
                 )}
                 title="Save"
               >
@@ -159,7 +159,7 @@ function SectionHeader({
   return (
     <div
       className={cn(
-        'px-2 pt-1.5 pb-1 flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--color-fg-muted)]',
+        'px-2 pt-1.5 pb-1 flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--fg-dim)]',
         className
       )}
     >
@@ -180,30 +180,30 @@ function ViewRow({
 }) {
   const Icon = MODE_ICON[view.mode];
   return (
-    <li className="group flex items-stretch rounded hover:bg-[var(--color-surface-hover)]">
+    <li className="group flex items-stretch rounded hover:bg-[var(--bg-hover)]">
       <button
         onClick={onApply}
         className="flex-1 min-w-0 flex items-center gap-2 px-2 py-1.5 text-left"
       >
-        <Icon className="w-3.5 h-3.5 text-[var(--color-fg-muted)] shrink-0" />
+        <Icon className="w-3.5 h-3.5 text-[var(--fg-dim)] shrink-0" />
         <div className="min-w-0 flex-1">
-          <div className="text-[13px] text-[var(--color-fg)] leading-tight truncate">
+          <div className="text-[13px] text-[var(--fg)] leading-tight truncate">
             {view.name}
           </div>
           {view.description && (
-            <div className="text-[11px] text-[var(--color-fg-muted)] leading-tight truncate mt-0.5">
+            <div className="text-[11px] text-[var(--fg-dim)] leading-tight truncate mt-0.5">
               {view.description}
             </div>
           )}
         </div>
-        <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-fg-muted)] shrink-0">
+        <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--fg-dim)] shrink-0">
           {view.mode}
         </span>
       </button>
       {onDelete && (
         <button
           onClick={onDelete}
-          className="opacity-0 group-hover:opacity-100 px-2 text-[var(--color-fg-muted)] hover:text-[hsl(var(--color-overdue))]"
+          className="opacity-0 group-hover:opacity-100 px-2 text-[var(--fg-dim)] hover:text-[var(--fg)]"
           title="Delete"
         >
           <Trash2 className="w-3 h-3" />

@@ -86,9 +86,9 @@ export function DateChip({
             'border',
             isSet
               ? overdue
-                ? 'border-[hsl(var(--color-overdue))] bg-[hsl(var(--color-overdue)/0.08)] text-[hsl(var(--color-overdue))]'
-                : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-fg)] hover:bg-[var(--color-surface-hover)]'
-              : 'border-dashed border-[var(--color-border)] text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] hover:bg-[var(--color-surface-hover)]'
+                ? 'border-[var(--red)] bg-[var(--red-wash)] text-[var(--fg)]'
+                : 'border-[var(--line)] bg-[var(--bg-raised)] text-[var(--fg)] hover:bg-[var(--bg-hover)]'
+              : 'border-dashed border-[var(--line)] text-[var(--fg-dim)] hover:text-[var(--fg)] hover:bg-[var(--bg-hover)]'
           )}
           title={
             isSet
@@ -104,9 +104,9 @@ export function DateChip({
         <Popover.Content
           sideOffset={6}
           align="start"
-          className="z-[60] w-[240px] rounded-lg border bg-[var(--color-surface-elevated)] p-3 space-y-3"
+          className="z-[60] w-[240px] rounded-md border bg-[var(--bg-raised)] p-3 space-y-3"
         >
-          <div className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--color-fg-muted)]">
+          <div className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--fg-dim)]">
             {label}
           </div>
           <input
@@ -118,7 +118,7 @@ export function DateChip({
               if (e.key === 'Enter') save(draft || null);
               if (e.key === 'Escape') setOpen(false);
             }}
-            className="w-full h-9 px-2 rounded-md border bg-[var(--color-surface)] text-sm outline-none"
+            className="w-full h-9 px-2 rounded-md border bg-[var(--bg-raised)] text-sm outline-none"
           />
           <div className="flex gap-1 text-[11px]">
             <QuickBtn onClick={() => setDraft(isoDaysFromToday(0))}>Today</QuickBtn>
@@ -130,7 +130,7 @@ export function DateChip({
               type="button"
               disabled={busy || !isSet}
               onClick={() => save(null)}
-              className="text-xs text-[var(--color-fg-muted)] hover:text-[hsl(var(--color-overdue))] disabled:opacity-40"
+              className="text-xs text-[var(--fg-dim)] hover:text-[var(--fg)] disabled:opacity-40"
             >
               Clear
             </button>
@@ -138,7 +138,7 @@ export function DateChip({
               type="button"
               disabled={busy}
               onClick={() => save(draft || null)}
-              className="px-2.5 h-7 rounded text-xs font-medium bg-[var(--color-button-primary)] text-[var(--color-button-primary-fg)] hover:bg-[var(--color-button-primary-hover)] disabled:opacity-50"
+              className="px-2.5 h-7 rounded text-xs font-medium bg-[var(--fg)] text-[var(--fg-inverse)] hover:bg-[var(--fg)] disabled:opacity-50"
             >
               {busy ? 'Saving…' : 'Save'}
             </button>
@@ -160,7 +160,7 @@ function QuickBtn({
     <button
       type="button"
       onClick={onClick}
-      className="px-2 h-6 rounded border text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] hover:bg-[var(--color-surface-hover)]"
+      className="px-2 h-6 rounded border text-[var(--fg-dim)] hover:text-[var(--fg)] hover:bg-[var(--bg-hover)]"
     >
       {children}
     </button>

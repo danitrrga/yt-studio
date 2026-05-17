@@ -8,15 +8,15 @@ import type { TelemetryEvent, TelemetryLevel } from '@/lib/types';
 import { cn } from '@/lib/utils';
 
 const LEVEL_DOT: Record<TelemetryLevel, string> = {
-  info: 'bg-[var(--color-fg-muted)]',
-  warn: 'bg-[hsl(var(--color-warn))]',
-  error: 'bg-[hsl(var(--color-overdue))]',
+  info: 'bg-[var(--fg-dim)]',
+  warn: 'bg-[var(--status-warn-color)]',
+  error: 'bg-[var(--red)]',
 };
 
 const LEVEL_TEXT: Record<TelemetryLevel, string> = {
-  info: 'text-[var(--color-fg-secondary)]',
-  warn: 'text-[hsl(var(--color-warn))]',
-  error: 'text-[hsl(var(--color-overdue))]',
+  info: 'text-[var(--fg-muted)]',
+  warn: 'text-[var(--status-warn-color)]',
+  error: 'text-[var(--red)]',
 };
 
 function detail(e: TelemetryEvent): string {
@@ -56,26 +56,26 @@ export function EventTable({ events, isLoading }: { events: TelemetryEvent[] | u
   };
 
   if (isLoading) {
-    return <div className="px-4 py-6 text-sm text-[var(--color-fg-muted)]">Loading events…</div>;
+    return <div className="px-4 py-6 text-sm text-[var(--fg-dim)]">Loading events…</div>;
   }
   if (rows.length === 0) {
     return (
-      <div className="px-4 py-12 text-center text-sm text-[var(--color-fg-muted)]">
+      <div className="px-4 py-12 text-center text-sm text-[var(--fg-dim)]">
         No events match the current filter.
       </div>
     );
   }
 
   return (
-    <div className="rounded-lg border bg-[var(--color-surface)] overflow-hidden">
-      <div className="grid grid-cols-[80px_90px_180px_60px_1fr] gap-3 px-3 h-9 items-center border-b font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--color-fg-muted)]">
+    <div className="rounded-md border bg-[var(--bg-raised)] overflow-hidden">
+      <div className="grid grid-cols-[80px_90px_180px_60px_1fr] gap-3 px-3 h-9 items-center border-b font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--fg-dim)]">
         <span>Time</span>
         <span>Scope</span>
         <span>Event</span>
         <span>Level</span>
         <span>Detail</span>
       </div>
-      <ul className="divide-y divide-[var(--color-border-subtle)] max-h-[60vh] overflow-y-auto">
+      <ul className="divide-y divide-[var(--line-faint)] max-h-[60vh] overflow-y-auto">
         {rows.map((e, i) => {
           const id = `${e.ts}-${i}`;
           const isOpen = expanded.has(id);
@@ -88,38 +88,38 @@ export function EventTable({ events, isLoading }: { events: TelemetryEvent[] | u
                 onClick={() => (errMsg ? toggle(id) : null)}
                 className={cn(
                   'w-full grid grid-cols-[80px_90px_180px_60px_1fr] gap-3 px-3 py-2 items-center text-left',
-                  errMsg && 'cursor-pointer hover:bg-[var(--color-surface-hover)]'
+                  errMsg && 'cursor-pointer hover:bg-[var(--bg-hover)]'
                 )}
               >
-                <span className="text-[var(--color-fg-muted)] tabular-nums">
+                <span className="text-[var(--fg-dim)] tabular-nums">
                   {format(new Date(e.ts), 'HH:mm:ss')}
                 </span>
-                <span className="text-[var(--color-fg-secondary)] truncate">{e.scope}</span>
+                <span className="text-[var(--fg-muted)] truncate">{e.scope}</span>
                 <span className="font-medium truncate">{e.event}</span>
                 <span className="inline-flex items-center gap-1.5">
                   <span className={cn('w-1.5 h-1.5 rounded-full', LEVEL_DOT[e.level])} />
                   <span className={LEVEL_TEXT[e.level]}>{e.level}</span>
                 </span>
                 <span className="flex items-center gap-2 min-w-0">
-                  <span className="truncate text-[var(--color-fg-secondary)]">{detail(e)}</span>
+                  <span className="truncate text-[var(--fg-muted)]">{detail(e)}</span>
                   {link && (
                     <Link
                       href={link}
                       onClick={(ev) => ev.stopPropagation()}
-                      className="ml-auto text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] shrink-0"
+                      className="ml-auto text-[var(--fg-dim)] hover:text-[var(--fg)] shrink-0"
                     >
                       Open →
                     </Link>
                   )}
                   {errMsg && (
-                    <span className="ml-1 text-[var(--color-fg-muted)] shrink-0">
+                    <span className="ml-1 text-[var(--fg-dim)] shrink-0">
                       {isOpen ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
                     </span>
                   )}
                 </span>
               </button>
               {isOpen && errMsg && (
-                <div className="px-3 pb-3 pl-[calc(80px+90px+180px+60px+3rem)] text-[11px] text-[hsl(var(--color-overdue))] font-mono whitespace-pre-wrap break-all">
+                <div className="px-3 pb-3 pl-[calc(80px+90px+180px+60px+3rem)] text-[11px] text-[var(--red)] font-mono whitespace-pre-wrap break-all">
                   {errMsg}
                 </div>
               )}

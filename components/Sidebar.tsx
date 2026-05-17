@@ -72,14 +72,14 @@ export default function Sidebar() {
       animate={{ width: collapsed ? 56 : 240 }}
       initial={false}
       transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-      className="shrink-0 border-r border-[var(--color-border-subtle)] bg-[var(--color-surface)] flex flex-col overflow-hidden"
+      className="shrink-0 border-r border-[var(--line-faint)] bg-[var(--bg-raised)] flex flex-col overflow-hidden"
     >
       <Suspense fallback={null}>
         <PresetActiveProbe onChange={setActivePreset} />
       </Suspense>
       <div
         className={cn(
-          'h-14 flex items-center border-b border-[var(--color-border-subtle)]',
+          'h-14 flex items-center border-b border-[var(--line-faint)]',
           collapsed ? 'px-3 justify-center' : 'px-5'
         )}
       >
@@ -122,7 +122,7 @@ export default function Sidebar() {
               <Icon className="w-4 h-4 shrink-0" />
               {!collapsed && <span className="flex-1">{label}</span>}
               {!collapsed && isHub && hubCount > 0 && (
-                <span className="text-[10px] tabular-nums rounded bg-[var(--color-surface-elevated)] px-1.5 py-0.5 text-[var(--color-fg-muted)]">
+                <span className="text-[10px] tabular-nums rounded bg-[var(--bg-raised)] px-1.5 py-0.5 text-[var(--fg-dim)]">
                   {hubCount}
                 </span>
               )}
@@ -149,7 +149,7 @@ export default function Sidebar() {
                     <InboxIcon className="w-3.5 h-3.5 shrink-0" />
                     <span className="flex-1">Inbox</span>
                     {ideaCount > 0 && (
-                      <span className="text-[10px] tabular-nums rounded bg-[var(--color-surface-elevated)] px-1.5 py-0.5 text-[var(--color-fg-muted)]">
+                      <span className="text-[10px] tabular-nums rounded bg-[var(--bg-raised)] px-1.5 py-0.5 text-[var(--fg-dim)]">
                         {ideaCount}
                       </span>
                     )}
@@ -209,7 +209,7 @@ export default function Sidebar() {
 
       <div
         className={cn(
-          'border-t border-[var(--color-border-subtle)] flex items-center',
+          'border-t border-[var(--line-faint)] flex items-center',
           collapsed ? 'flex-col gap-1 p-2' : 'justify-between p-3 gap-2'
         )}
       >
