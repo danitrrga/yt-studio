@@ -189,7 +189,7 @@ kbd, code, pre, .tabular, [data-mono] {
   font-feature-settings: 'tnum' 1, 'ss01' 1;
 }
 
-*:focus-visible {
+*:focus-visible:not(.cm-editor):not(.cm-editor *) {
   outline: none;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.10), 0 0 0 3px var(--bg);
 }
